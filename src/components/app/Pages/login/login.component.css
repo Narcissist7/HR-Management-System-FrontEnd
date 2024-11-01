@@ -1,0 +1,23 @@
+.container {
+    background-color: white; /* Optional: Add a background color */
+    border-radius: 10px; /* Optional: Add rounded corners */
+  }
+  
+  .card {
+    border: none; /* Remove default card border */
+  }
+  
+  .btn-danger {
+    background-color: red; /* Pure red for buttons */
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .btn-danger:hover {
+    background-color: darkred; /* Darker red on hover */
+  }
+  
+  .text-danger {
+    color: red; /* Red text for error messages */
+  }
+  

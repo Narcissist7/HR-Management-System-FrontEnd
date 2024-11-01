@@ -1,0 +1,108 @@
+/* Wider container for the second registration page */
+.container {
+    max-width: 700px; /* Increased width for a more balanced layout */
+    margin-top: 50px;
+    padding: 20px;
+  }
+  
+  /* Card styling */
+  .card {
+    border: 1px solid #ff0000; /* Pure red border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 20px; /* Added padding inside card */
+  }
+  
+  /* Card header */
+  .card-body h2 {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 20px; /* Extra margin for separation */
+  }
+  
+  /* Form input fields */
+  .form-control {
+    border: 1px solid #ff0000;
+    border-radius: 8px;
+    padding: 15px;
+    color: #000000;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px; /* Larger font size for readability */
+  }
+  
+  .form-control:focus {
+    border-color: #b30000;
+    box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
+  }
+  
+  /* Labels */
+  .form-label {
+    color: #000000;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  /* Button styling */
+  .btn-primary {
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 16px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #cc0000;
+    box-shadow: 0 4px 8px rgba(204, 0, 0, 0.2);
+  }
+  
+  .btn-primary:focus {
+    background-color: #b30000;
+    box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);
+  }
+  
+  /* Checkbox and Select styling */
+  .form-check-input {
+    border-color: #ff0000;
+  }
+  
+  .form-select {
+    border: 1px solid #ff0000;
+    border-radius: 8px;
+    padding: 12px;
+    color: #000000;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-select:focus {
+    border-color: #b30000;
+    box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
+  }
+  
+  /* Text link */
+  a {
+    color: #ff0000;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #b30000;
+  }
+  
+  /* Adjusted spacing for larger layout */
+  .mb-3,
+  .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .row .col-md-6 {
+    padding-right: 15px; /* Increased padding between columns */
+  }
+  
