@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import {NgFor, NgIf} from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-registration-two',
   standalone: true,
   imports: [
-    FormsModule ,NgFor , HttpClientModule , NgIf
+    FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf
   ],
   templateUrl: './registration-two.component.html',
   styleUrls: ['./registration-two.component.css']
@@ -17,9 +17,7 @@ export class RegistrationTwoComponent {
   ocrData: any = {};
   isLoading: boolean = false;
 
-
-
-  // Form fields
+  // OCR form fields
   name: string = '';
   phone: string = '';
   gender: string = '';
@@ -30,7 +28,39 @@ export class RegistrationTwoComponent {
   address: string = '';
   maritalStatus: string = '';
 
-  constructor(private http: HttpClient) {
+  // Work experience and education form
+  registrationForm: FormGroup;
+
+  constructor(private http: HttpClient, private fb: FormBuilder) {
+    // Initialize the form for work experience and education
+    this.registrationForm = this.fb.group({
+      workExperiences: this.fb.array([]),  // Initialize workExperiences as a FormArray
+      university: ['', Validators.required],
+      degree: ['', Validators.required],
+      grade: ['', Validators.required],
+      major: ['', Validators.required],
+      uniDate: ['', Validators.required]
+    });
+  }
+
+  get workExperiences(): FormArray {
+    return this.registrationForm.get('workExperiences') as FormArray;
+  }
+
+  addWorkExperience() {
+    const workExperienceForm = this.fb.group({
+      company: ['', Validators.required],
+      position: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: [''],
+      reason: ['']
+    });
+
+    this.workExperiences.push(workExperienceForm);
+  }
+
+  removeWorkExperience(index: number) {
+    this.workExperiences.removeAt(index);
   }
 
   onFileSelected(event: Event) {
@@ -63,33 +93,27 @@ export class RegistrationTwoComponent {
   }
 
   populateFormWithOCRData() {
-    // Check if OCR data is available and valid
     if (this.ocrData) {
       if (Array.isArray(this.ocrData)) {
-        // Assuming the first item is the one to use
-
         this.name = `${this.ocrData[0]} ${this.ocrData[1]}`;
-        this.egyptianId = this.ocrData[3]
-        this.address = this.ocrData[2]
-        this.dob = this.ocrData[4]
-        this.gender = this.ocrData[5]
-        this.birthPlace = this.ocrData[6]
+        this.egyptianId = this.ocrData[3];
+        this.address = this.ocrData[2];
+        this.dob = this.ocrData[4];
+        this.gender = this.ocrData[5];
+        this.birthPlace = this.ocrData[6];
       } else {
-        // If it's an object
         this.name = `${this.ocrData[0]} ${this.ocrData[1]}`;
-        this.egyptianId = this.ocrData[3]
-        this.address = this.ocrData[2]
-        this.dob = this.ocrData[4]
-        this.gender = this.ocrData[5]
-        this.birthPlace = this.ocrData[6]
+        this.egyptianId = this.ocrData[3];
+        this.address = this.ocrData[2];
+        this.dob = this.ocrData[4];
+        this.gender = this.ocrData[5];
+        this.birthPlace = this.ocrData[6];
       }
     }
   }
 
-  // Additional function to handle form submission or navigation
-  onNext() {
-    // Implement navigation to the next registration step here
-    console.log("Next Step with filled data:", {
+  onSubmit() {
+    console.log("OCR Data and Form Data:", {
       firstname: this.name,
       phone: this.phone,
       gender: this.gender,
@@ -98,10 +122,15 @@ export class RegistrationTwoComponent {
       militaryStatus: this.militaryStatus,
       egyptianId: this.egyptianId,
       address: this.address,
-      maritalStatus: this.maritalStatus
+      maritalStatus: this.maritalStatus,
+      workExperiences: this.registrationForm.value.workExperiences,
+      education: {
+        university: this.registrationForm.value.university,
+        degree: this.registrationForm.value.degree,
+        grade: this.registrationForm.value.grade,
+        major: this.registrationForm.value.major,
+        uniDate: this.registrationForm.value.uniDate
+      }
     });
-
   }
-
-
 }
