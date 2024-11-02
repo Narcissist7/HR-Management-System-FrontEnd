@@ -17,24 +17,23 @@ export class RegistrationTwoComponent {
   ocrData: any = {};
   isLoading: boolean = false;
 
-  // OCR form fields
-  name: string = '';
-  phone: string = '';
-  gender: string = '';
-  dob: string = '';
-  birthPlace: string = '';
-  militaryStatus: string = '';
-  egyptianId: string = '';
-  address: string = '';
-  maritalStatus: string = '';
-
-  // Work experience and education form
+  // Registration form with nested arrays for work experiences and education fields
   registrationForm: FormGroup;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
-    // Initialize the form for work experience and education
     this.registrationForm = this.fb.group({
-      workExperiences: this.fb.array([]),  // Initialize workExperiences as a FormArray
+      egyptianId: ['', Validators.required],
+      email:['', Validators.required],
+      firstname: ['', Validators.required],
+      secondname: ['', Validators.required],
+      phone: ['', Validators.required],
+      gender: ['', Validators.required],
+      dob: ['', Validators.required],
+      birthPlace: ['', Validators.required],
+      address: ['', Validators.required],
+      militaryStatus: ['', Validators.required],
+      maritalStatus: ['', Validators.required],
+      workExperiences: this.fb.array([]),
       university: ['', Validators.required],
       degree: ['', Validators.required],
       grade: ['', Validators.required],
@@ -52,10 +51,9 @@ export class RegistrationTwoComponent {
       company: ['', Validators.required],
       position: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: [''],
-      reason: ['']
+      endDate: ['', Validators.required],
+      reason: ['', Validators.required]
     });
-
     this.workExperiences.push(workExperienceForm);
   }
 
@@ -63,74 +61,99 @@ export class RegistrationTwoComponent {
     this.workExperiences.removeAt(index);
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
-      this.selectedFile = input.files[0];
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
     }
   }
 
   onUpload() {
+    if (!this.selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
     this.isLoading = true;
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('file', this.selectedFile);
 
-      this.http.post('http://127.0.0.1:5000/cashout', formData).subscribe(
-        (response: any) => {
-          this.ocrData = response.ocr_data;
-          this.populateFormWithOCRData();
-          this.isLoading = false; // Stop loading
-        },
-        (error) => {
-          console.error('Error uploading file:', error);
-          this.isLoading = false; // Stop loading in case of error
-        }
-      );
-    } else {
-      alert('Please select an image file first.');
-    }
-  }
+    this.http.post<any>('http://127.0.0.1:5000/cashout', formData).subscribe(
+      (response) => {
+        console.log(response); // Check the response structure here
+        const ocrDataArray = response.ocr_data;
 
-  populateFormWithOCRData() {
-    if (this.ocrData) {
-      if (Array.isArray(this.ocrData)) {
-        this.name = `${this.ocrData[0]} ${this.ocrData[1]}`;
-        this.egyptianId = this.ocrData[3];
-        this.address = this.ocrData[2];
-        this.dob = this.ocrData[4];
-        this.gender = this.ocrData[5];
-        this.birthPlace = this.ocrData[6];
-      } else {
-        this.name = `${this.ocrData[0]} ${this.ocrData[1]}`;
-        this.egyptianId = this.ocrData[3];
-        this.address = this.ocrData[2];
-        this.dob = this.ocrData[4];
-        this.gender = this.ocrData[5];
-        this.birthPlace = this.ocrData[6];
+        // Ensure fields are populated from the specific array indices
+        this.registrationForm.patchValue({
+          firstname: ocrDataArray[0] || '',
+          secondname: ocrDataArray[1] || '',
+          egyptianId: ocrDataArray[2] || '',
+          dob: ocrDataArray[3] || '',
+          address: ocrDataArray[4] || '',
+          gender: ocrDataArray[5] || '',
+          birthPlace: ocrDataArray[6] || ''
+        });
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error(error);
+        this.isLoading = false;
       }
-    }
+    );
   }
+
+
+
 
   onSubmit() {
-    console.log("OCR Data and Form Data:", {
-      firstname: this.name,
-      phone: this.phone,
-      gender: this.gender,
-      dob: this.dob,
-      birthPlace: this.birthPlace,
-      militaryStatus: this.militaryStatus,
-      egyptianId: this.egyptianId,
-      address: this.address,
-      maritalStatus: this.maritalStatus,
-      workExperiences: this.registrationForm.value.workExperiences,
-      education: {
-        university: this.registrationForm.value.university,
-        degree: this.registrationForm.value.degree,
-        grade: this.registrationForm.value.grade,
-        major: this.registrationForm.value.major,
-        uniDate: this.registrationForm.value.uniDate
-      }
-    });
+    if (this.registrationForm.valid) {
+      const formData = this.registrationForm.value;
+
+      // Mapping form data to match the required JSON format
+      const requestData = {
+        name: `${formData.firstname} ${formData.secondname}`,
+        email: formData.email,
+        phone: formData.phone,
+        dob: formData.dob,
+        gender: formData.gender,
+        pob: formData.birthPlace,
+        military_status: formData.militaryStatus,
+        ssn: formData.egyptianId,
+        address: formData.address,
+        martial_status: formData.maritalStatus,
+        educations: [
+          {
+            university: formData.university,
+            degree: formData.degree,
+            grade: formData.grade,
+            major: formData.major,
+            date: formData.uniDate,
+          }
+        ],
+        experiences: formData.workExperiences.map((experience: any) => ({
+          postion: experience.position,
+          reason: experience.reason,
+          company_name: experience.company,
+          start_date: experience.startDate,
+          end_date: experience.endDate
+        }))
+      };
+
+      console.log(requestData)
+      this.http.post('https://da4d-102-41-23-184.ngrok-free.app/api/userDetails', requestData)
+        .subscribe(
+          (response) => {
+            console.log('Form successfully submitted:', response);
+          },
+          (error) => {
+            console.error('Error submitting form:', error);
+            console.error('Error details:', error.message);
+          }
+        );
+    } else {
+      console.log('Form is invalid. Please fill all required fields.');
+    }
   }
+
+
 }
