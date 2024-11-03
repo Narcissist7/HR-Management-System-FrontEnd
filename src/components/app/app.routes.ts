@@ -28,16 +28,17 @@ export const routes: Routes = [
             }
         ]
     },
-    { 
+    {
         path: 'registration-one',
-         component: RegistrationOneComponent 
+         component: RegistrationOneComponent
     },
-    { 
+    {
         path: 'registration-two',
-        component: RegistrationTwoComponent 
+        component: RegistrationTwoComponent
     },
-    { 
+    {
         path: 'registration-three',
-        component: RegistrationThreeComponent 
+        component: RegistrationThreeComponent
     },
+
 ];

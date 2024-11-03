@@ -1,23 +1,20 @@
 <div class="container mt-5">
-    <div class="card shadow-lg">
-      <div class="card-body p-4">
-        <h2 class="text-center mb-4">Register</h2>
-        <form (ngSubmit)="goToNextStep()">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <!-- [(ngModel)]="email" -->
-            <input type="email" id="email" name="email" required class="form-control" autocomplete="email">
+  <div class="card shadow-lg">
+    <div class="card-body p-4">
+      <h2 class="text-center mb-4">Register</h2>
+      <form (ngSubmit)="goToNextStep()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" name="email" [(ngModel)]="email" required class="form-control" autocomplete="email">
+        </div>
 
-          </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="password" required class="form-control" autocomplete="current-password">
+        </div>
 
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <!-- [(ngModel)]="password" -->
-            <input type="password" id="password" name="password" required class="form-control" autocomplete="current-password">
-          </div>
-
-          <button type="submit" class="btn btn-primary w-100"><a href="/registration-two" style="color: white;">Next</a></button>
-        </form>
-      </div>
+        <button type="submit" class="btn btn-primary w-100">SignUp</button>
+      </form>
     </div>
   </div>
+</div>

@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration-two',
   standalone: true,
   imports: [
-    FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf
+    FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf, MatSnackBarModule
   ],
   templateUrl: './registration-two.component.html',
   styleUrls: ['./registration-two.component.css']
@@ -20,10 +22,16 @@ export class RegistrationTwoComponent {
   // Registration form with nested arrays for work experiences and education fields
   registrationForm: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.registrationForm = this.fb.group({
       egyptianId: ['', Validators.required],
-      email:['', Validators.required],
+      email: ['', Validators.required], // email field in the form
       firstname: ['', Validators.required],
       secondname: ['', Validators.required],
       phone: ['', Validators.required],
@@ -40,6 +48,12 @@ export class RegistrationTwoComponent {
       major: ['', Validators.required],
       uniDate: ['', Validators.required]
     });
+
+    // Retrieve email from query parameters and set it in the form
+    const email = this.route.snapshot.queryParamMap.get('email');
+    if (email) {
+      this.registrationForm.patchValue({ email });
+    }
   }
 
   get workExperiences(): FormArray {
@@ -102,9 +116,6 @@ export class RegistrationTwoComponent {
     );
   }
 
-
-
-
   onSubmit() {
     if (this.registrationForm.valid) {
       const formData = this.registrationForm.value;
@@ -139,21 +150,23 @@ export class RegistrationTwoComponent {
         }))
       };
 
-      console.log(requestData)
-      this.http.post('https://da4d-102-41-23-184.ngrok-free.app/api/userDetails', requestData)
+      this.http.post('http://localhost:8080/api/userDetails', requestData)
         .subscribe(
           (response) => {
             console.log('Form successfully submitted:', response);
+
+            // Show success toast and navigate to login page
+            this.snackBar.open('You are registered successfully', 'Close', {
+              duration: 3000, // 3 seconds
+            });
+            this.router.navigate(['login']);
           },
           (error) => {
             console.error('Error submitting form:', error);
-            console.error('Error details:', error.message);
           }
         );
     } else {
       console.log('Form is invalid. Please fill all required fields.');
     }
   }
-
-
 }
