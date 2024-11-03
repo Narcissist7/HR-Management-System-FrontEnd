@@ -5,6 +5,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { RegistrationOneComponent } from './Pages/registration/registration-one/registration-one.component';
 import { RegistrationTwoComponent } from './Pages/registration/registration-two/registration-two.component';
 import { RegistrationThreeComponent } from './Pages/registration/registration-three/registration-three.component';
+import { JobListComponent } from './Pages/Admin-Job-view/admin-job-view.component';
 
 export const routes: Routes = [
     {
@@ -37,7 +38,7 @@ export const routes: Routes = [
         component: RegistrationTwoComponent 
     },
     { 
-        path: 'registration-three',
-        component: RegistrationThreeComponent 
+        path: 'Job-View',
+        component: JobListComponent 
     },
 ];

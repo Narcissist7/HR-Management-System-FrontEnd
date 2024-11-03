@@ -1,7 +1,7 @@
-export class Jobl {
+export class Job {
     date: Date;
     title: string;
-    jobId: number;
+    id: number;
     recruiter: string;
     jobStatus: string;
     description: string;
@@ -11,7 +11,7 @@ export class Jobl {
     constructor(){
         this.date = new Date();
         this.title= " ";
-        this.jobId= 0;
+        this.id= 0;
         this.recruiter= " ";
         this.jobStatus= " ";
         this.description= " ";
