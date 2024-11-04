@@ -1,10 +1,23 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
+<div class="container d-flex justify-content-center align-items-center vh-100 bg-white">
   <div class="card shadow-lg p-4 rounded" style="width: 400px;">
+
+    <!-- Image added here -->
+    <div class="text-center mb-4">
+      <img src="assets/images.jpeg" alt="Description of the image" style="max-width: 100%; height: auto;">
+    </div>
+
     <h2 class="text-center mb-4">Login</h2>
+
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input formControlName="email" type="email" id="email" class="form-control" required />
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="form-control"
+          required
+        />
         <div class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
           <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
           <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
@@ -12,12 +25,25 @@
       </div>
       <div class="mb-4">
         <label for="password" class="form-label">Password</label>
-        <input formControlName="password" type="password" id="password" class="form-control" required />
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="form-control"
+          required
+        />
         <div class="text-danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
           <small>Password is required.</small>
         </div>
       </div>
-      <button type="submit" class="btn btn-danger btn-block" [disabled]="loginForm.invalid">Login</button>
+      <button
+        type="submit"
+        class="btn btn-block rounded"
+        [disabled]="loginForm.invalid"
+        style="width: 100%; padding: 12px; background: linear-gradient(90deg, #950e0e, #ec1c1c); border: none; color: #f1ebeb; font-weight: bold;"
+      >
+        Login
+      </button>
       <div class="text-center mt-3">
         <p>Not a member? <a href="/registration-one" class="text-danger">Register here</a></p>
       </div>
