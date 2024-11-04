@@ -41,14 +41,13 @@ export class LoginComponent {
         password: this.loginForm.value.password
       };
 
-      this.http.post('http://localhost:8080/api/register/login', loginData, { responseType: 'text' })
+      this.http.post('http://localhost:8080/api/register/login', loginData)
         .subscribe({
-          next: (response) => {
-            // Assuming response is the token if successful
-            console.log('Token received:', response);
+          next: (response: any) => { // Use `any` or define a specific interface for response
+            // Store the entire response in local storage
+            localStorage.setItem('userData', JSON.stringify(response)); // Store the response object
 
-            // Store the token and navigate to the dashboard
-            localStorage.setItem('token', response);  // Store the token if needed
+            // Navigate to the dashboard
             this.router.navigate(['/dashboard']);
           },
           error: (error) => {

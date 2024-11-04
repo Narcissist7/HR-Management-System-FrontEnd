@@ -1,1 +1,8 @@
-<p>layout works!</p>
+<div *ngIf="userData">
+  <p>Welcome, {{ userData.userResponseDetailsDTO.name }}</p>
+  <p>Email: {{ userData.userResponseDetailsDTO.email }}</p>
+  <p>Phone: {{ userData.userResponseDetailsDTO.phone }}</p>
+  <p>Date of Birth: {{ userData.userResponseDetailsDTO.dob }}</p>
+  <p>Date of Birth: {{ userData.token }}</p>
+  <!-- Add more fields as needed -->
+</div>
