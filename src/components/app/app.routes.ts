@@ -2,44 +2,46 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './Pages/login/login.component';
 import { LayoutComponent } from './Pages/layout/layout.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
-import { RegistrationOneComponent } from './Pages/registration/registration-one/registration-one.component';
-import { RegistrationTwoComponent } from './Pages/registration/registration-two/registration-two.component';
-import { RegistrationThreeComponent } from './Pages/registration/registration-three/registration-three.component';
+import { CandidateComponent } from './Pages/registration/candidate/candidate.component';
 import { JobListComponent } from './Pages/Admin-Job-view/admin-job-view.component';
+import { UserprofileComponent } from './Pages/userprofile/userprofile.component';
+import { HomeComponent } from './Pages/home/home.component';
+import {VisitorComponent} from './Pages/registration/visitor/visitor.component'; // Import HomeComponent
 
 export const routes: Routes = [
-    {
-        path:'',
-        redirectTo: "login",
-        pathMatch: 'full'
-
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path:'',
-        component: LayoutComponent,
-        children:
-        [
-            {
-                path: 'dashboard',
-                component: DashboardComponent,
-            }
-        ]
-    },
-    {
-        path: 'registration-one',
-         component: RegistrationOneComponent
-    },
-    {
-        path: 'registration-two',
-        component: RegistrationTwoComponent
-    },
-    { 
-        path: 'registration-three',
-        component: RegistrationThreeComponent 
-    },
-
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HomeComponent // Set HomeComponent as the starting page
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      }
+    ]
+  },
+  {
+    path: 'registration-two',
+    component: CandidateComponent
+  },
+  {
+    path: 'userprofile',
+    component: UserprofileComponent
+  },
+  {
+    path: 'visitor',
+    component: VisitorComponent
+  },
 ];

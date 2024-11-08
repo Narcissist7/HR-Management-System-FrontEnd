@@ -11,10 +11,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf, MatSnackBarModule
   ],
-  templateUrl: './registration-two.component.html',
-  styleUrls: ['./registration-two.component.css']
+  templateUrl: './candidate.component.html',
+  styleUrls: ['./candidate.component.css']
 })
-export class RegistrationTwoComponent {
+export class CandidateComponent {
   selectedFile: File | null = null;
   ocrData: any = {};
   isLoading: boolean = false;
@@ -150,7 +150,7 @@ export class RegistrationTwoComponent {
         }))
       };
 
-      this.http.post('http://localhost:8080/api/userDetails', requestData)
+      this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', requestData)
         .subscribe(
           (response) => {
             console.log('Form successfully submitted:', response);

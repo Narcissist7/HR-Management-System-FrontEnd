@@ -3,14 +3,13 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {RegistrationOneComponent} from '../registration/registration-one/registration-one.component';
 import {CommonModule, NgFor, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    RegistrationOneComponent,
+
     HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,CommonModule , NgIf , NgFor
@@ -48,7 +47,7 @@ export class LoginComponent {
             localStorage.setItem('userData', JSON.stringify(response)); // Store the response object
 
             // Navigate to the dashboard
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/userprofile']);
           },
           error: (error) => {
             this.snackBar.open('Login failed. Please check your credentials.', 'Close', {
