@@ -6,7 +6,8 @@ import { CandidateComponent } from './Pages/registration/candidate/candidate.com
 import { JobListComponent } from './Pages/Admin-Job-view/admin-job-view.component';
 import { UserprofileComponent } from './Pages/userprofile/userprofile.component';
 import { HomeComponent } from './Pages/home/home.component';
-import {VisitorComponent} from './Pages/registration/visitor/visitor.component'; // Import HomeComponent
+import {VisitorComponent} from './Pages/registration/visitor/visitor.component';
+import {LogEntryComponent} from '../../app/log-entry/log-entry.component'; // Import HomeComponent
 
 export const routes: Routes = [
   {
@@ -43,5 +44,9 @@ export const routes: Routes = [
   {
     path: 'visitor',
     component: VisitorComponent
+  },
+  {
+    path: 'logEntry',
+    component: LogEntryComponent
   },
 ];

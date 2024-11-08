@@ -5,7 +5,7 @@
   </div>
 
   <div class="content">
-    <div  (click)="navigateTo('visitor')">
+    <div (click)="navigateTo('visitor')">
       <img src="assets/img.png" alt="Visitor Image" class="image-button" />
       <h2>Visitor</h2>
     </div>
@@ -16,9 +16,14 @@
     </div>
   </div>
 
+  <!-- Button for logEntry page -->
+  <div class="already-submitted">
+    <button (click)="navigateTo('logEntry')" class="btn btn-danger">
+      Already submitted before?
+    </button>
+  </div>
+
   <div class="footer">
     <p>All rights reserved for NTG.</p>
   </div>
-
 </div>
-
