@@ -17,9 +17,6 @@ import { RouterModule} from '@angular/router';
 export class CandidateListComponent implements OnInit {
   candidates: Candidate[] = [];
   candidate: Candidate = new Candidate();
-  educations: Education[] = new Array<Education>();
-  experiences: Experience[] = new Array<Experience>();
-  isEditing = false;
 
   constructor(private candidateService: CandidateService) { }
 
@@ -31,20 +28,7 @@ export class CandidateListComponent implements OnInit {
     this.candidateService.getAllCandidate().subscribe((res) => {
       this.candidates = res;
       console.log(this.candidates);
-      this.extractEducationAndExperience();
     });
   }
-  extractEducationAndExperience() {
-    this.candidates.forEach(candidate => {
-      if (candidate.educations) {
-        this.educations.push(...candidate.educations);  // Flattening all educations into one array
-      }
-      if (candidate.experiences) {
-        this.experiences.push(...candidate.experiences);  // Flattening all experiences into one array
-      }
-    });
 
-    console.log('All Educations:', this.educations);
-    console.log('All Experiences:', this.experiences);
-  }
 }

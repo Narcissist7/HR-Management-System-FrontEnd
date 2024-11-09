@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Experience } from './experience';
 
 describe('Experience', () => {

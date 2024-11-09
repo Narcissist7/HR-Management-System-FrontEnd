@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Eductaion } from './eductaion';
 
 describe('Eductaion', () => {
