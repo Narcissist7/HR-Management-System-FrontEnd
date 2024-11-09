@@ -68,5 +68,5 @@ export const routes: Routes = [
   {
     path: 'candidateList',
     component: CandidateListComponent
-  }
+  },
 ];

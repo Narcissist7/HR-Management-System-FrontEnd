@@ -1,67 +1,116 @@
-<div class="candidate-list">
-  <h2 class="title">Candidate List</h2>
+<div class="table-container">
+  <h2 class="title">Candidate Table View</h2>
 
-  @for (candidate of candidates; track $index) {
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for(candidate of candidates; track $index){
+      <tr>
+        <td>{{ candidate.id }}</td>
+        <td>{{ candidate.name }}</td>
+        <td>{{ candidate.email }}</td>
+        <td>{{ candidate.phone }}</td>
+        <td>
+          <button class="btn-action" [routerLink]="['/item-details', candidate.id]">View Details</button>
+        </td>
+      </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
 
-    <!-- Candidate Card Section -->
-    <div class="candidate-card">
 
-      <!-- Candidate Header Section -->
-      <div class="candidate-header">
-        <h3 class="candidate-name">{{ candidate.name }}</h3>
-        <p class="candidate-email">Email: {{ candidate.email }}</p>
-        <p class="candidate-address">Address: {{ candidate.address }}</p>
-        <p class="candidate-dob">DOB: {{ candidate.dob }}</p>
-      </div>
 
-      <!-- Candidate Body Section -->
-      <div class="candidate-body">
 
-        <!-- Education Section -->
-        <div class="education-section">
-          <h4 class="candidate-name">Education</h4>
-          <ul>
-            <li>
-              <p>{{ educations[$index].university }}</p>
-            </li>
-            <li>
-              <p>Major: {{ educations[$index].major }}</p>
-            </li>
-            <li>
-              <p>Year: {{ educations[$index].date }}</p>
-            </li>
 
-          </ul>
-        </div>
 
-        <!-- Experience Section -->
-        <div class="experience-section">
-          <h4 class="candidate-name">Experience</h4>
-          <ul>
-            <li>
-              <p>{{ experiences[$index].company_name }}</p>
-            </li>
-            <li>
-              <p>Position: {{ experiences[$index].position }}</p>
-            </li>
-            <li>
-              <p>Year: {{ experiences[$index].end_date }}</p>
-            </li>
 
-          </ul>
-        </div>
 
-        <!-- View Details Button -->
-        <div class="view-details-button">
-          <button
-            class="btn-view-details"
-            [routerLink]="['/candidate-details', candidate.id]">
-            View Full Details
-          </button>
-        </div>
 
-      </div> <!-- End of candidate body -->
-    </div> <!-- End of candidate card -->
-  }
 
-</div> <!-- End of candidate list -->
+
+
+
+
+
+
+
+
+
+<!--<div class="candidate-list">-->
+<!--  <h2 class="title">Candidate List</h2>-->
+
+<!--  @for (candidate of candidates; track $index) {-->
+
+<!--    &lt;!&ndash; Candidate Card Section &ndash;&gt;-->
+<!--    <div class="candidate-card">-->
+
+<!--      &lt;!&ndash; Candidate Header Section &ndash;&gt;-->
+<!--      <div class="candidate-header">-->
+<!--        <h3 class="candidate-name">{{ candidate.name }}</h3>-->
+<!--        <p class="candidate-email">Email: {{ candidate.email }}</p>-->
+<!--        <p class="candidate-address">Address: {{ candidate.address }}</p>-->
+<!--        <p class="candidate-dob">DOB: {{ candidate.dob }}</p>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Candidate Body Section &ndash;&gt;-->
+<!--      <div class="candidate-body">-->
+
+<!--        &lt;!&ndash; Education Section &ndash;&gt;-->
+<!--        <div class="education-section">-->
+<!--          <h4 class="candidate-name">Education</h4>-->
+<!--          <ul>-->
+<!--            <li>-->
+<!--              <p>{{ educations[$index].university }}</p>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <p>Major: {{ educations[$index].major }}</p>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <p>Year: {{ educations[$index].date }}</p>-->
+<!--            </li>-->
+
+<!--          </ul>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Experience Section &ndash;&gt;-->
+<!--        <div class="experience-section">-->
+<!--          <h4 class="candidate-name">Experience</h4>-->
+<!--          <ul>-->
+<!--            <li>-->
+<!--              <p>{{ experiences[$index].company_name }}</p>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <p>Position: {{ experiences[$index].position }}</p>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <p>Year: {{ experiences[$index].end_date }}</p>-->
+<!--            </li>-->
+
+<!--          </ul>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; View Details Button &ndash;&gt;-->
+<!--        <div class="view-details-button">-->
+<!--          <button-->
+<!--            class="btn-view-details"-->
+<!--            [routerLink]="['/candidate-details', candidate.id]">-->
+<!--            View Full Details-->
+<!--          </button>-->
+<!--        </div>-->
+
+<!--      </div> &lt;!&ndash; End of candidate body &ndash;&gt;-->
+<!--    </div> &lt;!&ndash; End of candidate card &ndash;&gt;-->
+<!--  }-->
+
+<!--</div> &lt;!&ndash; End of candidate list &ndash;&gt;-->
