@@ -8,7 +8,9 @@ import { UserprofileComponent } from './Pages/userprofile/userprofile.component'
 import { HomeComponent } from './Pages/home/home.component';
 import {VisitorComponent} from './Pages/registration/visitor/visitor.component';
 import {LogEntryComponent} from './Pages/registration/log-entry/log-entry.component';
-import {SucessComponent} from './Pages/sucess/sucess.component'; // Import HomeComponent
+import {SucessComponent} from './Pages/sucess/sucess.component';
+import {FailedComponent} from './Pages/failed/failed.component';
+import {AlreadyexistsComponent} from './Pages/alreadyexists/alreadyexists.component'; // Import HomeComponent
 
 export const routes: Routes = [
   {
@@ -53,5 +55,13 @@ export const routes: Routes = [
   {
     path: 'sucess',
     component: SucessComponent
+  },
+  {
+    path: 'failed',
+    component: FailedComponent
+  },
+  {
+    path: 'alreadyexists',
+    component: AlreadyexistsComponent
   },
 ];

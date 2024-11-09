@@ -25,7 +25,7 @@ export class LogEntryComponent {
     private snackBar: MatSnackBar
   ) {
     this.registrationForm = this.fb.group({
-      nid: ['', Validators.required],
+      nid: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       visitee: ['', Validators.required],
     });
   }
@@ -60,7 +60,7 @@ export class LogEntryComponent {
                 });
               } else if (logResponse.status === 'failed' && logResponse.message === 'Not registered') {
                 // Navigate to home if not registered
-                this.router.navigate(['home']);
+                this.router.navigate(['failed']);
 
                 // Show error toast message if not registered
                 this.snackBar.open('Not registered', 'Close', {

@@ -30,7 +30,7 @@ export class CandidateComponent {
     private snackBar: MatSnackBar
   ) {
     this.registrationForm = this.fb.group({
-      egyptianId: ['', Validators.required],
+      egyptianId: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       email: ['', Validators.required], // email field in the form
       firstname: ['', Validators.required],
       secondname: ['', Validators.required],

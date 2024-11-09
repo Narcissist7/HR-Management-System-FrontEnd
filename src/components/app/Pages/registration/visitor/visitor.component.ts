@@ -35,7 +35,7 @@ export class VisitorComponent {
     private snackBar: MatSnackBar
   ) {
     this.registrationForm = this.fb.group({
-      egyptianId: ['', Validators.required],
+      egyptianId: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       firstname: ['', Validators.required],
       secondname: ['', Validators.required],
       phone: ['', Validators.required],
@@ -112,24 +112,32 @@ export class VisitorComponent {
       };
 
       // Ensure responseType is set to 'text' to handle plain text response
-      this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', requestData, { responseType: 'text' })
+      this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', requestData, { observe: 'response', responseType: 'text' })
         .subscribe(
           (response) => {
-            console.log('Form successfully submitted:', response);
-            // Handle the plain text response appropriately
-            if (response === "Not registered") {
+            if (response.status === 208) {
+              // Redirect to "alreadyexists" page if status is ALREADY_REPORTED
+              this.router.navigate(['alreadyexists']);
+            } else if (response.status === 200) {
+              // Show success toast message and redirect to "success" page
+              this.snackBar.open('Visitor registered successfully!', 'Close', {
+                duration: 5000, // 5 seconds
+                panelClass: ['success-toast'] // Custom CSS class for green background
+              });
+              this.router.navigate(['sucess']); // Redirect to "success" page
+            } else if (response.body === "Not registered") {
               // Display red toast message if user is not registered
               this.snackBar.open('User is not registered', 'Close', {
                 duration: 5000, // 5 seconds
-                panelClass: ['error-toast'] // Custom CSS class for red background
+                panelClass: ['error-toast']
               });
-            } else if (response.includes('logged in')) {
+            } else if (response.body?.includes('logged in')) {
               // Show success toast and navigate to home page
-              this.snackBar.open(response, 'Close', {
+              this.snackBar.open(response.body, 'Close', {
                 duration: 5000, // 5 seconds
               });
+              this.router.navigate(['home']);
             }
-            this.router.navigate(['home']);
           },
           (error) => {
             console.error('Error submitting form:', error);
@@ -147,6 +155,9 @@ export class VisitorComponent {
       console.log('Form is invalid. Please fill all required fields.');
     }
   }
+
+
+
 
 
 }
