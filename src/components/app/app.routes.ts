@@ -7,7 +7,8 @@ import { JobListComponent } from './Pages/Admin-Job-view/admin-job-view.componen
 import { UserprofileComponent } from './Pages/userprofile/userprofile.component';
 import { HomeComponent } from './Pages/home/home.component';
 import {VisitorComponent} from './Pages/registration/visitor/visitor.component';
-import {LogEntryComponent} from '../../app/log-entry/log-entry.component'; // Import HomeComponent
+import {LogEntryComponent} from './Pages/registration/log-entry/log-entry.component';
+import {SucessComponent} from './Pages/sucess/sucess.component'; // Import HomeComponent
 
 export const routes: Routes = [
   {
@@ -48,5 +49,9 @@ export const routes: Routes = [
   {
     path: 'logEntry',
     component: LogEntryComponent
+  },
+  {
+    path: 'sucess',
+    component: SucessComponent
   },
 ];

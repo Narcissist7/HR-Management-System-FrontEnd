@@ -111,33 +111,42 @@ export class VisitorComponent {
         visitee: formData.visitee
       };
 
-      this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', requestData)
+      // Ensure responseType is set to 'text' to handle plain text response
+      this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', requestData, { responseType: 'text' })
         .subscribe(
           (response) => {
-            if (response === null) {
-              // Display red toast message if user is already registered
-              this.snackBar.open('You are already registered before', 'Close', {
+            console.log('Form successfully submitted:', response);
+            // Handle the plain text response appropriately
+            if (response === "Not registered") {
+              // Display red toast message if user is not registered
+              this.snackBar.open('User is not registered', 'Close', {
                 duration: 5000, // 5 seconds
                 panelClass: ['error-toast'] // Custom CSS class for red background
               });
-              this.router.navigate(['home']);
-            } else {
-              console.log('Form successfully submitted:', response);
-
+            } else if (response.includes('logged in')) {
               // Show success toast and navigate to home page
-              this.snackBar.open('You are registered successfully', 'Close', {
+              this.snackBar.open(response, 'Close', {
                 duration: 5000, // 5 seconds
               });
-              this.router.navigate(['home']);
             }
+            this.router.navigate(['home']);
           },
           (error) => {
             console.error('Error submitting form:', error);
+            // Add error handling for unexpected response parsing issues
+            if (error instanceof SyntaxError) {
+              console.error('Syntax Error:', error.message);
+              this.snackBar.open('There was an issue with the response format.', 'Close', {
+                duration: 5000,
+                panelClass: ['error-toast']
+              });
+            }
           }
         );
     } else {
       console.log('Form is invalid. Please fill all required fields.');
     }
   }
+
 
 }
