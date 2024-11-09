@@ -5,20 +5,22 @@
     <table class="data-table">
       <thead>
       <tr>
-        <th>ID</th>
+        <th>National ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Address</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
         @for(candidate of candidates; track $index){
       <tr>
-        <td>{{ candidate.id }}</td>
+        <td>{{ candidate.ssn }}</td>
         <td>{{ candidate.name }}</td>
         <td>{{ candidate.email }}</td>
         <td>{{ candidate.phone }}</td>
+        <td>{{ candidate.address }}</td>
         <td>
           <button class="btn-action" [routerLink]="['/item-details', candidate.id]">View Details</button>
         </td>
