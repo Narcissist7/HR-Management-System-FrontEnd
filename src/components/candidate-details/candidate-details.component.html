@@ -1,61 +1,62 @@
 <div class="candidate-list">
-  <h2 class="title">Candidate List</h2>
+  <h2 class="title">Candidate Profile</h2>
 
+  <!-- Candidate Card Section -->
+  <div class="candidate-card">
 
+    <!-- Candidate Header Section -->
+    <div class="candidate-header">
+      <h3 class="candidate-name">{{ candidateDetails.name }}</h3>
+      <p class="candidate-email">Email: <span>{{ candidateDetails.email }}</span></p>
+      <p class="candidate-phone">Phone: <span>{{ candidateDetails.phone }}</span></p>
+      <p class="candidate-address">Address: <span>{{ candidateDetails.address }}</span></p>
+      <p class="candidate-dob">Date of Birth: <span>{{ candidateDetails.dob }}</span></p>
+      <p class="candidate-gender">Gender: <span>{{ candidateDetails.gender }}</span></p>
+      <p class="candidate-marital-status">Marital Status: <span>{{ candidateDetails.martial_status }}</span></p>
+      <p class="candidate-military-status">Military Status: <span>{{ candidateDetails.military_status }}</span></p>
+      <p class="candidate-pob">Place of Birth: <span>{{ candidateDetails.pob }}</span></p>
+      <p class="candidate-ssn">SSN: <span>{{ candidateDetails.ssn }}</span></p>
+    </div>
 
-    <!-- Candidate Card Section -->
-    <div class="candidate-card">
+    <!-- Candidate Body Section -->
+    <div class="candidate-body">
 
-      <!-- Candidate Header Section -->
-      <div class="candidate-header">
-        <h3 class="candidate-name">{{ candidateDetails.name }}</h3>
-        <p class="candidate-email">Email: {{ candidateDetails.email }}</p>
-        <p class="candidate-address">Address: {{ candidateDetails.address }}</p>
-        <p class="candidate-dob">DOB: {{ candidateDetails.dob }}</p>
+      <!-- Education Section -->
+      <div class="education-section">
+        <h4>Education</h4>
+        <ul>
+          @for (education of educations; track $index) {
+            <li>
+              <div class="education-item">
+                <h4><strong>{{ education.university }} </strong></h4>
+                <p><strong>Major:</strong> {{ education.major }}</p>
+                <p><strong>Degree:</strong> {{ education.degree }}</p>
+                <p><strong>Grade:</strong> {{ education.grade }}</p>
+                <p><strong>Year:</strong> {{ education.date }}</p>
+              </div>
+            </li>
+          }
+        </ul>
       </div>
 
-       Candidate Body Section
-      <div class="candidate-body">
-
-        @for (education of educations; track $index) {
-          Education Section
-          <div class="education-section">
-            <h4 class="candidate-name">Education</h4>
-            <ul>
-              <li>
-                <p>{{ education.university }}</p>
-              </li>
-              <li>
-                <p>Major: {{ education.major }}</p>
-              </li>
-              <li>
-                <p>Year: {{ education.date }}</p>
-              </li>
-
-            </ul>
-          </div>
-        }
-
-        @for (experience of experiences; track $index) {
-        Experience Section
-       <div class="experience-section">
-         <h4 class="candidate-name">Experience</h4>
-         <ul>
-           <li>
-             <p>{{ experience.company_name }}</p>
-            </li>
+      <!-- Experience Section -->
+      <div class="experience-section">
+        <h4>Experience</h4>
+        <ul>
+          @for (experience of experiences; track $index) {
             <li>
-              <p>Position: {{ experience.position }}</p>
+              <div class="experience-item">
+                <h4><strong>{{ experience.company_name }} </strong></h4>
+                <p><strong>Position:</strong> {{ experience.postion }}</p>
+                <p><strong>Since:</strong> {{ experience.start_date }}</p>
+                <p><strong>To:</strong> {{ experience.end_date }}</p>
+                <p><strong>Left for:</strong> {{ experience.reason }}</p>
+              </div>
             </li>
-            <li>
-              <p>Year: {{ experience.end_date }}</p>
-            </li>
+          }
+        </ul>
+      </div>
 
-          </ul>
-        </div>
-        }
-
-      </div> <!-- End of candidate body -->
-    </div> <!-- End of candidate card -->
-
+    </div> <!-- End of candidate body -->
+  </div> <!-- End of candidate card -->
 </div> <!-- End of candidate list -->
