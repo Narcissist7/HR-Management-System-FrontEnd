@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.logo img {
+  max-width: 250px;
+  margin-bottom: 35px;
+
+}
+.successContainer{
+  margin-bottom: 45px;
+  margin-top: 15px;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* Ensures it spans the full viewport width */
+  background-color: #ac2925;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 18px;
+}
+
