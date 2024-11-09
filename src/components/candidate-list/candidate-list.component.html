@@ -1,0 +1,67 @@
+<div class="candidate-list">
+  <h2 class="title">Candidate List</h2>
+
+  @for (candidate of candidates; track $index) {
+
+    <!-- Candidate Card Section -->
+    <div class="candidate-card">
+
+      <!-- Candidate Header Section -->
+      <div class="candidate-header">
+        <h3 class="candidate-name">{{ candidate.name }}</h3>
+        <p class="candidate-email">Email: {{ candidate.email }}</p>
+        <p class="candidate-address">Address: {{ candidate.address }}</p>
+        <p class="candidate-dob">DOB: {{ candidate.dob }}</p>
+      </div>
+
+      <!-- Candidate Body Section -->
+      <div class="candidate-body">
+
+        <!-- Education Section -->
+        <div class="education-section">
+          <h4 class="candidate-name">Education</h4>
+          <ul>
+            <li>
+              <p>{{ educations[$index].university }}</p>
+            </li>
+            <li>
+              <p>Major: {{ educations[$index].major }}</p>
+            </li>
+            <li>
+              <p>Year: {{ educations[$index].date }}</p>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="experience-section">
+          <h4 class="candidate-name">Experience</h4>
+          <ul>
+            <li>
+              <p>{{ experiences[$index].company_name }}</p>
+            </li>
+            <li>
+              <p>Position: {{ experiences[$index].position }}</p>
+            </li>
+            <li>
+              <p>Year: {{ experiences[$index].end_date }}</p>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- View Details Button -->
+        <div class="view-details-button">
+          <button
+            class="btn-view-details"
+            [routerLink]="['/candidate-details', candidate.id]">
+            View Full Details
+          </button>
+        </div>
+
+      </div> <!-- End of candidate body -->
+    </div> <!-- End of candidate card -->
+  }
+
+</div> <!-- End of candidate list -->
