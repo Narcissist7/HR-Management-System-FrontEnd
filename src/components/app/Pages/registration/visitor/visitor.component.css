@@ -24,7 +24,7 @@
 
 /* Form input fields */
 .form-control {
-  border: 1px solid #ff0000;
+  border: 1px solid #0c0101;
   border-radius: 8px;
   padding: 15px;
   color: #000000;
@@ -108,4 +108,13 @@ a:hover {
 .error-toast {
   background-color: #f44336; /* Red color */
   color: white;
+}
+
+.ng-invalid.ng-touched .form-control {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875em;
 }

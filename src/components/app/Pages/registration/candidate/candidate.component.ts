@@ -117,6 +117,23 @@ export class CandidateComponent {
   }
 
   onSubmit() {
+
+    if (this.registrationForm.invalid) {
+      // Mark all fields as touched to trigger validation messages
+      this.registrationForm.markAllAsTouched();
+
+      // Optionally, log to the console or show a toast for invalid form submission
+      console.log('Form is invalid. Please fill all required fields.');
+
+      // Show a toast to indicate that the form is incomplete
+      this.snackBar.open('Please fill in all required fields.', 'Close', {
+        duration: 5000,
+        panelClass: ['error-toast']
+      });
+
+      return;
+    }
+
     if (this.registrationForm.valid) {
       const formData = this.registrationForm.value;
 

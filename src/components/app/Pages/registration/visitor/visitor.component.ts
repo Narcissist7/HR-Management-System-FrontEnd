@@ -96,65 +96,78 @@ export class VisitorComponent {
   }
 
   onSubmit() {
-    if (this.registrationForm.valid) {
-      const formData = this.registrationForm.value;
+    if (this.registrationForm.invalid) {
+      // Mark all fields as touched to trigger validation messages
+      this.registrationForm.markAllAsTouched();
 
-      // Mapping form data to match the required JSON format
-      const requestData = {
-        name: `${formData.firstname} ${formData.secondname}`,
-        phone: formData.phone,
-        dob: formData.dob,
-        gender: formData.gender,
-        pob: formData.birthPlace,
-        ssn: formData.egyptianId,
-        address: formData.address,
-        visitee: formData.visitee
-      };
-
-      // Ensure responseType is set to 'text' to handle plain text response
-      this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', requestData, { observe: 'response', responseType: 'text' })
-        .subscribe(
-          (response) => {
-            if (response.status === 208) {
-              // Redirect to "alreadyexists" page if status is ALREADY_REPORTED
-              this.router.navigate(['alreadyexists']);
-            } else if (response.status === 200) {
-              // Show success toast message and redirect to "success" page
-              this.snackBar.open('Visitor registered successfully!', 'Close', {
-                duration: 5000, // 5 seconds
-                panelClass: ['success-toast'] // Custom CSS class for green background
-              });
-              this.router.navigate(['sucess']); // Redirect to "success" page
-            } else if (response.body === "Not registered") {
-              // Display red toast message if user is not registered
-              this.snackBar.open('User is not registered', 'Close', {
-                duration: 5000, // 5 seconds
-                panelClass: ['error-toast']
-              });
-            } else if (response.body?.includes('logged in')) {
-              // Show success toast and navigate to home page
-              this.snackBar.open(response.body, 'Close', {
-                duration: 5000, // 5 seconds
-              });
-              this.router.navigate(['home']);
-            }
-          },
-          (error) => {
-            console.error('Error submitting form:', error);
-            // Add error handling for unexpected response parsing issues
-            if (error instanceof SyntaxError) {
-              console.error('Syntax Error:', error.message);
-              this.snackBar.open('There was an issue with the response format.', 'Close', {
-                duration: 5000,
-                panelClass: ['error-toast']
-              });
-            }
-          }
-        );
-    } else {
+      // Optionally, log to the console or show a toast for invalid form submission
       console.log('Form is invalid. Please fill all required fields.');
+
+      // Show a toast to indicate that the form is incomplete
+      this.snackBar.open('Please fill in all required fields.', 'Close', {
+        duration: 5000,
+        panelClass: ['error-toast']
+      });
+
+      return;
     }
+
+    const formData = this.registrationForm.value;
+
+    // Mapping form data to match the required JSON format
+    const requestData = {
+      name: `${formData.firstname} ${formData.secondname}`,
+      phone: formData.phone,
+      dob: formData.dob,
+      gender: formData.gender,
+      pob: formData.birthPlace,
+      ssn: formData.egyptianId,
+      address: formData.address,
+      visitee: formData.visitee
+    };
+
+    // Ensure responseType is set to 'text' to handle plain text response
+    this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', requestData, { observe: 'response', responseType: 'text' })
+      .subscribe(
+        (response) => {
+          if (response.status === 208) {
+            // Redirect to "alreadyexists" page if status is ALREADY_REPORTED
+            this.router.navigate(['alreadyexists']);
+          } else if (response.status === 200) {
+            // Show success toast message and redirect to "success" page
+            this.snackBar.open('Visitor registered successfully!', 'Close', {
+              duration: 5000, // 5 seconds
+              panelClass: ['success-toast'] // Custom CSS class for green background
+            });
+            this.router.navigate(['sucess']); // Redirect to "success" page
+          } else if (response.body === "Not registered") {
+            // Display red toast message if user is not registered
+            this.snackBar.open('User is not registered', 'Close', {
+              duration: 5000, // 5 seconds
+              panelClass: ['error-toast']
+            });
+          } else if (response.body?.includes('logged in')) {
+            // Show success toast and navigate to home page
+            this.snackBar.open(response.body, 'Close', {
+              duration: 5000, // 5 seconds
+            });
+            this.router.navigate(['home']);
+          }
+        },
+        (error) => {
+          console.error('Error submitting form:', error);
+          // Add error handling for unexpected response parsing issues
+          if (error instanceof SyntaxError) {
+            console.error('Syntax Error:', error.message);
+            this.snackBar.open('There was an issue with the response format.', 'Close', {
+              duration: 5000,
+              panelClass: ['error-toast']
+            });
+          }
+        }
+      );
   }
+
 
 
 
