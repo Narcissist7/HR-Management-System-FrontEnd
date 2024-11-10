@@ -1,18 +1,45 @@
-.centered-content {
+/* Full-page container to center all content vertically */
+.full-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* Logo styling */
+.logo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.logo img {
+  width: 300px;
+  max-width: 250px;
+}
+
+/* Centered content styling */
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
+/* Cancel logo styling */
 .cancel-logo {
-  width: 100px; /* Adjust size as needed */
-  margin-bottom: 20px;
+  width: 80px;
+  margin-bottom: 15px;
 }
 
-p {
+/* Error message styling */
+.error-message {
   font-size: 1.2em;
-  color: #333;
+  color: #d9534f;
+  font-weight: bold;
+  margin: 0;
 }

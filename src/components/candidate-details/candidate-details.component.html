@@ -1,5 +1,5 @@
 <div class="candidate-list">
-  <h2 class="title">Candidate Profile</h2>
+  <h2 class="title">Candidate List</h2>
 
   <!-- Candidate Card Section -->
   <div class="candidate-card">
@@ -7,56 +7,46 @@
     <!-- Candidate Header Section -->
     <div class="candidate-header">
       <h3 class="candidate-name">{{ candidateDetails.name }}</h3>
-      <p class="candidate-email">Email: <span>{{ candidateDetails.email }}</span></p>
-      <p class="candidate-phone">Phone: <span>{{ candidateDetails.phone }}</span></p>
-      <p class="candidate-address">Address: <span>{{ candidateDetails.address }}</span></p>
-      <p class="candidate-dob">Date of Birth: <span>{{ candidateDetails.dob }}</span></p>
-      <p class="candidate-gender">Gender: <span>{{ candidateDetails.gender }}</span></p>
-      <p class="candidate-marital-status">Marital Status: <span>{{ candidateDetails.martial_status }}</span></p>
-      <p class="candidate-military-status">Military Status: <span>{{ candidateDetails.military_status }}</span></p>
-      <p class="candidate-pob">Place of Birth: <span>{{ candidateDetails.pob }}</span></p>
-      <p class="candidate-ssn">SSN: <span>{{ candidateDetails.ssn }}</span></p>
+      <p class="candidate-info"><strong>Email:</strong> {{ candidateDetails.email }}</p>
+      <p class="candidate-info"><strong>Phone:</strong> {{ candidateDetails.phone }}</p>
+      <p class="candidate-info"><strong>National ID:</strong> {{ candidateDetails.ssn }}</p>
+      <p class="candidate-info"><strong>Address:</strong> {{ candidateDetails.address }}</p>
+      <p class="candidate-info"><strong>Date of Birth:</strong> {{ candidateDetails.dob }}</p>
+      <p class="candidate-info"><strong>Place of Birth:</strong> {{ candidateDetails.pob }}</p>
+      <p class="candidate-info"><strong>Gender:</strong> {{ candidateDetails.gender }}</p>
+      <p class="candidate-info"><strong>Marital Status:</strong> {{ candidateDetails.martial_status }}</p>
+      <p class="candidate-info"><strong>Military Status:</strong> {{ candidateDetails.military_status }}</p>
     </div>
 
-    <!-- Candidate Body Section -->
+    <!-- Candidate Body -->
     <div class="candidate-body">
-
       <!-- Education Section -->
-      <div class="education-section">
-        <h4>Education</h4>
-        <ul>
-          @for (education of educations; track $index) {
-            <li>
-              <div class="education-item">
-                <h4><strong>{{ education.university }} </strong></h4>
-                <p><strong>Major:</strong> {{ education.major }}</p>
-                <p><strong>Degree:</strong> {{ education.degree }}</p>
-                <p><strong>Grade:</strong> {{ education.grade }}</p>
-                <p><strong>Year:</strong> {{ education.date }}</p>
-              </div>
-            </li>
-          }
-        </ul>
-      </div>
+      @for (education of educations; track $index) {
+        <div class="education-section">
+          <h4>Education</h4>
+          <ul>
+            <li><strong>University Name:</strong> {{ education.university }}</li>
+            <li><strong>Major:</strong> {{ education.major }}</li>
+            <li><strong>Degree:</strong> {{ education.degree }}</li>
+            <li><strong>Grade:</strong> {{ education.grade }}</li>
+            <li><strong>Graduation Year:</strong> {{ education.date }}</li>
+          </ul>
+        </div>
+      }
 
       <!-- Experience Section -->
-      <div class="experience-section">
-        <h4>Experience</h4>
-        <ul>
-          @for (experience of experiences; track $index) {
-            <li>
-              <div class="experience-item">
-                <h4><strong>{{ experience.company_name }} </strong></h4>
-                <p><strong>Position:</strong> {{ experience.postion }}</p>
-                <p><strong>Since:</strong> {{ experience.start_date }}</p>
-                <p><strong>To:</strong> {{ experience.end_date }}</p>
-                <p><strong>Left for:</strong> {{ experience.reason }}</p>
-              </div>
-            </li>
-          }
-        </ul>
-      </div>
-
+      @for (experience of experiences; track $index) {
+        <div class="experience-section">
+          <h4>Experience</h4>
+          <ul>
+            <li><strong>Company Name:</strong> {{ experience.company_name }}</li>
+            <li><strong>Position:</strong> {{ experience.postion }}</li>
+            <li><strong>Start Date:</strong> {{ experience.start_date }}</li>
+            <li><strong>End Date:</strong> {{ experience.end_date }}</li>
+            <li><strong>Reason for Leaving:</strong> {{ experience.reason }}</li>
+          </ul>
+        </div>
+      }
     </div> <!-- End of candidate body -->
   </div> <!-- End of candidate card -->
 </div> <!-- End of candidate list -->

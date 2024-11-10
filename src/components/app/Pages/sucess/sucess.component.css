@@ -7,26 +7,39 @@
   padding: 20px;
   box-sizing: border-box;
 }
+
 .logo img {
+  width: 300px;
   max-width: 250px;
   margin-bottom: 35px;
-
 }
-.successContainer{
+
+/* Styling for success message */
+.success-message {
+  font-size: 24px;
+  color: #4CAF50; /* Green color for success */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.successContainer {
   margin-bottom: 45px;
   margin-top: 15px;
 }
 
+.success-gif {
+  width: 250px; /* Adjust size for a smaller GIF */
+  height: auto;
+}
 
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw; /* Ensures it spans the full viewport width */
+  width: 100vw;
   background-color: #ac2925;
   color: white;
   text-align: center;
   padding: 15px 0;
   font-size: 18px;
 }
-

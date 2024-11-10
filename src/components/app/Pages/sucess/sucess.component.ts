@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 
 
@@ -11,7 +12,13 @@ import { Component } from '@angular/core';
 
 })
 export class SucessComponent {
+  constructor(private router: Router) {}
 
+  ngOnInit() {
+    setTimeout(() => {
+      this.router.navigate(['home']);
+    }, 6000);
+  }
 }
 
 
