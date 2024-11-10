@@ -1,0 +1,32 @@
+<div class="table-container">
+  <h2 class="title">Visitor Table View</h2>
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (visitor of visitors; track $index) {
+          <tr>
+            <td>{{ visitor.name }}</td>
+            <td>{{ visitor.dob }}</td>
+            <td>{{ visitor.phone }}</td>
+            <td>{{ visitor.address }}</td>
+            <td>
+              <button class="btn-action" [routerLink]="['/visitorDetails']" [state]="{ data: visitor }">
+                View Details
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

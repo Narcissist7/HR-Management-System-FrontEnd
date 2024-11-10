@@ -4,6 +4,7 @@ import {Visitor} from '../../Model/Visitor/visitor';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Constant} from '../../Constant/Constant';
+import {Candidate} from '../../Model/Candidate/candidate';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class VisitorService {
 
   submitVisitor(visitor: Visitor): Observable<any> {
     return this.http.post(environment.API_URL + Constant.API_Method.Visitor, visitor);
+  }
+
+  getAllVisitors(): Observable<Visitor[]> {
+    return this.http.get<Visitor[]>(environment.API_URL + Constant.API_Method.Visitor);
   }
 
   uploadFile(file: File): Observable<any> {

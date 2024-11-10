@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Candidate} from '../../Model/Candidate/candidate';
-import {CandidateService} from '../../Services/Candidate/candidate.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './candidate-details.component.html',
   styleUrl: './candidate-details.component.css'
 })
-export class CandidateDetailsComponent implements OnInit {
+export class CandidateDetailsComponent {
   candidateDetails: Candidate = new Candidate();
   educations: Education[] = new Array<Education>();
   experiences: Experience[] = new Array<Experience>();
@@ -24,9 +23,5 @@ export class CandidateDetailsComponent implements OnInit {
       console.warn('No candidate details available.');
     }
 }
-
-  ngOnInit(): void {
-
-  }
 
 }

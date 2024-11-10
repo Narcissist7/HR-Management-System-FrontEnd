@@ -1,21 +1,21 @@
 export class Visitor {
-  constructor(
-    public name: string,
-    public phone: string,
-    public dob: string,
-    public gender: string,
-    public pob: string, // Place of Birth
-    public ssn: string, // Egyptian ID
-    public address: string,
-    public visitee: string
-  ) {
-    this.name = "";
-    this.phone = "";
-    this.dob = "";
-    this.gender = "";
-    this.pob = "";
-    this.ssn = "";
-    this.address = "";
-    this.visitee = "";
+  name: string;
+  phone: string;
+  dob: Date;
+  gender: string;
+  pob: string;// Place of Birth
+  ssn: string; // Egyptian ID
+  address: string;
+  visitee: string;
+
+  constructor(name = "", phone = "", dob = new Date(), gender = "", pob = "", ssn = "", address = "", visitee = "",) {
+    this.name = name;
+    this.phone = phone;
+    this.dob = dob;
+    this.gender = gender;
+    this.pob = pob;
+    this.ssn = ssn;
+    this.address = address;
+    this.visitee = visitee;
   }
 }

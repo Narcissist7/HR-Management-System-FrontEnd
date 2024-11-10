@@ -12,7 +12,9 @@ import {SucessComponent} from './Pages/sucess/sucess.component';
 import {FailedComponent} from './Pages/failed/failed.component';
 import {AlreadyexistsComponent} from './Pages/alreadyexists/alreadyexists.component';
 import {CandidateListComponent} from '../candidate-list/candidate-list.component';
-import {CandidateDetailsComponent} from '../candidate-details/candidate-details.component'; // Import HomeComponent
+import {CandidateDetailsComponent} from '../candidate-details/candidate-details.component';
+import {VisitorListComponent} from '../visitor-list/visitor-list.component';
+import {VisitorDetailsComponent} from '../visitor-details/visitor-details.component'; // Import HomeComponent
 
 export const routes: Routes = [
   {
@@ -73,5 +75,13 @@ export const routes: Routes = [
   {
     path: 'candidateDetails',
     component: CandidateDetailsComponent
+  },
+  {
+    path: 'visitorList',
+    component: VisitorListComponent
+  },
+  {
+    path: 'visitorDetails',
+    component: VisitorDetailsComponent
   },
 ];
