@@ -1,7 +1,7 @@
 /* General styling for the page */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f3f4f6;
+  background-color: #f3f4f6; /* Soft background for the entire page */
   color: #444444;
   margin: 0;
   padding: 0;
@@ -11,11 +11,11 @@ body {
 .title {
   text-align: center;
   font-size: 2.2rem;
-  color: #b32e2e;
+  color: black;
   padding: 25px;
-  border-bottom: 2px solid #d1d5db;
+  border-bottom: 2px solid #b32e2e;
   margin-bottom: 30px;
-  background-color: #fafafa;
+  background-color: #ffffff; /* Change to white for a cleaner look */
   font-weight: bold;
 }
 
@@ -30,35 +30,34 @@ body {
 .candidate-card {
   width: 80%;
   max-width: 900px;
-  background: linear-gradient(145deg, #ffffff, #f0f0f3);
+  background: #ffffff; /* Solid white background for card */
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .candidate-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02); /* Slightly less scaling */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 /* Candidate header styles */
 .candidate-header {
-  background-color: #f9fafa;
+  background-color: #ffffff; /* Change to white for a cleaner look */
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-  border-left: 5px solid #b32e2e;
+  border-left: 5px solid #b32e2e; /* Keep the accent color */
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column; /* Stack items vertically */
+  gap: 10px; /* Space between items */
 }
 
 .candidate-name {
   font-size: 1.8rem;
-  color: #b32e2e;
+  color: black;
   font-weight: bold;
-  flex-basis: 100%;
 }
 
 .candidate-info {
@@ -81,7 +80,7 @@ body {
 }
 
 h4 {
-  color: #b32e2e;
+  color: black;
   font-size: 1.4rem;
   margin-bottom: 10px;
   font-weight: bold;
@@ -90,10 +89,11 @@ h4 {
 
 .education-section, .experience-section {
   margin-bottom: 25px;
-  padding: 10px 15px;
-  background-color: #f9f9f9;
+  padding: 15px; /* Increased padding for better spacing */
+  background-color: #f9f9f9; /* Light gray background for sections */
   border-radius: 8px;
-  border-left: 4px solid #b32e2e;
+  border-left: 4px solid #b32e2e; /* Accent color */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
 ul {
