@@ -21,6 +21,14 @@
     </div>
 
     <div class="mb-3">
+      <label for="job_title" class="form-label">Job Title</label>
+      <select id="job_title" class="form-control" formControlName="job_title" required>
+        <option value="">Select a job title</option>
+        <option *ngFor="let title of jobTitles">{{title}}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
       <label for="egyptianId" class="form-label">Egyptian ID Number</label>
       <input type="text" id="egyptianId" class="form-control" formControlName="egyptianId" required />
     </div>

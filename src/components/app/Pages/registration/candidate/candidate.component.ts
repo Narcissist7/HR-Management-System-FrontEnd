@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
@@ -14,10 +14,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   templateUrl: './candidate.component.html',
   styleUrls: ['./candidate.component.css']
 })
-export class CandidateComponent {
+export class CandidateComponent implements OnInit {
   selectedFile: File | null = null;
   ocrData: any = {};
   isLoading: boolean = false;
+  jobTitles: string[] = []; // Array to store job titles
 
   // Registration form with nested arrays for work experiences and education fields
   registrationForm: FormGroup;
@@ -31,10 +32,11 @@ export class CandidateComponent {
   ) {
     this.registrationForm = this.fb.group({
       egyptianId: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
-      email: ['', Validators.required], // email field in the form
+      email: ['', Validators.required],
       firstname: ['', Validators.required],
       secondname: ['', Validators.required],
       phone: ['', Validators.required],
+      job_title: ['', Validators.required],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       birthPlace: ['', Validators.required],
@@ -49,14 +51,29 @@ export class CandidateComponent {
       uniDate: ['', Validators.required]
     });
 
-    // Retrieve email from query parameters and set it in the form
     const email = this.route.snapshot.queryParamMap.get('email');
     if (email) {
       this.registrationForm.patchValue({ email });
     }
   }
 
-  get workExperiences(): FormArray {
+  ngOnInit(): void {
+    this.fetchJobTitles(); // Fetch job titles when the component initializes
+  }
+
+  fetchJobTitles(): void {
+    this.http.get<string[]>('http://localhost:8080/api/entry_managment_sys/jobtitles')
+      .subscribe(
+        (data) => {
+          this.jobTitles = data;
+        },
+        (error) => {
+          console.error('Error fetching job titles:', error);
+        }
+      );
+  }
+
+    get workExperiences(): FormArray {
     return this.registrationForm.get('workExperiences') as FormArray;
   }
 
@@ -94,10 +111,8 @@ export class CandidateComponent {
 
     this.http.post<any>('http://127.0.0.1:5000/cashout', formData).subscribe(
       (response) => {
-        console.log(response); // Check the response structure here
         const ocrDataArray = response.ocr_data;
 
-        // Ensure fields are populated from the specific array indices
         this.registrationForm.patchValue({
           firstname: ocrDataArray[0] || '',
           secondname: ocrDataArray[1] || '',
@@ -117,31 +132,22 @@ export class CandidateComponent {
   }
 
   onSubmit() {
-
     if (this.registrationForm.invalid) {
-      // Mark all fields as touched to trigger validation messages
       this.registrationForm.markAllAsTouched();
-
-      // Optionally, log to the console or show a toast for invalid form submission
-      console.log('Form is invalid. Please fill all required fields.');
-
-      // Show a toast to indicate that the form is incomplete
       this.snackBar.open('Please fill in all required fields.', 'Close', {
         duration: 5000,
         panelClass: ['error-toast']
       });
-
       return;
     }
 
     if (this.registrationForm.valid) {
       const formData = this.registrationForm.value;
-
-      // Mapping form data to match the required JSON format
       const requestData = {
         name: `${formData.firstname} ${formData.secondname}`,
         email: formData.email,
         phone: formData.phone,
+        job_title: formData.job_title,
         dob: formData.dob,
         gender: formData.gender,
         pob: formData.birthPlace,
@@ -159,7 +165,7 @@ export class CandidateComponent {
           }
         ],
         experiences: formData.workExperiences.map((experience: any) => ({
-          postion: experience.position,
+          position: experience.position,
           reason: experience.reason,
           company_name: experience.company,
           start_date: experience.startDate,
@@ -170,11 +176,8 @@ export class CandidateComponent {
       this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', requestData)
         .subscribe(
           (response) => {
-            console.log('Form successfully submitted:', response);
-
-            // Show success toast and navigate to login page
             this.snackBar.open('You are registered successfully', 'Close', {
-              duration: 3000, // 3 seconds
+              duration: 3000,
             });
             this.router.navigate(['sucess']);
           },
@@ -182,8 +185,6 @@ export class CandidateComponent {
             console.error('Error submitting form:', error);
           }
         );
-    } else {
-      console.log('Form is invalid. Please fill all required fields.');
     }
   }
 }
