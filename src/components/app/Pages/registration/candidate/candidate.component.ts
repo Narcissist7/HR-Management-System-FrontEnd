@@ -176,7 +176,7 @@ export class CandidateComponent {
             this.snackBar.open('You are registered successfully', 'Close', {
               duration: 3000, // 3 seconds
             });
-            this.router.navigate(['login']);
+            this.router.navigate(['sucess']);
           },
           (error) => {
             console.error('Error submitting form:', error);
