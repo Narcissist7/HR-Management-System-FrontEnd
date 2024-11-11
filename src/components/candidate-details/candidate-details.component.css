@@ -13,7 +13,7 @@ body {
   font-size: 2.2rem;
   color: black;
   padding: 25px;
-  border-bottom: 2px solid #b32e2e;
+  border-bottom: 2px solid #C9261D;
   margin-bottom: 30px;
   background-color: #ffffff; /* Change to white for a cleaner look */
   font-weight: bold;
@@ -48,7 +48,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-  border-left: 5px solid #b32e2e; /* Keep the accent color */
+  border-left: 5px solid #C9261D; /* Keep the accent color */
   display: flex;
   flex-direction: column; /* Stack items vertically */
   gap: 10px; /* Space between items */
@@ -69,7 +69,7 @@ body {
 }
 
 .candidate-info strong {
-  color: #b32e2e;
+  color: #C9261D;
   font-weight: bold;
   margin-right: 5px;
 }
@@ -92,7 +92,7 @@ h4 {
   padding: 15px; /* Increased padding for better spacing */
   background-color: #f9f9f9; /* Light gray background for sections */
   border-radius: 8px;
-  border-left: 4px solid #b32e2e; /* Accent color */
+  border-left: 4px solid #C9261D; /* Accent color */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
@@ -110,7 +110,7 @@ ul li {
 
 ul li strong {
   font-weight: bold;
-  color: #b32e2e;
+  color: #C9261D;
 }
 
 /* Responsive Design */

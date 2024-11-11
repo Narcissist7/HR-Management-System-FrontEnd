@@ -12,7 +12,7 @@
 .title {
   text-align: center;
   font-size: 2rem;
-  color: #b32e2e;
+  color: #C9261D;
   padding-bottom: 20px;
   margin-bottom: 30px;
   border-bottom: 2px solid #e0e0e0;
@@ -36,7 +36,7 @@
 
 .data-table th {
   background-color: #f5f5f5;
-  color: #b32e2e;
+  color: #C9261D;
   font-weight: bold;
 }
 
@@ -51,7 +51,7 @@
 
 .btn-action {
   padding: 8px 15px;
-  background-color: #b32e2e;
+  background-color: #C9261D;
   color: #fff;
   border: none;
   border-radius: 5px;
