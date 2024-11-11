@@ -16,7 +16,7 @@ export class AlreadyexistsComponent {
 
   ngOnInit() {
     setTimeout(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['logEntry']);
     }, 6000);
   }
 }

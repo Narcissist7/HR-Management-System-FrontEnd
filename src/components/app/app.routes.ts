@@ -15,7 +15,9 @@ import {CandidateListComponent} from '../candidate-list/candidate-list.component
 import {CandidateDetailsComponent} from '../candidate-details/candidate-details.component';
 import {VisitorListComponent} from '../visitor-list/visitor-list.component';
 import {VisitorDetailsComponent} from '../visitor-details/visitor-details.component';
-import {EntryLogListComponent} from '../entry-log-list/entry-log-list.component'; // Import HomeComponent
+import {EntryLogListComponent} from '../entry-log-list/entry-log-list.component';
+import {AdminDashboardComponent} from './Pages/admin-dashboard/admin-dashboard.component';
+
 
 export const routes: Routes = [
   {
@@ -88,5 +90,9 @@ export const routes: Routes = [
   {
     path: 'logList',
     component: EntryLogListComponent
-  }
+  },
+  {
+    path: 'adminDashboard',
+    component: AdminDashboardComponent
+  },
 ];

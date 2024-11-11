@@ -39,25 +39,24 @@ export class LoginComponent {
         password: this.loginForm.value.password
       };
 
-      this.http.post('http://localhost:8080/api/register/login', loginData)
-        .subscribe({
-          next: (response: any) => { // Use `any` or define a specific interface for response
-            // Store the entire response in local storage
-            localStorage.setItem('userData', JSON.stringify(response)); // Store the response object
-
-            // Navigate to the dashboard
-            this.router.navigate(['/userprofile']);
-          },
-          error: (error) => {
-            this.snackBar.open('Login failed. Please check your credentials.', 'Close', {
-              duration: 3000,
-              verticalPosition: 'top',
-              panelClass: ['error-toast']
-            });
-            console.error('Login failed', error);
-          }
-        });
+      this.http.post<any>('http://localhost:8080/api/entry_managment_sys/admin/login', loginData, {
+        headers: { 'Content-Type': 'application/json' }
+      }).subscribe({
+        next: (response) => {
+          localStorage.setItem('userData', JSON.stringify(response));
+          this.router.navigate(['/adminDashboard']);
+        },
+        error: (error) => {
+          console.error('Login failed:', error);
+          this.snackBar.open('Login failed. Please check your credentials.', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['error-toast']
+          });
+        }
+      });
     }
   }
+
 
 }
