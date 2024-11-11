@@ -14,7 +14,8 @@ import {AlreadyexistsComponent} from './Pages/alreadyexists/alreadyexists.compon
 import {CandidateListComponent} from '../candidate-list/candidate-list.component';
 import {CandidateDetailsComponent} from '../candidate-details/candidate-details.component';
 import {VisitorListComponent} from '../visitor-list/visitor-list.component';
-import {VisitorDetailsComponent} from '../visitor-details/visitor-details.component'; // Import HomeComponent
+import {VisitorDetailsComponent} from '../visitor-details/visitor-details.component';
+import {AdminDashboardComponent} from './Pages/admin-dashboard/admin-dashboard.component'; // Import HomeComponent
 
 export const routes: Routes = [
   {
@@ -83,5 +84,9 @@ export const routes: Routes = [
   {
     path: 'visitorDetails',
     component: VisitorDetailsComponent
+  },
+  {
+    path: 'adminDashboard',
+    component: AdminDashboardComponent
   },
 ];
