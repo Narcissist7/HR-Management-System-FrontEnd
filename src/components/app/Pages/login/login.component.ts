@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {CommonModule, NgFor, NgIf} from '@angular/common';
@@ -10,7 +10,6 @@ import {CommonModule, NgFor, NgIf} from '@angular/common';
   standalone: true,
   imports: [
 
-    HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,CommonModule , NgIf , NgFor
   ],

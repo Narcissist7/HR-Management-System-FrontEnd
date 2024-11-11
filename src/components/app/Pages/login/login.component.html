@@ -11,13 +11,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input
-          formControlName="email"
-          type="email"
-          id="email"
-          class="form-control"
-          required
-        />
+        <input formControlName="email" type="email" id="email" class="form-control" required />
         <div class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
           <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
           <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>

@@ -14,7 +14,6 @@ import { RouterModule} from '@angular/router';
 })
 export class CandidateListComponent implements OnInit {
   candidates: Candidate[] = [];
-  candidate: Candidate = new Candidate();
 
   constructor(private candidateService: CandidateService) { }
 

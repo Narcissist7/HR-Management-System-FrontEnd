@@ -15,7 +15,6 @@ import {Visitor} from '../../Model/Visitor/visitor';
 })
 export class VisitorListComponent implements OnInit{
   visitors: Visitor[] = [];
-  candidate: Candidate = new Candidate();
 
   constructor(private visitorService: VisitorService) { }
   ngOnInit(): void {

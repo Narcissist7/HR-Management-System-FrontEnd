@@ -3,6 +3,7 @@ export const Constant = {
     Visitor: "visitor",
     OCR: "http://127.0.0.1:5000/cashout",
     Candidate: 'candidate',
+    EntryLog: 'log',
 
   }
 }
