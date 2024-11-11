@@ -9,6 +9,7 @@ import {Constant} from '../../Constant/Constant';
   providedIn: 'root'
 })
 export class CandidateService {
+    private EndPoint: string = "";
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +17,9 @@ export class CandidateService {
     return this.http.get<Candidate[]>(environment.API_URL + Constant.API_Method.Candidate);
   }
 
+  getCandidateBySSN(ssn: string): Observable<Candidate> {
+    return this.http.get<Candidate>(`${environment.API_URL + Constant.API_Method.Candidate}/${ssn}`);
+  }
 }
 
 export { Candidate };

@@ -17,6 +17,7 @@ import {VisitorListComponent} from '../visitor-list/visitor-list.component';
 import {VisitorDetailsComponent} from '../visitor-details/visitor-details.component';
 import {EntryLogListComponent} from '../entry-log-list/entry-log-list.component';
 import {AdminDashboardComponent} from './Pages/admin-dashboard/admin-dashboard.component';
+import {EntryLogDetailsComponent} from '../entry-log-details/entry-log-details.component';
 
 
 export const routes: Routes = [
@@ -90,6 +91,10 @@ export const routes: Routes = [
   {
     path: 'logList',
     component: EntryLogListComponent
+  },
+  {
+    path: 'logDetails',
+    component: EntryLogDetailsComponent
   },
   {
     path: 'adminDashboard',
