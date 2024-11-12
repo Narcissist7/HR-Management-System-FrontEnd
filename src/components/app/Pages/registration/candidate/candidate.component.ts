@@ -149,7 +149,10 @@ export class CandidateComponent implements OnInit {
           gender: ocrDataArray[5] || '',
           birthPlace: ocrDataArray[6] || '',
           email: cvDataArray[1] || '',
-          phone: cvDataArray[0]|| ''
+          phone: cvDataArray[0]|| '',
+          university_name :cvDataArray[2],
+          major:cvDataArray[3],
+          degree:cvDataArray[4]
           // Add more fields if needed based on your cvData structure
         });
 
@@ -181,29 +184,32 @@ export class CandidateComponent implements OnInit {
       return;
     }
 
-    const formData = this.registrationForm.value;
-    const requestData = {
-      name: `${formData.firstname} ${formData.secondname}`,
-      email: formData.email,
-      phone: formData.phone,
-      job_title: formData.job_title,
-      dob: formData.dob,
-      gender: formData.gender,
-      pob: formData.birthPlace,
-      military_status: formData.militaryStatus,
-      ssn: formData.egyptianId,
-      address: formData.address,
-      martial_status: formData.maritalStatus,
+    const formData = new FormData();
+
+    // Append form fields
+    const formValues = this.registrationForm.value;
+    const candidateData = {
+      name: `${formValues.firstname} ${formValues.secondname}`,
+      email: formValues.email,
+      phone: formValues.phone,
+      job_title: formValues.job_title,
+      dob: formValues.dob,
+      gender: formValues.gender,
+      pob: formValues.birthPlace,
+      military_status: formValues.militaryStatus,
+      ssn: formValues.egyptianId,
+      address: formValues.address,
+      martial_status: formValues.maritalStatus,
       educations: [
         {
-          university: formData.university,
-          degree: formData.degree,
-          grade: formData.grade,
-          major: formData.major,
-          date: formData.uniDate,
+          university: formValues.university,
+          degree: formValues.degree,
+          grade: formValues.grade,
+          major: formValues.major,
+          date: formValues.uniDate,
         }
       ],
-      experiences: formData.workExperiences.map((experience: any) => ({
+      experiences: formValues.workExperiences.map((experience: any) => ({
         postion: experience.postion,
         reason: experience.reason,
         company_name: experience.company,
@@ -212,11 +218,23 @@ export class CandidateComponent implements OnInit {
       }))
     };
 
-    this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', requestData)
+    // Convert the JSON candidate data to a Blob and append it to formData
+    formData.append('candidateData', new Blob([JSON.stringify(candidateData)], { type: 'application/json' }));
+
+    // Append image and cv files
+    if (this.selectedImageFile) {
+      formData.append('image', this.selectedImageFile);
+    }
+    if (this.selectedPdfFile) {
+      formData.append('cv', this.selectedPdfFile);
+    }
+
+    // Send request
+    this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', formData)
       .subscribe(
         (response) => {
           this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You are registered successfully!', life: 3000 });
-          this.router.navigate(['success']);
+          this.router.navigate(['sucess']);
         },
         (error) => {
           console.error('Error submitting form:', error);
@@ -224,4 +242,6 @@ export class CandidateComponent implements OnInit {
         }
       );
   }
+
+
 }

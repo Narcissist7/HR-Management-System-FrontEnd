@@ -105,11 +105,20 @@
   .row .col-md-6 {
     padding-right: 15px; /* Increased padding between columns */
   }
-.ng-invalid.ng-touched .form-control {
-  border-color: red;
-}
+
 
 .error-message {
   color: red;
   font-size: 0.875em;
+}
+
+
+/* Style for valid input (non-empty) */
+input.ng-valid, select.ng-valid, textarea.ng-valid {
+  color: black; /* Text is black when valid */
+}
+
+/* Style for invalid input (empty or invalid) */
+input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+  color: red; /* Text is red when invalid */
 }
