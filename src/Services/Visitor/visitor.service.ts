@@ -29,4 +29,3 @@ export class VisitorService {
     return this.http.get<Visitor>(`${environment.API_URL + Constant.API_Method.Visitor}/${ssn}`);
   }
 }
-export {Visitor}

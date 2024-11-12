@@ -1,7 +1,7 @@
 <div class="log-list">
   <h2 class="title">Log Details</h2>
 
-  <div class="visitor-card">
+  <div class="log-card">
     <!-- Visitor Header Section -->
     <div class="log-header">
       <h3 class="log-name">{{ logDetails.date }}</h3>
@@ -12,12 +12,12 @@
     </div>
   </div>
 
-  @if (candidateDetails){
+  @if (candidateDetails.ssn != ''){
   <!-- Candidate Card Section -->
   <div class="candidate-card">
     <!-- Candidate Header Section -->
     <div class="candidate-header">
-      <h3 class="candidate-name"><strong>Name:</strong>{{ candidateDetails.name }}</h3>
+      <h3 class="candidate-name">{{ candidateDetails.name }}</h3>
       <p class="candidate-info"><strong>Job title :</strong> {{ candidateDetails.job_title}}</p>
       <p class="candidate-info"><strong>Email:</strong> {{ candidateDetails.email }}</p>
       <p class="candidate-info"><strong>Phone:</strong> {{ candidateDetails.phone }}</p>
@@ -61,17 +61,17 @@
   }
   </div> <!-- End of candidate body -->
 </div> <!-- End of candidate card -->
-  } @else if (visitorDetails){
+  } @else if (visitorDetails.ssn != ''){
     <div class="visitor-card">
       <!-- Visitor Header Section -->
       <div class="visitor-header">
-        <h3 class="visitor-name"><strong>Name:</strong>{{ visitorDetails.name }}</h3>
-        <p class="visitor-info"><strong>Gender:</strong> {{ visitorDetails.gender }}</p>
-        <p class="visitor-info"><strong>Phone:</strong> {{ visitorDetails.phone }}</p>
-        <p class="visitor-info"><strong>National ID:</strong> {{ visitorDetails.ssn }}</p>
-        <p class="visitor-info"><strong>Address:</strong> {{ visitorDetails.address }}</p>
-        <p class="visitor-info"><strong>Date of Birth:</strong> {{ visitorDetails.dob }}</p>
-        <p class="visitor-info"><strong>Place of Birth:</strong> {{ visitorDetails.pob }}</p>
+        <h3>{{ visitorDetails.name }}</h3>
+        <p class="log-info"><strong>Phone:</strong> {{ visitorDetails.phone }}</p>
+        <p class="log-info"><strong>SSN:</strong> {{ visitorDetails.ssn }}</p>
+        <p class="log-info"><strong>Gender:</strong> {{ visitorDetails.gender }}</p>
+        <p class="log-info"><strong>Date of Birth:</strong> {{ visitorDetails.dob | date }}</p>
+        <p class="log-info"><strong>Place of Birth:</strong> {{ visitorDetails.pob }}</p>
+        <p class="log-info"><strong>Address:</strong> {{ visitorDetails.address }}</p>
       </div>
     </div>
   }

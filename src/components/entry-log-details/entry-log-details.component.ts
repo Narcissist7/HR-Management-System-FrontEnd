@@ -1,17 +1,18 @@
 import {Component} from '@angular/core';
-import {Candidate} from '../../Model/Candidate/candidate';
 import {Router} from '@angular/router';
 import {EntryLog} from '../../Model/EntryLog/entry-log';
+import {Candidate} from '../../Model/Candidate/candidate';
 import {Visitor} from '../../Model/Visitor/visitor';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
-import {VisitorDetailsComponent} from '../visitor-details/visitor-details.component';
-import {CandidateDetailsComponent} from '../candidate-details/candidate-details.component';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-entry-log-details',
   standalone: true,
-  imports: [VisitorDetailsComponent, CandidateDetailsComponent],
+  imports: [
+    DatePipe
+  ],
   templateUrl: './entry-log-details.component.html',
   styleUrl: './entry-log-details.component.css'
 })
@@ -43,6 +44,7 @@ export class EntryLogDetailsComponent {
       visitorService.getVisitorBySSN(this.logDetails.ssn).subscribe({
         next: (data: Visitor) => {
           this.visitorDetails = data;
+          console.log('Visitor Details:', this.visitorDetails);
         }, complete: () => {
           if (!this.visitorDetails) {
             console.warn('No visitor details available.');
