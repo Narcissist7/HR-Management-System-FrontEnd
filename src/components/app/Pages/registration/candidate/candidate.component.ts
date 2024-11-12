@@ -80,7 +80,7 @@ export class CandidateComponent implements OnInit {
   addWorkExperience() {
     const workExperienceForm = this.fb.group({
       company: ['', Validators.required],
-      position: ['', Validators.required],
+      postion: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       reason: ['', Validators.required]
@@ -165,7 +165,7 @@ export class CandidateComponent implements OnInit {
           }
         ],
         experiences: formData.workExperiences.map((experience: any) => ({
-          position: experience.position,
+          postion: experience.postion,
           reason: experience.reason,
           company_name: experience.company,
           start_date: experience.startDate,
