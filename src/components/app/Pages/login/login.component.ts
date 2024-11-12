@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {CommonModule, NgFor, NgIf} from '@angular/common';
+import {MessageService} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,11 @@ import {CommonModule, NgFor, NgIf} from '@angular/common';
   imports: [
 
     ReactiveFormsModule,
-    MatSnackBarModule,CommonModule , NgIf , NgFor
+    MatSnackBarModule,CommonModule , NgIf , NgFor,ToastModule
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers:[MessageService]
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -23,7 +26,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private messageService:MessageService
   ) {
     // Initialize the form
     this.loginForm = this.fb.group({
@@ -44,15 +48,12 @@ export class LoginComponent {
       }).subscribe({
         next: (response) => {
           localStorage.setItem('userData', JSON.stringify(response));
+
           this.router.navigate(['/adminDashboard']);
         },
         error: (error) => {
-          console.error('Login failed:', error);
-          this.snackBar.open('Login failed. Please check your credentials.', 'Close', {
-            duration: 3000,
-            verticalPosition: 'top',
-            panelClass: ['error-toast']
-          });
+          this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'This email or password are not valid , Please try again !', life: 5000 });
+
         }
       });
     }
