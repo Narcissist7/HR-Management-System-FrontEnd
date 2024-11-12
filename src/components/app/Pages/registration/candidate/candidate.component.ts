@@ -99,43 +99,77 @@ export class CandidateComponent implements OnInit {
     this.workExperiences.removeAt(index);
   }
 
-  onFileSelected(event: any) {
+  selectedImageFile: File | null = null;
+  selectedPdfFile: File | null = null;
+
+
+  onImageSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.selectedFile = file;
+      this.selectedImageFile = file;
+    }
+  }
+
+  onPdfSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedPdfFile = file;
     }
   }
 
   onUpload() {
-    if (!this.selectedFile) {
-      this.messageService.add({ severity: 'error', summary: 'File Missing', detail: 'Please select a file to upload.', life: 5000 });
+    if (!this.selectedImageFile || !this.selectedPdfFile) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'File Missing',
+        detail: 'Please select both an image and a PDF file to upload.',
+        life: 5000
+      });
       return;
     }
+
     const formData = new FormData();
-    formData.append('file', this.selectedFile);
+    formData.append('image', this.selectedImageFile);
+    formData.append('pdf', this.selectedPdfFile);
 
     this.isLoading = true;
 
     this.http.post<any>('http://127.0.0.1:5000/cashout', formData).subscribe(
       (response) => {
         const ocrDataArray = response.ocr_data;
+        const cvDataArray = response.cv_data;
 
+        // Populate form fields with OCR and CV data
         this.registrationForm.patchValue({
+          egyptianId: ocrDataArray[2] || '',
           firstname: ocrDataArray[0] || '',
           secondname: ocrDataArray[1] || '',
-          egyptianId: ocrDataArray[2] || '',
           dob: ocrDataArray[3] || '',
           address: ocrDataArray[4] || '',
           gender: ocrDataArray[5] || '',
-          birthPlace: ocrDataArray[6] || ''
+          birthPlace: ocrDataArray[6] || '',
+          email: cvDataArray[1] || '',
+          phone: cvDataArray[0]|| ''
+          // Add more fields if needed based on your cvData structure
         });
+
         this.isLoading = false;
-        this.messageService.add({ severity: 'success', summary: 'File Uploaded', detail: 'OCR data fetched successfully!', life: 5000 });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'File Uploaded',
+          detail: 'OCR and resume data fetched successfully!',
+          life: 5000
+        });
       },
       (error) => {
         console.error(error);
         this.isLoading = false;
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an error uploading the file.', life: 5000 });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'There was an error uploading the files.',
+          life: 5000
+        });
       }
     );
   }

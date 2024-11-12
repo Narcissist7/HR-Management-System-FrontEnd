@@ -31,6 +31,7 @@ export class EntryLogListComponent implements OnInit {
       this.logs = data.content;
       this.totalElements = data.totalElements;
       console.log(this.logs);
+      
     });
   }
 
