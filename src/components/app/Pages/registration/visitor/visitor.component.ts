@@ -4,17 +4,21 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Va
 import {NgFor, NgForOf, NgIf} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import {MessageService} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 
 @Component({
   selector: 'app-visitor',
   standalone: true,
-    imports: [
-        FormsModule,
-        NgForOf,
-        ReactiveFormsModule
-    ],
+  imports: [
+    FormsModule,
+    NgForOf,
+    ReactiveFormsModule,
+    ToastModule
+  ],
   templateUrl: './visitor.component.html',
-  styleUrl: './visitor.component.css'
+  styleUrl: './visitor.component.css',
+  providers: [MessageService]
 })
 
 
@@ -32,7 +36,8 @@ export class VisitorComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private messageService:MessageService
   ) {
     this.registrationForm = this.fb.group({
       egyptianId: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
@@ -97,18 +102,8 @@ export class VisitorComponent {
 
   onSubmit() {
     if (this.registrationForm.invalid) {
-      // Mark all fields as touched to trigger validation messages
       this.registrationForm.markAllAsTouched();
-
-      // Optionally, log to the console or show a toast for invalid form submission
-      console.log('Form is invalid. Please fill all required fields.');
-
-      // Show a toast to indicate that the form is incomplete
-      this.snackBar.open('Please fill in all required fields.', 'Close', {
-        duration: 5000,
-        panelClass: ['error-toast']
-      });
-
+      this.messageService.add({ severity: 'error', summary: 'Form Incomplete', detail: 'Please fill in all required fields.', life: 5000 });
       return;
     }
 
@@ -131,8 +126,13 @@ export class VisitorComponent {
       .subscribe(
         (response) => {
           if (response.status === 208) {
-            // Redirect to "alreadyexists" page if status is ALREADY_REPORTED
-            this.router.navigate(['alreadyexists']);
+            this.messageService.add({ severity: 'warn', summary: 'User already exists', detail: 'User already exists in the database! you will be redirected to another page', life: 5000 });
+
+            // Delay navigation by 5 seconds
+            setTimeout(() => {
+              this.router.navigate(['/logEntry']); // Redirect to the admin dashboard after 5 seconds
+            }, 3000);
+
           } else if (response.status === 200) {
             // Show success toast message and redirect to "success" page
             this.snackBar.open('Visitor registered successfully!', 'Close', {

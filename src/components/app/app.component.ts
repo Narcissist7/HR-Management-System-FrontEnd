@@ -5,12 +5,13 @@ import {CandidateComponent} from './Pages/registration/candidate/candidate.compo
 import { JobListComponent } from "./Pages/Admin-Job-view/admin-job-view.component";
 import { HttpClientModule } from '@angular/common/http';
 import {HomeComponent} from './Pages/home/home.component';
+import {ToastModule} from 'primeng/toast';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, CandidateComponent, JobListComponent, HttpClientModule, HomeComponent],
+  imports: [RouterOutlet, LoginComponent, CandidateComponent, JobListComponent, HttpClientModule, HomeComponent , ToastModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

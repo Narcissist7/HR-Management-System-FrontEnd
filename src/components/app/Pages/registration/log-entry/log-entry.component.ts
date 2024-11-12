@@ -1,28 +1,32 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {NgFor, NgIf} from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-log-entry',
   standalone: true,
   imports: [
-    ReactiveFormsModule,NgFor , NgIf
+    ReactiveFormsModule,
+    NgFor,
+    NgIf,
+    ToastModule
   ],
   templateUrl: './log-entry.component.html',
-  styleUrl: './log-entry.component.css'
+  styleUrls: ['./log-entry.component.css'], // Use styleUrls instead of styleUrl
+  providers: [MessageService]
 })
 export class LogEntryComponent {
-
   registrationForm: FormGroup;
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private messageService: MessageService // Fixed constructor parameter (missing comma)
   ) {
     this.registrationForm = this.fb.group({
       nid: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
@@ -43,7 +47,7 @@ export class LogEntryComponent {
         .subscribe(
           (response) => {
             if (response.status === 200 && response.body) {
-              const logResponse: any = response.body; // Assuming the response body is of type LogResponse
+              const logResponse: any = response.body;
 
               if (logResponse.status === 'success') {
                 let message = logResponse.message;
@@ -53,48 +57,40 @@ export class LogEntryComponent {
                   this.router.navigate(['sucess']);
                 }
 
-                // Show success toast message
-                this.snackBar.open(message, 'Close', {
-                  duration: 5000,
-                  panelClass: ['success-toast']
-                });
+                // Show success toast message using PrimeNG MessageService
+                this.messageService.add({ severity: 'success', summary: message, detail: 'Success', life: 5000 });
               } else if (logResponse.status === 'failed' && logResponse.message === 'Not registered') {
-                // Navigate to home if not registered
-                this.router.navigate(['failed']);
+                // Show error toast message
+                this.messageService.add({ severity: 'error', summary: 'This User is not Registered', detail: 'Not found in the database, re-register please', life: 5000 });
 
-                // Show error toast message if not registered
-                this.snackBar.open('Not registered', 'Close', {
-                  duration: 5000,
-                  panelClass: ['error-toast']
-                });
+                // Delay navigation by 5 seconds
+                setTimeout(() => {
+                  this.router.navigate(['/home']);
+                }, 5000);
               }
             }
           },
           (error) => {
             if (error.status === 400) {
-              this.snackBar.open('Not registered', 'Close', {
-                duration: 5000,
-                panelClass: ['error-toast']
-              });
+              this.messageService.add({ severity: 'error', summary: 'This User is not Registered', detail: 'Not found in the database, re-register please', life: 5000 });
+
+              setTimeout(() => {
+                this.router.navigate(['/home']);
+              }, 5000);
             } else if (error.status === 500) {
-              this.snackBar.open('Internal server error. Please try again.', 'Close', {
-                duration: 5000,
-                panelClass: ['error-toast']
-              });
+              this.messageService.add({ severity: 'error', summary: 'Internal server error', detail: 'Please try again.', life: 5000 });
             } else {
-              this.snackBar.open('Unexpected error occurred. Please try again.', 'Close', {
-                duration: 5000,
-                panelClass: ['error-toast']
-              });
+              this.messageService.add({ severity: 'error', summary: 'Unexpected error occurred', detail: 'Please try again.', life: 5000 });
             }
             console.error('Error submitting form:', error);
           }
         );
     } else {
-      this.registrationForm.markAllAsTouched(); // Mark all fields as touched to display validation messages
-      console.log('Form is invalid. Please fill all required fields.');
+      if (this.registrationForm.invalid) {
+        this.registrationForm.markAllAsTouched();
+        this.messageService.add({ severity: 'error', summary: 'Form Incomplete', detail: 'Please fill in all required fields.', life: 5000 });
+        return;
+      }
     }
   }
-
-
 }

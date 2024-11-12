@@ -1,0 +1,28 @@
+<div class="container">
+  <h2 class="text-center mb-4">Create admin</h2>
+
+  <!-- Registration Form -->
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="Email" class="form-label">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" id="password" class="form-control" formControlName="password" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="user_name" class="form-label">Username</label>
+      <input type="text" id="user_name" class="form-control" formControlName="user_name" required />
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-outline-dark">Create</button>
+    </div>
+  </form>
+</div>
+
+<p-toast></p-toast>

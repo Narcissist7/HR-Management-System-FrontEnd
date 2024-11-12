@@ -18,6 +18,7 @@ import {VisitorDetailsComponent} from '../visitor-details/visitor-details.compon
 import {EntryLogListComponent} from '../entry-log-list/entry-log-list.component';
 import {AdminDashboardComponent} from './Pages/admin-dashboard/admin-dashboard.component';
 import {EntryLogDetailsComponent} from '../entry-log-details/entry-log-details.component';
+import {CreateAdminComponent} from './Pages/create-admin/create-admin.component';
 
 
 export const routes: Routes = [
@@ -100,4 +101,8 @@ export const routes: Routes = [
     path: 'adminDashboard',
     component: AdminDashboardComponent
   },
+  {
+    path:"createAdmin",
+    component: CreateAdminComponent
+  }
 ];

@@ -3,14 +3,21 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MessageService } from 'primeng/api'; // Import the MessageService for toast notifications
+import { ToastModule } from 'primeng/toast'; // Import the ToastModule
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-registration-two',
   standalone: true,
   imports: [
-    FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf, MatSnackBarModule
+    FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf,
+    ToastModule, DropdownModule, ButtonModule, InputTextModule, ProgressSpinnerModule
   ],
+  providers: [MessageService],
   templateUrl: './candidate.component.html',
   styleUrls: ['./candidate.component.css']
 })
@@ -20,7 +27,6 @@ export class CandidateComponent implements OnInit {
   isLoading: boolean = false;
   jobTitles: string[] = []; // Array to store job titles
 
-  // Registration form with nested arrays for work experiences and education fields
   registrationForm: FormGroup;
 
   constructor(
@@ -28,7 +34,7 @@ export class CandidateComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private messageService: MessageService // Inject MessageService for toasts
   ) {
     this.registrationForm = this.fb.group({
       egyptianId: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
@@ -69,11 +75,12 @@ export class CandidateComponent implements OnInit {
         },
         (error) => {
           console.error('Error fetching job titles:', error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch job titles', life: 5000 });
         }
       );
   }
 
-    get workExperiences(): FormArray {
+  get workExperiences(): FormArray {
     return this.registrationForm.get('workExperiences') as FormArray;
   }
 
@@ -101,7 +108,7 @@ export class CandidateComponent implements OnInit {
 
   onUpload() {
     if (!this.selectedFile) {
-      alert('Please select a file to upload.');
+      this.messageService.add({ severity: 'error', summary: 'File Missing', detail: 'Please select a file to upload.', life: 5000 });
       return;
     }
     const formData = new FormData();
@@ -123,10 +130,12 @@ export class CandidateComponent implements OnInit {
           birthPlace: ocrDataArray[6] || ''
         });
         this.isLoading = false;
+        this.messageService.add({ severity: 'success', summary: 'File Uploaded', detail: 'OCR data fetched successfully!', life: 5000 });
       },
       (error) => {
         console.error(error);
         this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an error uploading the file.', life: 5000 });
       }
     );
   }
@@ -134,57 +143,51 @@ export class CandidateComponent implements OnInit {
   onSubmit() {
     if (this.registrationForm.invalid) {
       this.registrationForm.markAllAsTouched();
-      this.snackBar.open('Please fill in all required fields.', 'Close', {
-        duration: 5000,
-        panelClass: ['error-toast']
-      });
+      this.messageService.add({ severity: 'error', summary: 'Form Incomplete', detail: 'Please fill in all required fields.', life: 5000 });
       return;
     }
 
-    if (this.registrationForm.valid) {
-      const formData = this.registrationForm.value;
-      const requestData = {
-        name: `${formData.firstname} ${formData.secondname}`,
-        email: formData.email,
-        phone: formData.phone,
-        job_title: formData.job_title,
-        dob: formData.dob,
-        gender: formData.gender,
-        pob: formData.birthPlace,
-        military_status: formData.militaryStatus,
-        ssn: formData.egyptianId,
-        address: formData.address,
-        martial_status: formData.maritalStatus,
-        educations: [
-          {
-            university: formData.university,
-            degree: formData.degree,
-            grade: formData.grade,
-            major: formData.major,
-            date: formData.uniDate,
-          }
-        ],
-        experiences: formData.workExperiences.map((experience: any) => ({
-          postion: experience.postion,
-          reason: experience.reason,
-          company_name: experience.company,
-          start_date: experience.startDate,
-          end_date: experience.endDate
-        }))
-      };
+    const formData = this.registrationForm.value;
+    const requestData = {
+      name: `${formData.firstname} ${formData.secondname}`,
+      email: formData.email,
+      phone: formData.phone,
+      job_title: formData.job_title,
+      dob: formData.dob,
+      gender: formData.gender,
+      pob: formData.birthPlace,
+      military_status: formData.militaryStatus,
+      ssn: formData.egyptianId,
+      address: formData.address,
+      martial_status: formData.maritalStatus,
+      educations: [
+        {
+          university: formData.university,
+          degree: formData.degree,
+          grade: formData.grade,
+          major: formData.major,
+          date: formData.uniDate,
+        }
+      ],
+      experiences: formData.workExperiences.map((experience: any) => ({
+        postion: experience.postion,
+        reason: experience.reason,
+        company_name: experience.company,
+        start_date: experience.startDate,
+        end_date: experience.endDate
+      }))
+    };
 
-      this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', requestData)
-        .subscribe(
-          (response) => {
-            this.snackBar.open('You are registered successfully', 'Close', {
-              duration: 3000,
-            });
-            this.router.navigate(['sucess']);
-          },
-          (error) => {
-            console.error('Error submitting form:', error);
-          }
-        );
-    }
+    this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', requestData)
+      .subscribe(
+        (response) => {
+          this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You are registered successfully!', life: 3000 });
+          this.router.navigate(['success']);
+        },
+        (error) => {
+          console.error('Error submitting form:', error);
+          this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: 'An error occurred while registering.', life: 5000 });
+        }
+      );
   }
 }
