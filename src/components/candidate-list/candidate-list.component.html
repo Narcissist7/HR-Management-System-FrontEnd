@@ -30,5 +30,10 @@
         }
       </tbody>
     </table>
+    <div class="paginator-container">
+      <mat-paginator
+        (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
+      </mat-paginator>
+    </div>
   </div>
 </div>

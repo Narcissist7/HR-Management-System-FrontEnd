@@ -20,6 +20,9 @@ export class CandidateService {
   getCandidateBySSN(ssn: string): Observable<Candidate> {
     return this.http.get<Candidate>(`${environment.API_URL + Constant.API_Method.Candidate}/${ssn}`);
   }
+  getPaginatedCandidates(page: number, size: number): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL +  Constant.API_Method.Candidate + '/paged'}?page=${page}&size=${size}`);
+  }
 }
 
 export { Candidate };

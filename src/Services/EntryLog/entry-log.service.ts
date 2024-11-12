@@ -20,4 +20,8 @@ export class EntryLogService {
     return this.http.get<EntryLog[]>(environment.API_URL + Constant.API_Method.EntryLog);
   }
 
+  getPaginatedLogs(page: number, size: number): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL +  Constant.API_Method.EntryLog + '/paged'}?page=${page}&size=${size}`);
+  }
+
 }
