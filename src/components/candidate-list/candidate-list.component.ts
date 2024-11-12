@@ -27,11 +27,6 @@ export class CandidateListComponent implements OnInit {
   }
 
   fetchCandidates() {
-    // this.candidateService.getAllCandidate().subscribe((res) => {
-    //   this.candidates = res;
-    //   console.log(this.candidates);
-    // });
-
     this.candidateService.getPaginatedCandidates(this.page, this.size).subscribe(data => {
       this.candidates = data.content;
       this.totalElements = data.totalElements;

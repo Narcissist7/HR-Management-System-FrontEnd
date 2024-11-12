@@ -28,4 +28,8 @@ export class VisitorService {
   getVisitorBySSN(ssn: string):Observable<Visitor> {
     return this.http.get<Visitor>(`${environment.API_URL + Constant.API_Method.Visitor}/${ssn}`);
   }
+
+  getPaginatedVisitors(page: number, size: number): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL +  Constant.API_Method.Visitor + '/paged'}?page=${page}&size=${size}`);
+  }
 }
