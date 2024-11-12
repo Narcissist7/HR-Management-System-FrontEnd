@@ -12,33 +12,38 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrl: './entry-log-list.component.css'
 })
 export class EntryLogListComponent implements OnInit {
-  logs: EntryLog[] = [];
-  totalElements: number = 0;
-  page: number = 0;
-  size: number = 10;
+  logs: any[] = []; // Initialize as an empty array
+  currentPage: number = 0;
+  totalPages: number = 1;
+  pageSize: number = 8;
 
-  constructor(private logService: EntryLogService) { }
+  constructor(private logService: EntryLogService) {}
+
   ngOnInit(): void {
-    this.fetchEntryLogs();
+    this.loadLogs();
   }
 
-  fetchEntryLogs() {
-    // this.logService.getAllLogs().subscribe((res) => {
-    //   this.logs = res;
-    //   console.log(this.logs);
-
-    this.logService.getPaginatedLogs(this.page, this.size).subscribe(data => {
-      this.logs = data.content;
-      this.totalElements = data.totalElements;
-      console.log(this.logs);
-      
+  loadLogs(): void {
+    this.logService.getPaginatedLogs(this.currentPage, this.pageSize).subscribe({
+      next: (data: any) => {
+        this.logs = data.content ?? []; // Ensure logs is always an array
+        this.totalPages = data.totalPages;
+      },
+      error: (error) => {
+        console.error('Failed to load logs:', error);
+        this.logs = []; // Set logs to an empty array on error
+      }
     });
   }
 
-  onPageChange(event: any): void {
-    this.page = event.pageIndex;
-    this.size = event.pageSize;
-    this.fetchEntryLogs();
+  onPageChange(newPage: number): void {
+    if (newPage >= 0 && newPage < this.totalPages) {
+      this.currentPage = newPage;
+      this.loadLogs();
+    }
   }
 
+  trackByIndex(index: number): number {
+    return index;
+  }
 }

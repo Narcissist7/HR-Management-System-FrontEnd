@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {EntryLog} from '../../Model/EntryLog/entry-log';
 import {environment} from '../../environments/environment';
@@ -20,8 +20,12 @@ export class EntryLogService {
     return this.http.get<EntryLog[]>(environment.API_URL + Constant.API_Method.EntryLog);
   }
 
-  getPaginatedLogs(page: number, size: number): Observable<any> {
-    return this.http.get<any>(`${environment.API_URL +  Constant.API_Method.EntryLog + '/paged'}?page=${page}&size=${size}`);
-  }
+  getPaginatedLogs(page: number, size: number): Observable<EntryLog[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
 
+    return this.http.get<EntryLog[]>(`${environment.API_URL +  Constant.API_Method.EntryLog + '/paginated'}`, { params });
+  }
+// `${environment.API_URL +  Constant.API_Method.EntryLog + '/paged'}?page=${page}&size=${size}`
 }

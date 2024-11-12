@@ -29,9 +29,11 @@
       </tbody>
     </table>
     <div class="paginator-container">
-      <mat-paginator
-        [length]="totalElements" [pageSize]="size" [pageSizeOptions]="[10, 20, 30]" (page)="onPageChange($event)">
-      </mat-paginator>
+<!--      <mat-paginator-->
+<!--        [length]="totalElements" [pageSize]="size" [pageSizeOptions]="[10, 20, 30]" (page)="onPageChange($event)">-->
+<!--      </mat-paginator>-->
+        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+        <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Next</button>
     </div>
   </div>
 </div>
