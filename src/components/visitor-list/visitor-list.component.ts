@@ -1,16 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {Candidate} from '../../Model/Candidate/candidate';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
 import {Visitor} from '../../Model/Visitor/visitor';
 import {MatPaginator} from '@angular/material/paginator';
+import {NgIf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-visitor-list',
   standalone: true,
   imports: [
     RouterModule,
-    MatPaginator
+    MatPaginator,
+    NgIf,
+    FormsModule
   ],
   templateUrl: './visitor-list.component.html',
   styleUrl: './visitor-list.component.css'

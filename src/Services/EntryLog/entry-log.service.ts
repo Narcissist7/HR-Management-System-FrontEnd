@@ -28,4 +28,10 @@ export class EntryLogService {
     return this.http.get<EntryLog[]>(`${environment.API_URL +  Constant.API_Method.EntryLog + '/paginated'}`, { params });
   }
 // `${environment.API_URL +  Constant.API_Method.EntryLog + '/paged'}?page=${page}&size=${size}`
+  filterLogsByDate(startDate: string, endDate: string, page: number, size: number): Observable<any> {
+    return this.http.post(`${environment.API_URL +  Constant.API_Method.EntryLog + '/filterDates'}`, {
+      startDate,
+      endDate
+    });
+  }
 }

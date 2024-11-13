@@ -18,7 +18,7 @@ export class CandidateListComponent implements OnInit {
   candidates: Candidate[] = [];
   totalElements: number = 0;
   page: number = 0;
-  size: number = 10;
+  size: number = 7;
 
   constructor(private candidateService: CandidateService) { }
 

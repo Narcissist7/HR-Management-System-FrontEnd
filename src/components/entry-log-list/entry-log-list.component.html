@@ -1,7 +1,31 @@
+<!-- Log Table -->
 <div class="table-container">
   <h2 class="title">Log Table View</h2>
 
   <div class="table-wrapper">
+    <!-- Logo/Button to open filter -->
+    <div class="filter-logo" (click)="toggleFilter()">
+      <span class="filter-icon">🔍</span>
+      <span class="filter-text">Filter</span>
+    </div>
+
+    <!-- Filter Form: Initially hidden -->
+    <div class="filter-container" *ngIf="showFilter">
+      <div class="filter-body">
+        <!-- Start Date and End Date in one line -->
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" [(ngModel)]="filterStartDate" />
+
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" [(ngModel)]="filterEndDate" />
+      </div>
+
+      <div class="button-container">
+        <button class="btn-apply" (click)="applyDateFilter()">Apply</button>
+        <button class="btn-cancel" (click)="toggleFilter()">Cancel</button>
+      </div>
+    </div>
+
     <table class="data-table">
       <thead>
       <tr>
@@ -28,12 +52,11 @@
         }
       </tbody>
     </table>
+
     <div class="paginator-container">
-<!--      <mat-paginator-->
-<!--        [length]="totalElements" [pageSize]="size" [pageSizeOptions]="[10, 20, 30]" (page)="onPageChange($event)">-->
-<!--      </mat-paginator>-->
-        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
-        <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Next</button>
+      <mat-paginator
+        (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
+      </mat-paginator>
     </div>
   </div>
 </div>
