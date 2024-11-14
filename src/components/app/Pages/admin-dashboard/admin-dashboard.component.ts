@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -11,8 +11,18 @@ import {ToastModule} from 'primeng/toast';
   ],
   styleUrls: ['./admin-dashboard.component.css']
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit {
+
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      console.log('JWT Token:', jwtToken);
+    } else {
+      console.log('No JWT Token found in local storage');
+    }
+  }
 
   navigateTo(page: string) {
     this.router.navigate([`/${page}`]);

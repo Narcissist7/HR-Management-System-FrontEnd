@@ -43,21 +43,33 @@ export class LoginComponent {
         password: this.loginForm.value.password
       };
 
-      this.http.post<any>('http://localhost:8080/api/entry_managment_sys/admin/login', loginData, {
+      this.http.post<any>('http://localhost:8080/api/entry_managment_sys/admin/login2', loginData, {
         headers: { 'Content-Type': 'application/json' }
       }).subscribe({
         next: (response) => {
+          // Save JWT token if it exists in the response
+          if (response && response.token) {
+            localStorage.setItem('token', response.token);
+          }
+
+          // Optionally save other user data
           localStorage.setItem('userData', JSON.stringify(response));
+          console.log(localStorage.getItem('token'));
 
           this.router.navigate(['/adminDashboard']);
         },
         error: (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'This email or password are not valid , Please try again !', life: 5000 });
-
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Login Failed',
+            detail: 'This email or password are not valid. Please try again!',
+            life: 5000
+          });
         }
       });
     }
   }
+
 
 
 }

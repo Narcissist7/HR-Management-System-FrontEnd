@@ -134,7 +134,7 @@ export class CandidateComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.http.post<any>('http://127.0.0.1:5000/cashout', formData).subscribe(
+    this.http.post<any>('http://127.0.0.1:5000/candidate', formData).subscribe(
       (response) => {
         const ocrDataArray = response.ocr_data;
         const cvDataArray = response.cv_data;

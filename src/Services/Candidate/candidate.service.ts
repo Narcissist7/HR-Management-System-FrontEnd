@@ -14,14 +14,26 @@ export class CandidateService {
   constructor(private http: HttpClient) {}
 
   getAllCandidate(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(environment.API_URL + Constant.API_Method.Candidate);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.get<Candidate[]>("/api/entry_managment_sys/candidate" , {headers});
   }
 
   getCandidateBySSN(ssn: string): Observable<Candidate> {
-    return this.http.get<Candidate>(`${environment.API_URL + Constant.API_Method.Candidate}/${ssn}`);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.get<Candidate>(`/api/entry_managment_sys/candidate/${ssn}` , {headers});
   }
   getPaginatedCandidates(page: number, size: number): Observable<any> {
-    return this.http.get<any>(`${environment.API_URL +  Constant.API_Method.Candidate + '/paged'}?page=${page}&size=${size}`);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.get<any>(`/api/entry_managment_sys/candidate/paged?page=${page}&size=${size}` , {headers});
   }
 }
 
