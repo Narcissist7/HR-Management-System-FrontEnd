@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Candidate} from '../../Model/Candidate/candidate';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
-import { RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
@@ -20,10 +20,16 @@ export class CandidateListComponent implements OnInit {
   page: number = 0;
   size: number = 7;
 
-  constructor(private candidateService: CandidateService) { }
+  constructor(private candidateService: CandidateService , private router:Router) { }
 
   ngOnInit(): void {
-    this.fetchCandidates();
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      this.fetchCandidates();
+    } else {
+      this.router.navigate(['notAuthorized']);
+    }
+
   }
 
   fetchCandidates() {

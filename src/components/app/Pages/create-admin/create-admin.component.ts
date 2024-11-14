@@ -35,6 +35,15 @@ export class CreateAdminComponent {
     });
   }
 
+  ngOnInit(): void {
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      console.log('JWT Token:', jwtToken);
+    } else {
+      this.router.navigate(['notAuthorized']);
+    }
+  }
+
 
 
 

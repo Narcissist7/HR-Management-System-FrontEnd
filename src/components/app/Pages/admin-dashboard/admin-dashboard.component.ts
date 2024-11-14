@@ -17,11 +17,18 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
+
     if (jwtToken) {
       console.log('JWT Token:', jwtToken);
     } else {
-      console.log('No JWT Token found in local storage');
+      this.router.navigate(['notAuthorized'])
     }
+  }
+
+  logout()
+  {
+    localStorage.clear();
+    this.router.navigate(['login'])
   }
 
   navigateTo(page: string) {

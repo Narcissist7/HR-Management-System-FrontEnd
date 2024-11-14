@@ -18,5 +18,18 @@ export class VisitorDetailsComponent {
     if (!this.visitorDetails) {
       console.warn('No visitor details available.');
     }
+
+
+  }
+
+  ngOnInit(): void {
+
+    const  jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      console.log('JWT Token:', jwtToken);
+    } else {
+      this.router.navigate(['notAuthorized'])
+    }
+
   }
 }

@@ -2,7 +2,7 @@ import {EntryLogFilterRequestDTO} from '../../Model/EntryLog/EntryLogFilterReque
 import {EntryLogService} from '../../Services/EntryLog/entry-log.service';
 import {EntryLog} from '../../Model/EntryLog/entry-log';
 import {Component, OnInit} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
@@ -27,11 +27,19 @@ export class EntryLogListComponent implements OnInit {
 
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
 
-  constructor(private logService: EntryLogService) {}
+  constructor(private logService: EntryLogService , private router : Router) {}
 
   ngOnInit(): void {
-    this.loadLogs();
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      this.loadLogs();
+    } else {
+      this.router.navigate(['notAuthorized']);
+    }
+
+
   }
+
 
   loadLogs(): void {
     this.logService.getPaginatedLogs(this.page, this.size).subscribe({

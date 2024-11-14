@@ -26,6 +26,9 @@ export class EntryLogDetailsComponent {
   constructor(private router: Router, candidateService: CandidateService, visitorService: VisitorService) {
     this.logDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
 
+
+
+
     if (this.logDetails.role == "candidate") {
       candidateService.getCandidateBySSN(this.logDetails.ssn).subscribe({
         next: (data: Candidate) => {
@@ -57,4 +60,12 @@ export class EntryLogDetailsComponent {
 
   }
 
+  ngOnInit(): void {
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+
+    } else {
+      this.router.navigate(['notAuthorized']);
+    }
+  }
 }

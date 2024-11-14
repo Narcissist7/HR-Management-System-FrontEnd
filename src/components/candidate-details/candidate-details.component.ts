@@ -22,6 +22,16 @@ export class CandidateDetailsComponent {
     if (!this.candidateDetails) {
       console.warn('No candidate details available.');
     }
-}
+
+  }
+
+  ngOnInit(): void {
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      console.log('JWT Token:', jwtToken);
+    } else {
+      this.router.navigate(['notAuthorized']);
+    }
+  }
 
 }

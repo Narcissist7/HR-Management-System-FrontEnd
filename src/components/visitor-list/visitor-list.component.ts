@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
 import {Visitor} from '../../Model/Visitor/visitor';
 import {MatPaginator} from '@angular/material/paginator';
@@ -24,9 +24,16 @@ export class VisitorListComponent implements OnInit{
   page: number = 0;
   size: number = 10;
 
-  constructor(private visitorService: VisitorService) { }
+
+  constructor(private visitorService: VisitorService, private router: Router) { }
+
   ngOnInit(): void {
-    this.fetchVisitors();
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
+      console.log('JWT Token:', jwtToken);
+    } else {
+      this.router.navigate(['notAuthorized']);
+    }
   }
 
   fetchVisitors() {

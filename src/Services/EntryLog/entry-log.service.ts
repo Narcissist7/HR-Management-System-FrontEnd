@@ -14,19 +14,31 @@ export class EntryLogService {
   }
 
   submitLog(log: EntryLog): Observable<any> {
-    return this.http.post(environment.API_URL + Constant.API_Method.EntryLog, log);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.post('api/entry_managment_sys/log', log , {headers});
   }
 
   getAllLogs(): Observable<EntryLog[]> {
-    return this.http.get<EntryLog[]>(environment.API_URL + Constant.API_Method.EntryLog);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.get<EntryLog[]>('api/entry_managment_sys/log' , {headers});
   }
 
   getPaginatedLogs(page: number, size: number): Observable<EntryLog[]> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
 
-    return this.http.get<EntryLog[]>(`${environment.API_URL +  Constant.API_Method.EntryLog + '/paginated'}`, { params });
+    return this.http.get<EntryLog[]>(`api/entry_managment_sys/log/paginated`, { params , headers });
   }
 // `${environment.API_URL +  Constant.API_Method.EntryLog + '/paged'}?page=${page}&size=${size}`
   filterLogsByDate(startDate: string, endDate: string, page: number, size: number): Observable<any> {
