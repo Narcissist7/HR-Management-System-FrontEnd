@@ -3,7 +3,7 @@ export class EntryLog {
   person_id: number;
   role: string;
   ssn: string;
-  date: Date;
+  date: Date | null;
   time: string;
   phoneNumber: string;
   visitee: string;

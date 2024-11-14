@@ -22,7 +22,7 @@ export class EntryLogListComponent implements OnInit {
   size: number = 10; // Default page size
   showDateFilter: boolean = false;
   showTimeFilter: boolean = false;
-  showVisiteeFilter: boolean = false;
+  // showVisiteeFilter: boolean = false;
   showRoleFilter: boolean = false;
 
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
@@ -36,7 +36,7 @@ export class EntryLogListComponent implements OnInit {
   loadLogs(): void {
     this.logService.getPaginatedLogs(this.page, this.size).subscribe({
       next: (data: any) => {
-        this.logs = data.content ?? [];
+        this.logs = data.content;
         this.totalElements = data.totalElements;
       },
       error: (error) => {
@@ -49,8 +49,9 @@ export class EntryLogListComponent implements OnInit {
   applyFilter(): void {
     this.logService.filterLogs(this.filterRequest, this.page, this.size).subscribe({
       next: (data: any) => {
-        this.logs = data.content ?? [];
+        this.logs = data.content ;
         this.totalElements = data.totalElements;
+        console.log(this.logs);
       },
       error: (error) => {
         console.error('Failed to apply filter:', error);
@@ -73,9 +74,9 @@ export class EntryLogListComponent implements OnInit {
     this.showTimeFilter = !this.showTimeFilter;
   }
 
-  toggleVisiteeFilter(): void {
-    this.showVisiteeFilter = !this.showVisiteeFilter;
-  }
+  // toggleVisiteeFilter(): void {
+  //   this.showVisiteeFilter = !this.showVisiteeFilter;
+  // }
 
   toggleRoleFilter(): void {
     this.showRoleFilter = !this.showRoleFilter;
