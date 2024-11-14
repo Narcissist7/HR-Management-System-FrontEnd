@@ -51,22 +51,23 @@ export class EntryLogService {
 
 
   filterLogs(filterRequest: EntryLogFilterRequestDTO, page: number, size: number): Observable<any> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('size', size.toString())
-      .set('role', filterRequest.role)
-      .set('date', filterRequest.date?.toString())
-      .set('time', filterRequest.time?.toString())
-      .set('visitee', filterRequest.visitee)
-      .set('startDate', filterRequest.startDate?.toString())
-      .set('endDate', filterRequest.endDate?.toString())
-      .set('startTime', filterRequest.startTime?.toString())
-      .set('endTime', filterRequest.endTime?.toString());
-    const headers = {
+    const body = {
+      page: page,
+      size: size,
+      role: filterRequest.role,
+      visitee: filterRequest.visitee,
+      startDate: filterRequest.startDate,
+      endDate: filterRequest.endDate,
+      startTime: filterRequest.startTime,
+      endTime: filterRequest.endTime
+    }
+    console.log(body);
+   const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       'Content-Type': 'application/json'
     };
 
-    return this.http.post<any>('api/entry_managment_sys/log/filter', { params, headers });
+
+    return this.http.post<any>('api/entry_managment_sys/log/filter', body, { headers });
   }
 }
