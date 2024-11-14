@@ -20,6 +20,7 @@ import {AdminDashboardComponent} from './Pages/admin-dashboard/admin-dashboard.c
 import {EntryLogDetailsComponent} from '../entry-log-details/entry-log-details.component';
 import {CreateAdminComponent} from './Pages/create-admin/create-admin.component';
 import {NotAuthorizedComponent} from './Pages/not-authorized/not-authorized.component';
+import {AnalyticsComponent} from './Pages/analytics/analytics.component';
 
 
 export const routes: Routes = [
@@ -109,5 +110,9 @@ export const routes: Routes = [
   {
     path:"notAuthorized",
     component: NotAuthorizedComponent
+  },
+  {
+    path:"analytics",
+    component:AnalyticsComponent
   }
 ];

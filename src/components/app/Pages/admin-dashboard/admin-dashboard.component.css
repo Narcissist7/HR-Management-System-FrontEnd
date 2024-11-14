@@ -1,68 +1,83 @@
+/* General Styles */
 body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start; /* Allow scrolling */
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif; /* Changed to a cleaner font */
+  overflow-y: auto;
+  background-color: #f9f9f9; /* Lighter background */
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.navbar-logo .logo {
+  width: 120px;
 }
 
 .logout-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  z-index: 20;
   background-color: transparent;
   border: none;
-  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-.logout-button:hover {
-  transform: scale(1.1);
+.logout-button img {
+  width: 30px;
+  height: 30px;
 }
 
-.logo {
-  width: 150px;
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.header-title {
+/* Dashboard Header */
+.dashboard-header {
   text-align: center;
-  margin-top: 30px;
-  color: #C9261D;
-  font-size: 28px;
-  font-weight: 600;
+  font-family: 'Segoe UI Semibold';
+  margin-top: 140px; /* Adjusted for spacing */
 }
 
+/* Red line */
+.line {
+  height: 6px;
+  width: 400px;
+  background-color: #C9261D;
+  margin: 10px auto;
+}
+
+/* Navigation Buttons Section */
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
   flex-wrap: wrap;
-  margin-top: 100px;
-  flex-grow: 1;
+  margin-top: 60px; /* Adjusted for spacing */
 }
 
-.logo-container .logo-item {
+.logo-item {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   flex: 1 0 45%;
   max-width: 200px;
   box-sizing: border-box;
   transition: transform 0.3s ease-in-out;
 }
 
-.logo-container .logo-item:hover {
+.logo-item:hover {
   transform: translateY(-5px);
 }
 
 .logo-img {
-  width: 150px;
+  width: 140px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -73,22 +88,91 @@ body {
 
 .logo-text {
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
   font-weight: bold;
 }
 
+/* Data Summary Section */
+.data-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
+  gap: 30px; /* Space between analytics */
+  margin-top: 40px;
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling */
+}
+
+/* Data Role Boxes */
+.data-role {
+  text-align: center;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background-color: #ffffff;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.data-role:hover {
+  transform: translateY(-5px);
+}
+
+/* Individual Role Colors */
+.red {
+  background-color: #ffcccc;
+  border: 2px solid #c9261d;
+}
+
+.blue {
+  background-color: #cce7ff;
+  border: 2px solid #1d87c9;
+}
+
+.green {
+  background-color: #c8e6c9;
+  border: 2px solid #4caf50;
+}
+
+.yellow {
+  background-color: #fff9c4;
+  border: 2px solid #ffeb3b;
+}
+
+.orange {
+  background-color: #ffe0b2;
+  border: 2px solid #ff9800;
+}
+
+.purple {
+  background-color: #e1bee7;
+  border: 2px solid #9c27b0;
+}
+
+.data-role h3 {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: bold;
+}
+
+.big-number {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Footer Section */
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: #ac2925;
   color: white;
   text-align: center;
-  padding: 20px;
-  font-size: 16px;
-  z-index: 10;
+  padding: 15px;
+  font-size: 14px;
 }
 
 .footer p {

@@ -1,43 +1,79 @@
-<style>
-  .line {
-    height: 6px;
-    width: 400px;
-    background-color:  #C9261D;
-    margin: 10px auto; /* Center the line horizontally */
-  }
-</style>
+<!-- Navbar Section -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <img src="assets/logo2.png" alt="ntg-logo" class="logo" />
+  </div>
+  <button class="logout-button" (click)="logout()">
+    <img src="assets/logout.png" alt="Logout" />
+  </button>
+</nav>
 
 <!-- Admin Dashboard HTML -->
-<img src="assets/logout.png" alt="Logout" class="logout-button" (click)="logout()"/>
-<img src="assets/logo2.png" alt="ntg-logo" class="logo" />
+<h2 class="dashboard-header">Admin Dashboard</h2>
 
-<h2 class="text-center" style="font-family: 'Segoe UI Semibold'; ">Admin Dashboard</h2>
+<div class="line"></div> <!-- Red line -->
 
-<div class="line"></div> <!-- Red line above logos -->
-
+<!-- Navigation Buttons Section -->
 <div class="logo-container">
   <div class="logo-item" (click)="navigateTo('logList')">
-    <img src="assets/immigration.png" alt="Entry Logs" class="logo-img"/>
+    <img src="assets/immigration.png" alt="Entry Logs" class="logo-img" />
     <div class="logo-text">Entry Logs</div>
   </div>
   <div class="logo-item" (click)="navigateTo('createAdmin')">
-    <img src="assets/admin.png" alt="Create Admin" class="logo-img"/>
+    <img src="assets/admin.png" alt="Create Admin" class="logo-img" />
     <div class="logo-text">Create Admin</div>
   </div>
   <div class="logo-item" (click)="navigateTo('visitorList')">
-    <img src="assets/id-card.png" alt="Visitors" class="logo-img"/>
+    <img src="assets/id-card.png" alt="Visitors" class="logo-img" />
     <div class="logo-text">Visitors</div>
   </div>
   <div class="logo-item" (click)="navigateTo('candidateList')">
-    <img src="assets/candidate.png" alt="Candidates" class="logo-img"/>
+    <img src="assets/candidate.png" alt="Candidates" class="logo-img" />
     <div class="logo-text">Candidates</div>
   </div>
 </div>
 
+<div class="line"></div> <!-- Red line -->
+<!-- Data Summary Section (Modern Analysis) -->
+<div class="data-summary">
+  <!-- Candidates Section -->
+  <div class="data-role red">
+    <h3>total number of candidates </h3>
+    <p class="big-number">{{ allTime_candidates }}</p>
+  </div>
 
+  <!-- Visitors Section -->
+  <div class="data-role blue">
+    <h3>total number of visitors</h3>
+    <p class="big-number">{{ allTime_visitors }}</p>
+  </div>
 
+  <!-- Today Candidates Section -->
+  <div class="data-role green">
+    <h3>Today's Candidates count</h3>
+    <p class="big-number">{{ today_candidates }}</p>
+  </div>
+
+  <!-- Today Visitors Section -->
+  <div class="data-role yellow">
+    <h3>Today's Visitors count</h3>
+    <p class="big-number">{{ today_visitors }}</p>
+  </div>
+
+  <!-- This Month Candidates Section -->
+  <div class="data-role orange">
+    <h3>This Month Candidates count</h3>
+    <p class="big-number">{{ month_candidates }}</p>
+  </div>
+
+  <!-- This Month Visitors Section -->
+  <div class="data-role purple">
+    <h3>This Month Visitors count</h3>
+    <p class="big-number">{{ month_visitors }}</p>
+  </div>
+</div>
+
+<!-- Footer Section -->
 <div class="footer">
   <p>For any inquiries, contact support at <a href="mailto:it&#64;ntgclarity.com">it&#64;ntgclarity.com</a></p>
 </div>
-
-
