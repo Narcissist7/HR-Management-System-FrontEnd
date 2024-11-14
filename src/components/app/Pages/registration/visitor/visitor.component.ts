@@ -76,7 +76,7 @@ export class VisitorComponent {
 
     this.isLoading = true;
 
-    this.http.post<any>('http://127.0.0.1:5000/cashout', formData).subscribe(
+    this.http.post<any>('http://127.0.0.1:5000/visitor', formData).subscribe(
       (response) => {
         console.log(response); // Check the response structure here
         const ocrDataArray = response.ocr_data;

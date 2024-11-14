@@ -1,35 +1,54 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Visitor} from '../../Model/Visitor/visitor';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
-import {Constant} from '../../Constant/Constant';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Visitor } from '../../Model/Visitor/visitor';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Constant } from '../../Constant/Constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VisitorService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log("Token is missing");
+    } else {
+      console.log("Token:", token);
+    }
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token || ''}`
+    });
   }
 
-  // submitVisitor(visitor: Visitor): Observable<any> {
-  //   return this.http.post(environment.API_URL + Constant.API_Method.Visitor, visitor);
-  // }
 
   getAllVisitors(): Observable<Visitor[]> {
-    return this.http.get<Visitor[]>(environment.API_URL + Constant.API_Method.Visitor);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<Visitor[]>("/api/entry_managment_sys/visitor", { headers });
   }
 
-  // uploadFile(file: File): Observable<any> {
-  //   const formData = new FormData();
-  //   formData.append('file', file);
-  //   return this.http.post<any>(Constant.API_Method.OCR, formData);
-  // }
-  getVisitorBySSN(ssn: string):Observable<Visitor> {
-    return this.http.get<Visitor>(`${environment.API_URL + Constant.API_Method.Visitor}/${ssn}`);
+  getVisitorBySSN(ssn: string): Observable<Visitor> {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<Visitor>(`/api/entry_managment_sys/visitor/${ssn}`, { headers });
   }
+
 
   getPaginatedVisitors(page: number, size: number): Observable<any> {
-    return this.http.get<any>(`${environment.API_URL +  Constant.API_Method.Visitor + '/paged'}?page=${page}&size=${size}`);
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<any>(`/api/entry_managment_sys/visitor/paged?page=${page}&size=${size}`, { headers })
   }
 }
