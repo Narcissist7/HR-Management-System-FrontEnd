@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { EntryLogService } from '../../Services/EntryLog/entry-log.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { FormsModule } from '@angular/forms';
-import { NgForOf, NgIf } from '@angular/common';
-import { EntryLog } from '../../Model/EntryLog/entry-log';
-import { EntryLogFilterRequestDTO } from '../../Model/EntryLog/EntryLogFilterRequestDto/entry-log-filter-dto'; // Import your DTO
+import {EntryLogFilterRequestDTO} from '../../Model/EntryLog/EntryLogFilterRequestDto/entry-log-filter-dto';
+import {EntryLogService} from '../../Services/EntryLog/entry-log.service';
+import {EntryLog} from '../../Model/EntryLog/entry-log';
+import {Component, OnInit} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {MatPaginator} from '@angular/material/paginator';
+import {FormsModule} from '@angular/forms';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-entry-log-list',
@@ -14,6 +14,7 @@ import { EntryLogFilterRequestDTO } from '../../Model/EntryLog/EntryLogFilterReq
   templateUrl: './entry-log-list.component.html',
   styleUrls: ['./entry-log-list.component.css']
 })
+
 export class EntryLogListComponent implements OnInit {
   logs: EntryLog[] = [];
   totalElements: number = 0;
@@ -23,15 +24,13 @@ export class EntryLogListComponent implements OnInit {
   showTimeFilter: boolean = false;
   showVisiteeFilter: boolean = false;
   showRoleFilter: boolean = false;
-  // visitees: string[] = []; // Populate this with actual visitee data
 
-  // Initialize the filterRequest as an instance of EntryLogFilterRequestDTO
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
+
   constructor(private logService: EntryLogService) {}
 
   ngOnInit(): void {
     this.loadLogs();
-    // this.loadVisitees(); // Load visitees for the filter
   }
 
   loadLogs(): void {
@@ -46,18 +45,6 @@ export class EntryLogListComponent implements OnInit {
       }
     });
   }
-
-  // loadVisitees(): void {
-  //   // Fetch the list of visitees from the service
-  //   this.logService.getVisitees().subscribe({
-  //     next: (data: string[]) => {
-  //       this.visitees = data;
-  //     },
-  //     error: (error) => {
-  //       console.error('Failed to load visitees:', error);
-  //     }
-  //   });
-  // }
 
   applyFilter(): void {
     this.logService.filterLogs(this.filterRequest, this.page, this.size).subscribe({

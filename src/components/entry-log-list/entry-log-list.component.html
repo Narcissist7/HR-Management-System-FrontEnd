@@ -1,9 +1,14 @@
+
+
+<!-- Log Table -->
+<div class="table-container">
+  <h2 class="title">Log Table View</h2>
 <div class="filter-container">
   <h3>Filters</h3>
 
   <div class="filter-icons">
     <!-- Date Filter -->
-    <div>
+    <div class="filter-item">
       <button (click)="toggleDateFilter()">📅 Date Filter</button>
       <div *ngIf="showDateFilter">
         <input type="date" [(ngModel)]="filterRequest.startDate" placeholder="Start Date" />
@@ -12,7 +17,7 @@
     </div>
 
     <!-- Time Filter -->
-    <div>
+    <div class="filter-item">
       <button (click)="toggleTimeFilter()">🕒 Time Filter</button>
       <div *ngIf="showTimeFilter">
         <input type="time" [(ngModel)]="filterRequest.startTime" placeholder="Start Time" />
@@ -21,22 +26,12 @@
     </div>
 
     <!-- Today Filter -->
-    <div>
+    <div class="filter-item">
       <button (click)="filterToday()">📅 Today Filter</button>
     </div>
 
-    <!-- Visitee Filter -->
-<!--    <div>-->
-<!--      <button (click)="toggleVisiteeFilter()">👤 Visitee Filter</button>-->
-<!--      <div *ngIf="showVisiteeFilter">-->
-<!--        <select [(ngModel)]="filterRequest.visitee">-->
-<!--          <option *ngFor="let visitee of visitees" [value]="visitee">{{ visitee }}</option>-->
-<!--        </select>-->
-<!--      </div>-->
-<!--    </div>-->
-
     <!-- Role Filter -->
-    <div>
+    <div class="filter-item">
       <button (click)="toggleRoleFilter()">👥 Role Filter</button>
       <div *ngIf="showRoleFilter">
         <select [(ngModel)]="filterRequest.role">
@@ -50,10 +45,6 @@
     <button (click)="applyFilter()">🔍 Apply Filters</button>
   </div>
 </div>
-
-<!-- Log Table -->
-<div class="table-container">
-  <h2 class="title">Log Table View</h2>
   <table class="data-table">
     <thead>
     <tr>
