@@ -1,44 +1,97 @@
-import {Component, OnInit} from '@angular/core';
-import { RouterModule} from '@angular/router';
-import {EntryLogService} from '../../Services/EntryLog/entry-log.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { EntryLogService } from '../../Services/EntryLog/entry-log.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { NgForOf, NgIf } from '@angular/common';
+import { EntryLog } from '../../Model/EntryLog/entry-log';
+import { EntryLogFilterRequestDTO } from '../../Model/EntryLog/EntryLogFilterRequestDto/entry-log-filter-dto'; // Import your DTO
 
 @Component({
   selector: 'app-entry-log-list',
   standalone: true,
-  imports: [RouterModule, MatPaginator, FormsModule, NgIf],
+  imports: [RouterModule, MatPaginator, FormsModule, NgIf, NgForOf],
   templateUrl: './entry-log-list.component.html',
-  styleUrl: './entry-log-list.component.css'
+  styleUrls: ['./entry-log-list.component.css']
 })
 export class EntryLogListComponent implements OnInit {
-  logs: any[] = []; // Initialize as an empty array
+  logs: EntryLog[] = [];
   totalElements: number = 0;
   page: number = 0;
-  size: number = 1;
-  showFilter: boolean = false;
+  size: number = 10; // Default page size
+  showDateFilter: boolean = false;
+  showTimeFilter: boolean = false;
+  showVisiteeFilter: boolean = false;
+  showRoleFilter: boolean = false;
+  // visitees: string[] = []; // Populate this with actual visitee data
 
-  filterStartDate: string = '';
-  filterEndDate: string = '';
-
+  // Initialize the filterRequest as an instance of EntryLogFilterRequestDTO
+  filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
   constructor(private logService: EntryLogService) {}
 
   ngOnInit(): void {
     this.loadLogs();
+    // this.loadVisitees(); // Load visitees for the filter
   }
 
   loadLogs(): void {
     this.logService.getPaginatedLogs(this.page, this.size).subscribe({
       next: (data: any) => {
-        this.logs = data.content ?? []; // Ensure logs is always an array
-        this.totalElements = data.totalPages;
+        this.logs = data.content ?? [];
+        this.totalElements = data.totalElements;
       },
       error: (error) => {
         console.error('Failed to load logs:', error);
-        this.logs = []; // Set logs to an empty array on error
+        this.logs = [];
       }
     });
+  }
+
+  // loadVisitees(): void {
+  //   // Fetch the list of visitees from the service
+  //   this.logService.getVisitees().subscribe({
+  //     next: (data: string[]) => {
+  //       this.visitees = data;
+  //     },
+  //     error: (error) => {
+  //       console.error('Failed to load visitees:', error);
+  //     }
+  //   });
+  // }
+
+  applyFilter(): void {
+    this.logService.filterLogs(this.filterRequest, this.page, this.size).subscribe({
+      next: (data: any) => {
+        this.logs = data.content ?? [];
+        this.totalElements = data.totalElements;
+      },
+      error: (error) => {
+        console.error('Failed to apply filter:', error);
+      }
+    });
+  }
+
+  filterToday(): void {
+    const today = new Date();
+    this.filterRequest.startDate = today;
+    this.filterRequest.endDate = today;
+    this.applyFilter();
+  }
+
+  toggleDateFilter(): void {
+    this.showDateFilter = !this.showDateFilter;
+  }
+
+  toggleTimeFilter(): void {
+    this.showTimeFilter = !this.showTimeFilter;
+  }
+
+  toggleVisiteeFilter(): void {
+    this.showVisiteeFilter = !this.showVisiteeFilter;
+  }
+
+  toggleRoleFilter(): void {
+    this.showRoleFilter = !this.showRoleFilter;
   }
 
   onPageChange(event: any): void {
@@ -46,21 +99,4 @@ export class EntryLogListComponent implements OnInit {
     this.size = event.pageSize;
     this.loadLogs();
   }
-
-  toggleFilter(): void {
-    this.showFilter = !this.showFilter; // HIGHLIGHT CHANGE: Toggles filter visibility
-  }
-
-  applyDateFilter(): void {
-    if (this.filterStartDate && this.filterEndDate) {
-      this.logService.filterLogsByDate(this.filterStartDate, this.filterEndDate, this.page, this.size).subscribe({
-        next: (data: any) => {
-          this.logs = data.content ?? [];
-          this.totalElements = data.totalElements;
-        },
-        error: (error) => console.error('Failed to filter logs:', error)
-      });
-    }
-  }
-
 }

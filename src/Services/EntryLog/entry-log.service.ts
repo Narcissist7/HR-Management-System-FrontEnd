@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {EntryLog} from '../../Model/EntryLog/entry-log';
 import {environment} from '../../environments/environment';
 import {Constant} from '../../Constant/Constant';
+import {EntryLogFilterRequestDTO} from '../../Model/EntryLog/EntryLogFilterRequestDto/entry-log-filter-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,39 @@ export class EntryLogService {
       startDate,
       endDate
     });
+  }
+
+  filterLogsByRole(role: string, page: number, size: number): Observable<any> {
+    // Create the request body
+    const body = {
+      role: role,
+      page: page,
+      size: size
+    };
+
+    // Send the POST request to the backend
+    return this.http.post<any>(`${environment.API_URL + Constant.API_Method.EntryLog + '/filterRole'}`, body);
+  }
+
+
+
+  filterLogs(filterRequest: EntryLogFilterRequestDTO, page: number, size: number): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('role', filterRequest.role)
+      .set('date', filterRequest.date?.toString())
+      .set('time', filterRequest.time?.toString())
+      .set('visitee', filterRequest.visitee)
+      .set('startDate', filterRequest.startDate?.toString())
+      .set('endDate', filterRequest.endDate?.toString())
+      .set('startTime', filterRequest.startTime?.toString())
+      .set('endTime', filterRequest.endTime?.toString());
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.post<any>('api/entry_managment_sys/log/filter', { params, headers });
   }
 }

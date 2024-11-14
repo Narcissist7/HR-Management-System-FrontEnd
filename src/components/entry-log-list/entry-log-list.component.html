@@ -1,62 +1,89 @@
+<div class="filter-container">
+  <h3>Filters</h3>
+
+  <div class="filter-icons">
+    <!-- Date Filter -->
+    <div>
+      <button (click)="toggleDateFilter()">📅 Date Filter</button>
+      <div *ngIf="showDateFilter">
+        <input type="date" [(ngModel)]="filterRequest.startDate" placeholder="Start Date" />
+        <input type="date" [(ngModel)]="filterRequest.endDate" placeholder="End Date" />
+      </div>
+    </div>
+
+    <!-- Time Filter -->
+    <div>
+      <button (click)="toggleTimeFilter()">🕒 Time Filter</button>
+      <div *ngIf="showTimeFilter">
+        <input type="time" [(ngModel)]="filterRequest.startTime" placeholder="Start Time" />
+        <input type="time" [(ngModel)]="filterRequest.endTime" placeholder="End Time" />
+      </div>
+    </div>
+
+    <!-- Today Filter -->
+    <div>
+      <button (click)="filterToday()">📅 Today Filter</button>
+    </div>
+
+    <!-- Visitee Filter -->
+<!--    <div>-->
+<!--      <button (click)="toggleVisiteeFilter()">👤 Visitee Filter</button>-->
+<!--      <div *ngIf="showVisiteeFilter">-->
+<!--        <select [(ngModel)]="filterRequest.visitee">-->
+<!--          <option *ngFor="let visitee of visitees" [value]="visitee">{{ visitee }}</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <!-- Role Filter -->
+    <div>
+      <button (click)="toggleRoleFilter()">👥 Role Filter</button>
+      <div *ngIf="showRoleFilter">
+        <select [(ngModel)]="filterRequest.role">
+          <option value="">All</option>
+          <option value="candidate">Candidate</option>
+          <option value="visitor">Visitor</option>
+        </select>
+      </div>
+    </div>
+
+    <button (click)="applyFilter()">🔍 Apply Filters</button>
+  </div>
+</div>
+
 <!-- Log Table -->
 <div class="table-container">
   <h2 class="title">Log Table View</h2>
-
-  <div class="table-wrapper">
-    <!-- Logo/Button to open filter -->
-    <div class="filter-logo" (click)="toggleFilter()">
-      <span class="filter-icon">🔍</span>
-      <span class="filter-text">Filter</span>
-    </div>
-
-    <!-- Filter Form: Initially hidden -->
-    <div class="filter-container" *ngIf="showFilter">
-      <div class="filter-body">
-        <!-- Start Date and End Date in one line -->
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" [(ngModel)]="filterStartDate" />
-
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" [(ngModel)]="filterEndDate" />
-      </div>
-
-      <div class="button-container">
-        <button class="btn-apply" (click)="applyDateFilter()">Apply</button>
-        <button class="btn-cancel" (click)="toggleFilter()">Cancel</button>
-      </div>
-    </div>
-
-    <table class="data-table">
-      <thead>
+  <table class="data-table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let log of logs;">
       <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Actions</th>
+        <td>{{ log.name }}</td>
+        <td>{{ log.role }}</td>
+        <td>{{ log.date }}</td>
+        <td>{{ log.time }}</td>
+        <td>
+          <button class="btn-action" [routerLink]="['/logDetails']" [state]="{ data: log }">
+            View Details
+          </button>
+        </td>
       </tr>
-      </thead>
-      <tbody>
-        @for (log of logs; track $index) {
-          <tr>
-            <td>{{ log.name }}</td>
-            <td>{{ log.role }}</td>
-            <td>{{ log.date }}</td>
-            <td>{{ log.time }}</td>
-            <td>
-              <button class="btn-action" [routerLink]="['/logDetails']" [state]="{ data: log }">
-                View Details
-              </button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    </ng-container>
+    </tbody>
+  </table>
 
-    <div class="paginator-container">
-      <mat-paginator
-        (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
-      </mat-paginator>
-    </div>
+  <div class="paginator-container">
+    <mat-paginator
+      (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
+    </mat-paginator>
   </div>
 </div>
