@@ -1,6 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Candidate} from '../../Model/Candidate/candidate';
 import {Router} from '@angular/router';
+import {tokenserviceService} from '../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-candidate-details',
@@ -14,7 +15,7 @@ export class CandidateDetailsComponent {
   educations: Education[] = new Array<Education>();
   experiences: Experience[] = new Array<Experience>();
 
-  constructor(private router: Router) {
+  constructor(private router: Router , private tokenService:tokenserviceService) {
     this.candidateDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
     this.educations = this.candidateDetails.educations;
     this.experiences = this.candidateDetails.experiences;
@@ -27,10 +28,10 @@ export class CandidateDetailsComponent {
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
-      console.log('JWT Token:', jwtToken);
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
+
     } else {
-      this.router.navigate(['notAuthorized']);
+      this.tokenService.logout();
     }
   }
 

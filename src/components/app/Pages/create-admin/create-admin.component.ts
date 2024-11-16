@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {Observable} from 'rxjs';
+import {tokenserviceService} from '../../../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-create-admin',
@@ -26,7 +27,8 @@ export class CreateAdminComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService // Inject MessageService
+    private messageService: MessageService  ,
+    private tokenService:tokenserviceService// Inject MessageService
   ) {
     this.registrationForm = this.fb.group({
       email: ['', Validators.required],
@@ -37,10 +39,11 @@ export class CreateAdminComponent {
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
-      console.log('JWT Token:', jwtToken);
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
+
     } else {
-      this.router.navigate(['notAuthorized']);
+      alert("session expired please log in ")
+      this.tokenService.logout();
     }
   }
 

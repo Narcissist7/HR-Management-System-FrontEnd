@@ -6,6 +6,7 @@ import {Visitor} from '../../Model/Visitor/visitor';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
 import {DatePipe} from '@angular/common';
+import {tokenserviceService} from '../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-entry-log-details',
@@ -23,7 +24,7 @@ export class EntryLogDetailsComponent {
   educations: Education[] = new Array<Education>();
   experiences: Experience[] = new Array<Experience>();
 
-  constructor(private router: Router, candidateService: CandidateService, visitorService: VisitorService) {
+  constructor(private router: Router, candidateService: CandidateService, visitorService: VisitorService , private tokenService:tokenserviceService) {
     this.logDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
 
 
@@ -62,10 +63,10 @@ export class EntryLogDetailsComponent {
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
 
     } else {
-      this.router.navigate(['notAuthorized']);
+      this.tokenService.logout();
     }
   }
 }

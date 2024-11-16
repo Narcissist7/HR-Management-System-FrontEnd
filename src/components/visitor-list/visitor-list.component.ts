@@ -5,6 +5,7 @@ import {Visitor} from '../../Model/Visitor/visitor';
 import {MatPaginator} from '@angular/material/paginator';
 import {NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {tokenserviceService} from '../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-visitor-list',
@@ -25,16 +26,20 @@ export class VisitorListComponent implements OnInit{
   size: number = 10;
 
 
-  constructor(private visitorService: VisitorService, private router: Router) { }
+  constructor(private visitorService: VisitorService, private router: Router , private tokenService: tokenserviceService) { }
+
+
+
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
-      console.log('JWT Token:', jwtToken);
-    } else {
-      this.router.navigate(['notAuthorized']);
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
+      this.fetchVisitors();
     }
-    this.fetchVisitors();
+    else {
+      this.tokenService.logout();
+    }
+
   }
 
   fetchVisitors() {

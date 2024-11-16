@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Visitor} from '../../Model/Visitor/visitor';
 import {Router} from '@angular/router';
+import {tokenserviceService} from '../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-visitor-details',
@@ -12,7 +13,7 @@ import {Router} from '@angular/router';
 export class VisitorDetailsComponent {
   visitorDetails: Visitor = new Visitor();
 
-  constructor(private router: Router) {
+  constructor(private router: Router , private tokenService:tokenserviceService) {
     this.visitorDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
 
     if (!this.visitorDetails) {
@@ -25,10 +26,10 @@ export class VisitorDetailsComponent {
   ngOnInit(): void {
 
     const  jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
-      console.log('JWT Token:', jwtToken);
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)){
+
     } else {
-      this.router.navigate(['notAuthorized'])
+      this.tokenService.logout();
     }
 
   }

@@ -3,6 +3,7 @@ import {Candidate} from '../../Model/Candidate/candidate';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
 import {Router, RouterModule} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
+import {tokenserviceService} from '../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-candidate-list',
@@ -20,14 +21,14 @@ export class CandidateListComponent implements OnInit {
   page: number = 0;
   size: number = 7;
 
-  constructor(private candidateService: CandidateService , private router:Router) { }
+  constructor(private candidateService: CandidateService , private router:Router , private tokenService:tokenserviceService) { }
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
       this.fetchCandidates();
     } else {
-      this.router.navigate(['notAuthorized']);
+     this.tokenService.logout();
     }
 
   }

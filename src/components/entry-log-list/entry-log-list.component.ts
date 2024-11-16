@@ -6,6 +6,7 @@ import {Router, RouterModule} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
+import {tokenserviceService} from '../../Services/token/tokenservice.service';
 
 @Component({
   selector: 'app-entry-log-list',
@@ -27,14 +28,14 @@ export class EntryLogListComponent implements OnInit {
 
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
 
-  constructor(private logService: EntryLogService , private router : Router) {}
+  constructor(private logService: EntryLogService , private router : Router , private tokenService:tokenserviceService) {}
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
-    if (jwtToken) {
+    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
       this.loadLogs();
     } else {
-      this.router.navigate(['notAuthorized']);
+      this.tokenService.logout();
     }
 
 
