@@ -95,4 +95,9 @@ export class EntryLogListComponent implements OnInit {
     this.size = event.pageSize;
     this.loadLogs();
   }
+
+  resetFilters() {
+    this.filterRequest = new EntryLogFilterRequestDTO();
+    this.applyFilter();
+  }
 }

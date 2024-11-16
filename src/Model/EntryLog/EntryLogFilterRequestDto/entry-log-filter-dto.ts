@@ -2,15 +2,15 @@ export class EntryLogFilterRequestDTO {
   endTime: string;
   role: string;
   visitee: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | null;
+  endDate: Date | null;
   startTime: string;
 
   constructor(
     role: string = '',
     visitee: string = '',
-    startDate: Date = new Date(),
-    endDate: Date = new Date(),
+    startDate: Date | null = null,
+    endDate: Date | null = null,
     startTime: string = '',
     endTime: string = '',
   ) {
