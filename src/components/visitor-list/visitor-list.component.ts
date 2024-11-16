@@ -34,6 +34,7 @@ export class VisitorListComponent implements OnInit{
     } else {
       this.router.navigate(['notAuthorized']);
     }
+    this.fetchVisitors();
   }
 
   fetchVisitors() {
