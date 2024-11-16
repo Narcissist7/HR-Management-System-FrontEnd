@@ -56,6 +56,11 @@ export class LoginComponent {
           localStorage.setItem('userData', JSON.stringify(response));
           console.log(localStorage.getItem('token'));
 
+          setTimeout(() => {
+            localStorage.clear();
+
+          }, 900000)
+
           this.router.navigate(['/adminDashboard']);
         },
         error: (error) => {
