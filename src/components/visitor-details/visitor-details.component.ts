@@ -25,12 +25,12 @@ export class VisitorDetailsComponent {
 
   ngOnInit(): void {
 
-    const  jwtToken = localStorage.getItem('token');
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)){
+    if (this.tokenService.validateToken() == true) {
 
-    } else {
-      this.tokenService.logout();
     }
-
+    else
+    {
+      alert("session expired!!!")
+    }
   }
 }

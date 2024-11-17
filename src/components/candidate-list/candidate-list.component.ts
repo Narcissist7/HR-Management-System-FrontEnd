@@ -28,13 +28,14 @@ export class CandidateListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const jwtToken = localStorage.getItem('token');
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
-      this.fetchCandidates();
-    } else {
-      this.tokenService.logout();
-    }
 
+    if (this.tokenService.validateToken() == true) {
+      this.fetchCandidates();
+    }
+    else
+    {
+      alert("session expired!!!")
+    }
   }
 
   fetchCandidates() {

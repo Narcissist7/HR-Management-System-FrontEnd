@@ -6,6 +6,7 @@
   <div class="mb-3">
     <label class="form-label">Select Image</label>
     <input type="file" (change)="onImageSelected($event)" class="form-control" />
+
   </div>
   <button type="button" class="btn btn-primary mb-4" (click)="onUpload()" [disabled]="isLoading">
     {{ isLoading ? 'Uploading...' : 'Upload and Process' }}

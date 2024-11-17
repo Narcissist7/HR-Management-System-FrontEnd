@@ -27,11 +27,12 @@ export class CandidateDetailsComponent {
   }
 
   ngOnInit(): void {
-    const jwtToken = localStorage.getItem('token');
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
 
-    } else {
-      this.tokenService.logout();
+    if (this.tokenService.validateToken() == true) {
+    }
+    else
+    {
+      alert("session expired!!!")
     }
   }
 

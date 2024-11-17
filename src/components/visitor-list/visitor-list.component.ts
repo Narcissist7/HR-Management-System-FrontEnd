@@ -29,11 +29,13 @@ export class VisitorListComponent implements OnInit {
   constructor(private visitorService: VisitorService, private router: Router, private tokenService: tokenserviceService) { }
 
   ngOnInit(): void {
-    const jwtToken = localStorage.getItem('token');
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
+
+    if (this.tokenService.validateToken() == true) {
       this.fetchVisitors();
-    } else {
-      this.tokenService.logout();
+    }
+    else
+    {
+      alert("session expired!!!")
     }
   }
 

@@ -31,14 +31,14 @@ export class EntryLogListComponent implements OnInit {
   constructor(private logService: EntryLogService , private router : Router , private tokenService:tokenserviceService) {}
 
   ngOnInit(): void {
-    const jwtToken = localStorage.getItem('token');
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
+
+    if (this.tokenService.validateToken() == true) {
       this.loadLogs();
-    } else {
-      this.tokenService.logout();
     }
-
-
+    else
+    {
+      alert("session expired!!!")
+    }
   }
 
 

@@ -27,7 +27,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
 
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
+    if (this.tokenService.validateToken()) {
       this.analyticsService.getAnalyticsData().subscribe(
         (data) => {
           [this.allTime_candidates, this.allTime_visitors, this.today_candidates, this.today_visitors, this.month_candidates, this.month_visitors] = data;
@@ -37,8 +37,8 @@ export class AdminDashboardComponent implements OnInit {
         }
       );
     } else {
-      alert("session expired please log in ")
-      this.tokenService.logout();
+      alert("session expired!!!")
+
     }
   }
 

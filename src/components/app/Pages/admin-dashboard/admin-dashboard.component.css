@@ -15,7 +15,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #817979;
   padding: 10px 20px;
   position: fixed;
   top: 0;
@@ -34,8 +34,8 @@ body {
 }
 
 .logout-button img {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
 
 /* Dashboard Header */

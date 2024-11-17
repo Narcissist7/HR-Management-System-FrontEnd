@@ -34,4 +34,14 @@ export class tokenserviceService {
     localStorage.removeItem('token');
     this.router.navigate(["notAuthorized"])
   }
+
+  validateToken(): boolean {
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken && !this.isTokenExpired(jwtToken)) {
+      return true;
+    } else {
+      this.logout();
+      return false;
+    }
+  }
 }

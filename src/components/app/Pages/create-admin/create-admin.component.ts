@@ -38,12 +38,11 @@ export class CreateAdminComponent {
   }
 
   ngOnInit(): void {
-    const jwtToken = localStorage.getItem('token');
-    if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
-
-    } else {
-      alert("session expired please log in ")
-      this.tokenService.logout();
+    if (this.tokenService.validateToken() == true) {
+    }
+    else
+    {
+      alert("session expired!!!")
     }
   }
 
