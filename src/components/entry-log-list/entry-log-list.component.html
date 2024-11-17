@@ -5,9 +5,14 @@
   <h2 class="title">Log Table View</h2>
 
   <div class="filter-container">
-  <h3>Filters</h3>
 
   <div class="filter-icons">
+
+    <!-- Today Filter -->
+    <div class="filter-item">
+      <button (click)="filterToday()">📅 Today Filter</button>
+    </div>
+
     <!-- Date Filter -->
     <div class="filter-item">
       <button (click)="toggleDateFilter()">📅 Date Filter</button>
@@ -26,11 +31,6 @@
       </div>
     </div>
 
-    <!-- Today Filter -->
-    <div class="filter-item">
-      <button (click)="filterToday()">📅 Today Filter</button>
-    </div>
-
     <!-- Role Filter -->
     <div class="filter-item">
       <button (click)="toggleRoleFilter()">👥 Role Filter</button>
@@ -43,8 +43,8 @@
       </div>
     </div>
 
-    <button (click)="applyFilter()">🔍 Apply Filters</button>
-    <button (click)="resetFilters()">🔃 Reset Filters</button>
+    <button (click)="applyFilter()">🔍Apply</button>
+    <button (click)="resetFilters()">🔃Reset</button>
   </div>
 </div>
   <table class="data-table">
