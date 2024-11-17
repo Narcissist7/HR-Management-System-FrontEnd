@@ -111,3 +111,108 @@
 .mat-paginator .mat-button {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Adjust based on desired placement */
+  margin: 10px 0;
+}
+
+/* Main container for search bar */
+.search-bar-container {
+  display: flex;
+  justify-content: flex-start; /* Adjust based on your layout */
+  align-items: center;
+  width: 100%; /* Full width for better usability */
+  max-width: 600px; /* Limit the maximum width for better control */
+  margin: 20px auto; /* Center alignment */
+  background-color: #fff; /* Optional: match the page background */
+  border: 2px solid #ddd; /* Common border for input and button */
+  border-radius: 30px; /* Rounded borders for smooth design */
+  overflow: hidden; /* Ensures smooth alignment */
+}
+
+
+/* Search input styles */
+.search-bar {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none; /* Remove internal borders */
+  outline: none; /* Remove focus outline */
+}
+
+.search-bar:focus {
+  background-color: #f9f9f9; /* Subtle focus feedback */
+}
+
+/* Search button/icon */
+.search-icon {
+  background-color: #ff0033;
+  border: none; /* Removes border for smoothness */
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-icon:hover {
+  background-color: #ff6666;
+  transform: scale(1.05); /* Subtle pop effect */
+}
+
+.search-icon i {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .search-bar-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .search-bar {
+    font-size: 16px;
+  }
+}
+
+/* Reset button styles */
+.reset-icon {
+  background-color: #ccc;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-left: 2px solid #ddd; /* Same border style as container */
+}
+
+.reset-icon:hover {
+  background-color: #999;
+  transform: scale(1.05);
+}
+
+.reset-icon i {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Ensure seamless alignment with search button */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+

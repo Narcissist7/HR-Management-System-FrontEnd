@@ -19,27 +19,22 @@ import {tokenserviceService} from '../../Services/token/tokenservice.service';
   templateUrl: './visitor-list.component.html',
   styleUrl: './visitor-list.component.css'
 })
-export class VisitorListComponent implements OnInit{
+export class VisitorListComponent implements OnInit {
   visitors: Visitor[] = [];
   totalElements: number = 0;
   page: number = 0;
   size: number = 10;
+  searchQuery: string = '';
 
-
-  constructor(private visitorService: VisitorService, private router: Router , private tokenService: tokenserviceService) { }
-
-
-
+  constructor(private visitorService: VisitorService, private router: Router, private tokenService: tokenserviceService) { }
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
     if (jwtToken && !this.tokenService.isTokenExpired(jwtToken)) {
       this.fetchVisitors();
-    }
-    else {
+    } else {
       this.tokenService.logout();
     }
-
   }
 
   fetchVisitors() {
@@ -52,7 +47,24 @@ export class VisitorListComponent implements OnInit{
   onPageChange(event: any): void {
     this.page = event.pageIndex;
     this.size = event.pageSize;
-    this.fetchVisitors();
+    this.searchQuery ? this.searchVisitors() : this.fetchVisitors();
   }
 
+  searchVisitors() {
+    this.visitorService.searchVisitorsByName(this.searchQuery, this.page, this.size).subscribe(data => {
+      this.visitors = data.content;
+      this.totalElements = data.totalElements;
+    });
+  }
+
+  onSearch() {
+    this.page = 0; // Reset page on new search
+    this.searchVisitors();
+  }
+
+  resetFilters() {
+    this.searchQuery = ''; // Clear search query
+    this.page = 0; // Reset pagination to first page
+    this.fetchVisitors(); // Reload all visitors
+  }
 }

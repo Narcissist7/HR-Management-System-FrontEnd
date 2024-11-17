@@ -35,6 +35,18 @@ export class CandidateService {
     };
     return this.http.get<any>(`/api/entry_managment_sys/candidate/paged?page=${page}&size=${size}` , {headers});
   }
+
+  searchCandidatesByName(name: string, page: number, size: number) {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.post<any>(
+      `/api/entry_managment_sys/candidate/filterByName`,
+      { name },
+      { headers }
+    );
+  }
 }
 
 export { Candidate };

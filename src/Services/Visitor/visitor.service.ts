@@ -51,4 +51,16 @@ export class VisitorService {
 
     return this.http.get<any>(`/api/entry_managment_sys/visitor/paged?page=${page}&size=${size}`, { headers })
   }
+
+  searchVisitorsByName(name: string, page: number, size: number): Observable<any> {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.post<any>(
+      `/api/entry_managment_sys/visitor/filterByName`,
+      { name },
+      { headers }
+    );
+  }
 }
