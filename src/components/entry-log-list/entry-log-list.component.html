@@ -47,36 +47,42 @@
     <button (click)="resetFilters()">🔃Reset</button>
   </div>
 </div>
-  <table class="data-table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Role</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let log of logs;">
+
+
+  @if (loading){
+    <div class="loader"></div>
+  } @else {
+    <table class="data-table">
+      <thead>
       <tr>
-        <td>{{ log.name }}</td>
-        <td>{{ log.role }}</td>
-        <td>{{ log.date }}</td>
-        <td>{{ log.time }}</td>
-        <td>
-          <button class="btn-action" [routerLink]="['/logDetails']" [state]="{ data: log }">
-            View Details
-          </button>
-        </td>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Actions</th>
       </tr>
-    </ng-container>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let log of logs;">
+        <tr>
+          <td>{{ log.name }}</td>
+          <td>{{ log.role }}</td>
+          <td>{{ log.date }}</td>
+          <td>{{ log.time }}</td>
+          <td>
+            <button class="btn-action" [routerLink]="['/logDetails']" [state]="{ data: log }">
+              View Details
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
 
   <div class="paginator-container">
     <mat-paginator
       (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
     </mat-paginator>
   </div>
+  }
 </div>

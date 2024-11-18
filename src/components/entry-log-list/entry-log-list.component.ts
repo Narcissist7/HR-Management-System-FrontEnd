@@ -21,6 +21,7 @@ export class EntryLogListComponent implements OnInit {
   totalElements: number = 0;
   page: number = 0;
   size: number = 10; // Default page size
+  loading: boolean = false;
   showDateFilter: boolean = false;
   showTimeFilter: boolean = false;
   // showVisiteeFilter: boolean = false;
@@ -33,6 +34,7 @@ export class EntryLogListComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.tokenService.validateToken() == true) {
+      this.loading = true;
       this.loadLogs();
     }
     else
@@ -43,27 +45,33 @@ export class EntryLogListComponent implements OnInit {
 
 
   loadLogs(): void {
+    this.loading = true;
     this.logService.getPaginatedLogs(this.page, this.size).subscribe({
       next: (data: any) => {
         this.logs = data.content;
         this.totalElements = data.totalElements;
+        this.loading = false;
       },
       error: (error) => {
         console.error('Failed to load logs:', error);
         this.logs = [];
+        this.loading = false;
       }
     });
   }
 
   applyFilter(): void {
+    this.loading = true;
     this.logService.filterLogs(this.filterRequest, this.page, this.size).subscribe({
       next: (data: any) => {
         this.logs = data.content ;
         this.totalElements = data.totalElements;
+        this.loading = false;
         console.log(this.logs);
       },
       error: (error) => {
         console.error('Failed to apply filter:', error);
+        this.loading = false;
       }
     });
   }
