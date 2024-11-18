@@ -1,17 +1,14 @@
+.wrapper{
+  padding: 20px;
+  background:#F7F7F7;
 
-h2 {
-  color: #8B0000;
 }
 
-/* Wider container for the second registration page */
 .container {
   max-width: 800px; /* Increased width for a more balanced layout */
-  /*margin-top: 50px;*/
   padding: 20px;
-  margin: 0 auto;
   border: 2px solid #8B0000; /* Dark red border */
-  border-radius: 5px;
-  background: #fff;
+  border-radius: 15px;
 }
 
 /* Card styling */
@@ -23,7 +20,9 @@ h2 {
   background-color: #ffffff;
   padding: 20px; /* Added padding inside card */
 }
-
+.text-uploadImg{
+  color:#E14E23;
+}
 /* Card header */
 .card-body h2 {
   color: #000000;
@@ -55,7 +54,7 @@ h2 {
 
 /* Button styling */
 .btn-primary {
-  background-color: #8B0000;
+  background-color: #E14E23;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -68,12 +67,12 @@ h2 {
 
 .btn-primary:hover {
   background-color: #cc0000;
-  /*box-shadow: 0 4px 8px rgba(204, 0, 0, 0.2);*/
+  box-shadow: 0 4px 8px rgba(204, 0, 0, 0.2);
 }
 
 .btn-primary:focus {
-  background-color: #8B0000;
-  /*box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);*/
+  background-color: #b30000;
+  box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);
 }
 
 /* Checkbox and Select styling */
@@ -114,7 +113,6 @@ a:hover {
 .row .col-md-6 {
   padding-right: 15px; /* Increased padding between columns */
 }
-
 .error-toast {
   background-color: #f44336; /* Red color */
   color: white;
@@ -128,3 +126,4 @@ a:hover {
   color: red;
   font-size: 0.875em;
 }
+

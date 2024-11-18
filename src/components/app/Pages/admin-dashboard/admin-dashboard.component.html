@@ -1,18 +1,15 @@
 <!-- Navbar Section -->
-<nav class="navbar">
-  <div class="navbar-logo">
-    <img src="assets/logo2.png" alt="ntg-logo" class="logo" />
-  </div>
-  <button class="logout-button" (click)="logout()">
-    <img src="assets/logout_16584919.png" alt="Logout" />
-  </button>
-</nav>
+<!--<nav class="navbar">-->
+<!--  -->
+<!--</nav>-->
 
 <!-- Admin Dashboard HTML -->
 
-
-<div class="sidebar">
 <h2 class="dashboard-header">Dashboard</h2>
+<div class="sidebar">
+  <div class="navbar-logo">
+    <img src="assets/logo2.png" alt="ntg-logo" class="logo" />
+  </div>
   <div class="logo-item" (click)="navigateTo('logList')">
     <img src="assets/attendant-list.png" alt="Entry Logs" class="logo-img" style="margin-top : 60px ; " />
   </div>
@@ -25,6 +22,9 @@
   <div class="logo-item" (click)="navigateTo('candidateList')">
     <img src="assets/choosing.png" alt="Candidates" class="logo-img" />
   </div>
+  <button class="logo-item" id="logoutBtn" (click)="logout()">
+    <img src="assets/output-onlinepngtools.png" alt="Logout" class="logo-img" />
+  </button>
 </div>
 
 <!-- Data Summary Section (Modern Analysis) -->

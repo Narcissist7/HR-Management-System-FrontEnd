@@ -11,17 +11,17 @@ body {
 }
 
 /* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #817979;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 200; /* Higher z-index for navbar */
-}
+/*.navbar {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  background-color: #817979;*/
+/*  padding: 10px 20px;*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  width: 100%;*/
+/*  z-index: 200; !* Higher z-index for navbar *!*/
+/*}*/
 
 .navbar-logo .logo {
   width: 120px;
@@ -42,17 +42,18 @@ body {
 /* Dashboard Header */
 .dashboard-header {
   text-align: center;
-  font-family: 'Segoe UI Semibold';
-  margin-top: 140px; /* Adjusted for spacing */
+  margin-left: 55px;
+  font-family: 'poppins', serif;
+  margin-top: 20px; /* Adjusted for spacing */
 }
 
 /* Red line */
-.line {
-  height: 6px;
-  width: 400px;
-  background-color: #C9261D;
-  margin: 10px auto;
-}
+/*.line {*/
+/*  height: 6px;*/
+/*  width: 400px;*/
+/*  background-color: #C9261D;*/
+/*  margin: 10px auto;*/
+/*}*/
 
 /* Navigation Buttons Section */
 .logo-container {
@@ -73,6 +74,16 @@ body {
   transition: transform 0.3s ease-in-out;
 }
 
+#logoutBtn{
+  margin-left:20%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+/*#logoutBtn img{*/
+/*  width: 50px;*/
+/*  height: 50px;*/
+/*}*/
 .logo-item:hover {
   transform: translateY(-5px);
 }
@@ -199,15 +210,15 @@ body {
 /* Sidebar */
 .sidebar {
   width: 130px; /* Slightly narrower sidebar */
-  height: 100%;
-  background-color: #000; /* Black background */
+  /*height: 100%;*/
+  padding-top: 17px;
+  background: rgb(139, 51, 41);
+  background: linear-gradient(180deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%);
   position: fixed;
   top: 0;
   left: 0;
   display: table-column;
-
   align-items: center;
-  padding-top: 80px; /* Adjust padding to align with the navbar */
   z-index: 100; /* Lower z-index for sidebar */
   gap: 10px; /* Reduce spacing between icons */
 }
@@ -216,7 +227,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 90px; /* Less space between items */
+  margin-bottom: 60px; /* Less space between items */
 }
 
 .sidebar .logo-img {
