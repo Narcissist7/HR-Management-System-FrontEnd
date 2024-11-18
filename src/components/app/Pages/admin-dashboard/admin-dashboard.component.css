@@ -107,31 +107,116 @@ body {
 
 /* Data Summary Section */
 .data-summary {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
-  gap: 30px; /* Space between analytics */
-  margin-top: 40px;
-  padding-left: 150px;
-  padding-right: 20px;
-  padding-top: 10px;
-  overflow-y: auto; /* Allow scrolling */
+  margin-left:150px;
+  margin-right:15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px;
 }
 
-/* Data Role Boxes */
+/* Individual Card Styling */
 .data-role {
+  flex: 1 1 30%;
+  min-width: 195px;
+  max-width: 195px;
+  height:195px;
+  background: linear-gradient(180deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%);
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   text-align: center;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  background-color: #ffffff;
   transition: transform 0.3s ease-in-out;
-  margin-bottom: 20px;
+  position: relative;
 }
 
-.data-role:hover {
-  transform: translateY(-5px);
+/* Header for data-role cards */
+.data-role h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #f4eae6; /* Using the lighter tone from your brand colors */
 }
+
+/* Big number text */
+.big-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffd166; /* Highlight color for numbers */
+}
+
+/* Hover Effect for Cards */
+.data-role:hover {
+  transform: translateY(-10px);
+}
+
+/* Specific Colors for Each Card */
+.data-role.red {
+  background: linear-gradient(180deg, rgba(244, 89, 80, 1) 0%, rgba(139, 51, 41, 1) 100%);
+}
+
+.data-role.blue {
+  background: linear-gradient(180deg, #5c93ea 0%, #293e6a 100%);
+}
+
+.data-role.green {
+  background: linear-gradient(180deg, #80c8b8 0%, #2b6e60 100%);
+}
+
+.data-role.yellow {
+  background: linear-gradient(180deg, #ffd166 0%, #c49330 100%);
+}
+
+.data-role.orange {
+  background: linear-gradient(180deg, #ea8c55 0%, #9b4c1f 100%);
+}
+
+.data-role.purple {
+  background: linear-gradient(180deg, #9b5c9b 0%, #4a294a 100%);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .data-role {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-role {
+    flex: 1 1 100%;
+  }
+}
+
+
+/*!* Data Summary Section *!*/
+/*.data-summary {*/
+/*  display: grid;*/
+/*  grid-template-columns: repeat(2, 1fr); !* Create 2 columns *!*/
+/*  gap: 30px; !* Space between analytics *!*/
+/*  margin-top: 40px;*/
+/*  padding-left: 150px;*/
+/*  padding-right: 20px;*/
+/*  padding-top: 10px;*/
+/*  overflow-y: auto; !* Allow scrolling *!*/
+/*}*/
+
+/*!* Data Role Boxes *!*/
+/*.data-role {*/
+/*  text-align: center;*/
+/*  padding: 25px;*/
+/*  border-radius: 10px;*/
+/*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*  width: 100%;*/
+/*  background-color: #ffffff;*/
+/*  transition: transform 0.3s ease-in-out;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.data-role:hover {*/
+/*  transform: translateY(-5px);*/
+/*}*/
 
 /* Individual Role Colors */
 .red {
@@ -210,7 +295,7 @@ body {
 /* Sidebar */
 .sidebar {
   width: 130px; /* Slightly narrower sidebar */
-  /*height: 100%;*/
+  height: 100%;
   padding-top: 17px;
   background: rgb(139, 51, 41);
   background: linear-gradient(180deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%);
