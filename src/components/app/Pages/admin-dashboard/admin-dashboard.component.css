@@ -20,11 +20,12 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 200; /* Higher z-index for navbar */
 }
 
 .navbar-logo .logo {
   width: 120px;
+
 }
 
 .logout-button {
@@ -164,7 +165,7 @@ body {
 
 /* Footer Section */
 .footer {
-  position: relative;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -173,6 +174,7 @@ body {
   text-align: center;
   padding: 15px;
   font-size: 14px;
+  z-index : 100 ;
 }
 
 .footer p {
@@ -184,8 +186,56 @@ body {
   color: #f2f2f2;
   text-decoration: none;
   font-weight: bold;
+
 }
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+
+/* Sidebar */
+.sidebar {
+  width: 130px; /* Slightly narrower sidebar */
+  height: 100%;
+  background-color: #000; /* Black background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: table-column;
+
+  align-items: center;
+  padding-top: 80px; /* Adjust padding to align with the navbar */
+  z-index: 100; /* Lower z-index for sidebar */
+  gap: 10px; /* Reduce spacing between icons */
+}
+
+.sidebar .logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 90px; /* Less space between items */
+}
+
+.sidebar .logo-img {
+  width: 60px; /* Smaller icon size */
+  height: 60px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.sidebar .logo-img:hover {
+  transform: scale(1.2); /* Slight scaling on hover */
+}
+
+.sidebar .logo-text {
+  font-size: 12px; /* Smaller font size */
+  color: #f0f0f0; /* Light color for visibility */
+  text-align: center;
+  margin-top: 5px; /* Space between icon and text */
+  display: block; /* Ensure text is visible */
+}
+
+/* Adjust content to account for the sidebar */
+body {
+  margin-left: 100px; /* Offset for the sidebar */
 }
