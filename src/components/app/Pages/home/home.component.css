@@ -55,18 +55,31 @@ h2 {
   content: "";
   width: 6px; /* Make the border thicker */
   height: 210px;
-  background-color: red;
+  background-color: #c52e25;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
+
+.alreadySubmitted_btn {
+  background-color: #c52e25; /* Pure red for buttons */
+  display: block;
+  margin: 0 auto;
+  color: #ffffffff;
+}
+
+.alreadySubmitted_btn:hover {
+  background-color: #8b3329; /* Darker red on hover */
+}
+
+
 
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #ac2925;
+  background-color: #c52e25;
   color: white;
   text-align: center;
   padding: 15px 0; /* Reduced padding for a slimmer appearance */
