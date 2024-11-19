@@ -58,7 +58,7 @@ export class VisitorService {
       'Content-Type': 'application/json'
     };
     return this.http.post<any>(
-      `/api/entry_managment_sys/visitor/filterByName`,
+      `/api/entry_managment_sys/visitor/filterByName?page=${page}&size=${size}`,
       { name },
       { headers }
     );

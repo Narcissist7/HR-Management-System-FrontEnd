@@ -7,11 +7,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
+import {LoaderComponent} from '../Reusable/loader/loader.component';
 
 @Component({
   selector: 'app-entry-log-list',
   standalone: true,
-  imports: [RouterModule, MatPaginator, FormsModule, NgIf, NgForOf],
+  imports: [RouterModule, MatPaginator, FormsModule, NgIf, NgForOf, LoaderComponent],
   templateUrl: './entry-log-list.component.html',
   styleUrls: ['./entry-log-list.component.css']
 })
@@ -26,6 +27,7 @@ export class EntryLogListComponent implements OnInit {
   showTimeFilter: boolean = false;
   // showVisiteeFilter: boolean = false;
   showRoleFilter: boolean = false;
+
 
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
 

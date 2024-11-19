@@ -2,14 +2,18 @@
   <h2 class="title">Candidates</h2>
 
   <div class="search-bar-container">
-    <input type="text" class="search-bar" placeholder="Search visitors..." [(ngModel)]="searchQuery" (input)="onSearch()" />
+    <input type="text" class="search-bar" placeholder="Search candidates..." [(ngModel)]="searchQuery" (input)="onSearch()" />
 
     <button class="reset-icon" (click)="resetFilters()">
       <i class="material-icons">close</i>
     </button>
   </div>
 
+    @if (loading){
+      <app-loader/>
+    } @else {
   <div class="table-wrapper">
+
     <table class="data-table">
       <thead>
       <tr>
@@ -44,4 +48,5 @@
       </mat-paginator>
     </div>
   </div>
+    }
 </div>

@@ -1,45 +1,49 @@
 <div class="container d-flex justify-content-center align-items-center vh-100 bg-white">
-  <div class="card shadow-lg p-4 rounded" style="width: 400px;">
+  @if (loading){
+    <app-ntg-apps-loader/>
+  } @else {
+    <div class="card shadow-lg p-4 rounded" style="width: 400px;">
 
-    <!-- Image added here -->
-    <div class="text-center mb-4">
-      <img src="assets/logo2.png" alt="Description of the image" style="max-width: 60%; height: auto;">
+      <!-- Image added here -->
+      <div class="text-center mb-4">
+        <img alt="Description of the image" src="assets/logo2.png" style="max-width: 60%; height: auto;">
+      </div>
+
+      <h2 class="text-center mb-4">Login</h2>
+
+      <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
+        <div class="mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-control" formControlName="email" id="email" required type="email"/>
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="password">Password</label>
+          <input
+            class="form-control"
+            formControlName="password"
+            id="password"
+            required
+            type="password"
+          />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+            <small>Password is required.</small>
+          </div>
+        </div>
+        <button
+          [disabled]="loginForm.invalid"
+          class="btn btn-block rounded"
+          style="width: 100%; padding: 12px; background: linear-gradient(90deg, #950e0e, #ec1c1c); border: none; color: #f1ebeb; font-weight: bold;"
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
     </div>
-
-    <h2 class="text-center mb-4">Login</h2>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input formControlName="email" type="email" id="email" class="form-control" required />
-        <div class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
-          <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
-        </div>
-      </div>
-      <div class="mb-4">
-        <label for="password" class="form-label">Password</label>
-        <input
-          formControlName="password"
-          type="password"
-          id="password"
-          class="form-control"
-          required
-        />
-        <div class="text-danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <small>Password is required.</small>
-        </div>
-      </div>
-      <button
-        type="submit"
-        class="btn btn-block rounded"
-        [disabled]="loginForm.invalid"
-        style="width: 100%; padding: 12px; background: linear-gradient(90deg, #950e0e, #ec1c1c); border: none; color: #f1ebeb; font-weight: bold;"
-      >
-        Login
-      </button>
-    </form>
-  </div>
+  }
 </div>
-
 <p-toast></p-toast>
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {CommonModule, NgFor, NgIf} from '@angular/common';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import {NtgAppsLoaderComponent} from '../../../Reusable/ntg-apps-loader/ntg-apps-loader.component';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,15 @@ import {ToastModule} from 'primeng/toast';
   imports: [
 
     ReactiveFormsModule,
-    MatSnackBarModule,CommonModule , NgIf , NgFor,ToastModule
+    MatSnackBarModule, CommonModule, NgIf, NgFor, ToastModule, NtgAppsLoaderComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   providers:[MessageService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  loading: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +36,12 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.loading = false;  // Hide loader after a short delay
+    }, 3000);
   }
 
   onLogin(): void {

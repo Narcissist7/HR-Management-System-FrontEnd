@@ -42,7 +42,7 @@ export class CandidateService {
       'Content-Type': 'application/json'
     };
     return this.http.post<any>(
-      `/api/entry_managment_sys/candidate/filterByName`,
+      `/api/entry_managment_sys/candidate/filterByName?page=${page}&size=${size}`,
       { name },
       { headers }
     );
