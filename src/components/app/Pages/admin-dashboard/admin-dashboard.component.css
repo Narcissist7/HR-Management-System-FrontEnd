@@ -109,6 +109,7 @@ body {
 .data-summary {
   margin-left:150px;
   margin-right:15px;
+  margin-top:40px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -122,7 +123,9 @@ body {
   min-width: 195px;
   max-width: 195px;
   height:195px;
-  background: linear-gradient(180deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%);
+  /*background: #CCCCCC;*/
+  background: #f4eae6;
+  background: linear-gradient(436deg, rgba(139,51,41,1) 0%, rgba(244,234,230,1) 0%);
   color: #ffffff;
   padding: 20px;
   border-radius: 15px;
@@ -152,29 +155,29 @@ body {
 }
 
 /* Specific Colors for Each Card */
-.data-role.red {
-  background: linear-gradient(180deg, rgba(244, 89, 80, 1) 0%, rgba(139, 51, 41, 1) 100%);
-}
+/*.data-role.red {*/
+/*  background: linear-gradient(436deg, rgba(139,51,41,1) 0%, rgba(244,234,230,1) 0%);*/
+/*}*/
 
-.data-role.blue {
-  background: linear-gradient(180deg, #5c93ea 0%, #293e6a 100%);
-}
+/*.blue {*/
+/*  background: linear-gradient(51deg, rgba(139,51,41,1) 0%, rgba(234,116,92,0.9276960784313726) 48%);*/
+/*}*/
 
-.data-role.green {
-  background: linear-gradient(180deg, #80c8b8 0%, #2b6e60 100%);
-}
+/*.data-role.green {*/
+/*  background: linear-gradient(180deg, #80c8b8 0%, #2b6e60 100%);*/
+/*}*/
 
-.data-role.yellow {
-  background: linear-gradient(180deg, #ffd166 0%, #c49330 100%);
-}
+/*.data-role.yellow {*/
+/*  background: linear-gradient(180deg, #ffd166 0%, #c49330 100%);*/
+/*}*/
 
-.data-role.orange {
-  background: linear-gradient(180deg, #ea8c55 0%, #9b4c1f 100%);
-}
+/*.data-role.orange {*/
+/*  background: linear-gradient(180deg, #ea8c55 0%, #9b4c1f 100%);*/
+/*}*/
 
-.data-role.purple {
-  background: linear-gradient(180deg, #9b5c9b 0%, #4a294a 100%);
-}
+/*.data-role.purple {*/
+/*  background: linear-gradient(180deg, #9b5c9b 0%, #4a294a 100%);*/
+/*}*/
 
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
@@ -219,35 +222,32 @@ body {
 /*}*/
 
 /* Individual Role Colors */
-.red {
-  background-color: #ffcccc;
-  border: 2px solid #c9261d;
-}
+/*.red {*/
+/*  background-color: #ffcccc;*/
+/*  border: 2px solid #c9261d;*/
+/*}*/
 
-.blue {
-  background-color: #cce7ff;
-  border: 2px solid #1d87c9;
-}
 
-.green {
-  background-color: #c8e6c9;
-  border: 2px solid #4caf50;
-}
 
-.yellow {
-  background-color: #fff9c4;
-  border: 2px solid #ffeb3b;
-}
+/*.green {*/
+/*  background-color: #c8e6c9;*/
+/*  border: 2px solid #4caf50;*/
+/*}*/
 
-.orange {
-  background-color: #ffe0b2;
-  border: 2px solid #ff9800;
-}
+/*.yellow {*/
+/*  background-color: #fff9c4;*/
+/*  border: 2px solid #ffeb3b;*/
+/*}*/
 
-.purple {
-  background-color: #e1bee7;
-  border: 2px solid #9c27b0;
-}
+/*.orange {*/
+/*  background-color: #ffe0b2;*/
+/*  border: 2px solid #ff9800;*/
+/*}*/
+
+/*.purple {*/
+/*  background-color: #e1bee7;*/
+/*  border: 2px solid #9c27b0;*/
+/*}*/
 
 .data-role h3 {
   font-size: 1.2em;
