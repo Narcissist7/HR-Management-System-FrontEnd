@@ -48,14 +48,14 @@ export class CandidateListComponent implements OnInit {
       this.candidateService.getPaginatedCandidates(this.page, this.size).subscribe(data => {
         this.candidates = data.content;
         this.totalElements = data.totalElements;
-        this.loading = false;
       });
+        this.loading = false;
     } else if(this.isSearching){
       this.candidateService.searchCandidatesByName(this.searchQuery, this.page, this.size).subscribe(data => {
         this.candidates = data.content;
         this.totalElements = data.totalElements;
-        this.loading = false;
       });
+        this.loading = false;
     }
   }
 
