@@ -3,13 +3,17 @@ import { Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import {AnalyticsServiceService} from '../../../../Services/Analytics/analytics-service.service';
 import {tokenserviceService} from '../../../../Services/token/tokenservice.service';
+import {ChartModule} from 'primeng/chart';
+import { ChartComponent } from '../chart/chart.component'
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
   templateUrl: './admin-dashboard.component.html',
   imports: [
-    ToastModule
+    ToastModule,
+    ChartModule,
+    ChartComponent
   ],
   styleUrls: ['./admin-dashboard.component.css']
 })
@@ -23,6 +27,7 @@ export class AdminDashboardComponent implements OnInit {
   today_visitors: number[] = [];
   month_candidates: number[] = [];
   month_visitors: number[] = [];
+
 
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');

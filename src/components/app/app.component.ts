@@ -6,6 +6,7 @@ import { JobListComponent } from "./Pages/Admin-Job-view/admin-job-view.componen
 import { HttpClientModule } from '@angular/common/http';
 import {HomeComponent} from './Pages/home/home.component';
 import {ToastModule} from 'primeng/toast';
+import { ChartModule } from 'primeng/chart';
 
 
 @Component({

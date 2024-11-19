@@ -21,6 +21,7 @@ import {EntryLogDetailsComponent} from '../entry-log-details/entry-log-details.c
 import {CreateAdminComponent} from './Pages/create-admin/create-admin.component';
 import {NotAuthorizedComponent} from './Pages/not-authorized/not-authorized.component';
 import {AnalyticsComponent} from './Pages/analytics/analytics.component';
+import {ChartComponent} from './Pages/chart/chart.component';
 
 
 export const routes: Routes = [
