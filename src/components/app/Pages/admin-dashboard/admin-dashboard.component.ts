@@ -6,6 +6,7 @@ import {tokenserviceService} from '../../../../Services/token/tokenservice.servi
 import {ChartModule} from 'primeng/chart';
 import { ChartComponent } from '../chart/chart.component';
 import {NgOptimizedImage} from '@angular/common';
+import {LoaderComponent} from '../../../Reusable/loader/loader.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,7 +16,8 @@ import {NgOptimizedImage} from '@angular/common';
     ToastModule,
     ChartModule,
     ChartComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    LoaderComponent
   ],
   styleUrls: ['./admin-dashboard.component.css']
 })
@@ -29,6 +31,7 @@ export class AdminDashboardComponent implements OnInit {
   today_visitors: number[] = [];
   month_candidates: number[] = [];
   month_visitors: number[] = [];
+  loading: boolean = true;
 
 
   ngOnInit(): void {
@@ -38,9 +41,11 @@ export class AdminDashboardComponent implements OnInit {
       this.analyticsService.getAnalyticsData().subscribe(
         (data) => {
           [this.allTime_candidates, this.allTime_visitors, this.today_candidates, this.today_visitors, this.month_candidates, this.month_visitors] = data;
+          this.loading = false;
         },
         (error) => {
           console.error('Error fetching analytics data', error);
+          this.loading = false;
         }
       );
     } else {

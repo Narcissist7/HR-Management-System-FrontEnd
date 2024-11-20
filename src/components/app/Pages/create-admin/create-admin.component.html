@@ -2,6 +2,9 @@
 <div class="container">
   <h2 class="text-center mb-4">Create admin</h2>
 
+  @if(loading){
+    <app-loader/>
+  } @else {
   <!-- Registration Form -->
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
@@ -24,6 +27,7 @@
       <button type="submit" class="btn btn-outline-dark">Create</button>
     </div>
   </form>
+  }
 </div>
 
 <p-toast></p-toast>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Candidate} from '../../Model/Candidate/candidate';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
-import {Router, RouterModule} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {PaginatorModule} from 'primeng/paginator';
@@ -30,13 +30,13 @@ export class CandidateListComponent implements OnInit {
   isSearching: boolean = false;
   loading: boolean = false;
 
-  constructor(private candidateService: CandidateService, private router: Router, private tokenService: tokenserviceService) {
+  constructor(private candidateService: CandidateService, private tokenService: tokenserviceService) {
   }
 
   ngOnInit(): void {
 
-    if (this.tokenService.validateToken() == true) {
-      this.loading = true;
+    if (this.tokenService.validateToken()) {
+      this.loading = false;
       this.fetchCandidates();
     }
     else
@@ -46,6 +46,7 @@ export class CandidateListComponent implements OnInit {
   }
 
   fetchCandidates() {
+    this.loading = true;
     if(!this.isSearching && this.searchQuery == null){
       this.candidateService.getPaginatedCandidates(this.page, this.size).subscribe(data => {
         this.candidates = data.content;
@@ -54,8 +55,8 @@ export class CandidateListComponent implements OnInit {
         console.log(this.totalElements);
         console.log(this.page);
         console.log(this.size);
-      });
         this.loading = false;
+      });
     } else if(this.isSearching){
       this.candidateService.searchCandidatesByName(this.searchQuery, this.page, this.size).subscribe(data => {
         this.candidates = data.content;
@@ -64,20 +65,18 @@ export class CandidateListComponent implements OnInit {
         console.log(this.totalElements);
         console.log(this.page);
         console.log(this.size);
-      });
         this.loading = false;
+      });
     }
   }
 
   onPageChange(event: any): void {
-    this.loading = true;
     this.page = event.pageIndex;
     this.size = event.pageSize;
     this.fetchCandidates();
   }
 
   resetFilters() {
-    this.loading = true;
     this.searchQuery = null; // Clear search query
     this.isSearching = false;
     this.fetchCandidates();

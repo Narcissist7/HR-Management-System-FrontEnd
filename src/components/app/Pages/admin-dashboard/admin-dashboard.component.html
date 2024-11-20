@@ -1,80 +1,79 @@
-<!-- Navbar Section -->
-<!--<nav class="navbar">-->
-<!--  -->
-<!--</nav>-->
-
 <!-- Admin Dashboard HTML -->
 <div class="sidebar">
   <div class="navbar-logo">
-    <img src="assets/logo2.png" alt="ntg-logo" class="logo" />
+    <img alt="ntg-logo" class="logo" src="assets/logo2.png"/>
   </div>
-  <div class="logo-item" (click)="navigateTo('admin-dashboard')">
-    <img src="assets/white-home.png" alt="Entry Logs" class="logo-img" style="margin-top : 20px ; " />
+  <div (click)="navigateTo('admin-dashboard')" class="logo-item">
+    <img alt="Entry Logs" class="logo-img" src="assets/white-home.png" style="margin-top : 20px ; "/>
     <h6>Dashboard</h6>
   </div>
-  <div class="logo-item" (click)="navigateTo('logList')">
-    <img src="assets/attendant-list.png" alt="Entry Logs" class="logo-img" />
+  <div (click)="navigateTo('logList')" class="logo-item">
+    <img alt="Entry Logs" class="logo-img" src="assets/attendant-list.png"/>
     <h6>Entry Log</h6>
   </div>
-  <div class="logo-item" (click)="navigateTo('createAdmin')">
-    <img src="assets/setting.png" alt="Create Admin" class="logo-img" />
+  <div (click)="navigateTo('createAdmin')" class="logo-item">
+    <img alt="Create Admin" class="logo-img" src="assets/setting.png"/>
     <h6>Create Admin</h6>
   </div>
-  <div class="logo-item" (click)="navigateTo('visitorList')">
-    <img src="assets/id-card%20(1).png" alt="Visitors" class="logo-img" />
+  <div (click)="navigateTo('visitorList')" class="logo-item">
+    <img alt="Visitors" class="logo-img" src="assets/id-card%20(1).png"/>
     <h6>Visitor List</h6>
   </div>
-  <div class="logo-item" (click)="navigateTo('candidateList')">
-    <img ngSrc="assets/choosing.png" alt="Candidates" class="logo-img" height="256" width="256"/>
+  <div (click)="navigateTo('candidateList')" class="logo-item">
+    <img alt="Candidates" class="logo-img" height="256" ngSrc="assets/choosing.png" width="256"/>
     <h6>Candidate List</h6>
   </div>
-  <button class="logo-item" id="logoutBtn" (click)="logout()">
-    <img src="assets/output-onlinepngtools.png" alt="Logout" class="logo-img" style="margin-bottom : 30px ;" />
+  <button (click)="logout()" class="logo-item" id="logoutBtn">
+    <img alt="Logout" class="logo-img" src="assets/output-onlinepngtools.png" style="margin-bottom : 30px ;"/>
   </button>
 </div>
 
-<!-- Data Summary Section (Modern Analysis) -->
+@if (loading) {
+  <app-loader/>
+} @else {
+  <!-- Data Summary Section (Modern Analysis) -->
+  <div class="data-summary">
+    <!-- Candidates Section -->
+    <div class="data-role red">
+      <h3>total number of candidates </h3>
+      <p class="big-number">{{ allTime_candidates }}</p>
+    </div>
 
-<div class="data-summary">
-  <!-- Candidates Section -->
-  <div class="data-role red">
-    <h3>total number of candidates </h3>
-    <p class="big-number">{{ allTime_candidates }}</p>
+    <!-- Visitors Section -->
+    <div class="data-role blue">
+      <h3>total number of visitors</h3>
+      <p class="big-number">{{ allTime_visitors }}</p>
+    </div>
+
+    <!-- Today Candidates Section -->
+    <div class="data-role green">
+      <h3>Today's Candidates count</h3>
+      <p class="big-number">{{ today_candidates }}</p>
+    </div>
+
+    <!-- Today Visitors Section -->
+    <div class="data-role yellow">
+      <h3>Today's Visitors count</h3>
+      <p class="big-number">{{ today_visitors }}</p>
+    </div>
+
+    <!-- This Month Candidates Section -->
+    <div class="data-role orange">
+      <h3>This Month Candidates count</h3>
+      <p class="big-number">{{ month_candidates }}</p>
+    </div>
+
+    <!-- This Month Visitors Section -->
+    <div class="data-role purple">
+      <h3>This Month Visitors count</h3>
+      <p class="big-number">{{ month_visitors }}</p>
+    </div>
+
+    <app-chart></app-chart>
+
   </div>
+}
 
-  <!-- Visitors Section -->
-  <div class="data-role blue">
-    <h3>total number of visitors</h3>
-    <p class="big-number">{{ allTime_visitors }}</p>
-  </div>
-
-  <!-- Today Candidates Section -->
-  <div class="data-role green">
-    <h3>Today's Candidates count</h3>
-    <p class="big-number">{{ today_candidates }}</p>
-  </div>
-
-  <!-- Today Visitors Section -->
-  <div class="data-role yellow">
-    <h3>Today's Visitors count</h3>
-    <p class="big-number">{{ today_visitors }}</p>
-  </div>
-
-  <!-- This Month Candidates Section -->
-  <div class="data-role orange">
-    <h3>This Month Candidates count</h3>
-    <p class="big-number">{{ month_candidates }}</p>
-  </div>
-
-  <!-- This Month Visitors Section -->
-  <div class="data-role purple">
-    <h3>This Month Visitors count</h3>
-    <p class="big-number">{{ month_visitors }}</p>
-  </div>
-
-  <app-chart></app-chart>
-
-</div>
 
 <!-- Footer Section -->
 <!--<div class="footer">-->

@@ -7,6 +7,7 @@ import {ToastModule} from 'primeng/toast';
 import {Observable} from 'rxjs';
 import {tokenserviceService} from '../../../../Services/token/tokenservice.service';
 import {NavbarComponent} from '../../../Reusable/navbar/navbar.component';
+import {LoaderComponent} from '../../../Reusable/loader/loader.component';
 
 @Component({
   selector: 'app-create-admin',
@@ -15,7 +16,8 @@ import {NavbarComponent} from '../../../Reusable/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    NavbarComponent
+    NavbarComponent,
+    LoaderComponent
   ],
   templateUrl: './create-admin.component.html',
   styleUrl: './create-admin.component.css',
@@ -23,6 +25,7 @@ import {NavbarComponent} from '../../../Reusable/navbar/navbar.component';
 })
 export class CreateAdminComponent {
   registrationForm: FormGroup;
+  loading: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -40,6 +43,9 @@ export class CreateAdminComponent {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+    }, 2000);
+    this.loading = false;
     if (this.tokenService.validateToken() == true) {
     }
     else
@@ -52,7 +58,7 @@ export class CreateAdminComponent {
 
 
   onSubmit() {
-
+    this.loading = true;
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       'Content-Type': 'application/json'
@@ -62,6 +68,7 @@ export class CreateAdminComponent {
       this.registrationForm.markAllAsTouched();
       // Show an error toast for incomplete form
       this.messageService.add({ severity: 'error', summary: 'Form Incomplete', detail: 'Please fill in all required fields.', life: 5000 });
+      this.loading = false;
       return;
     }
 
@@ -96,6 +103,7 @@ export class CreateAdminComponent {
         }
       }
     );
+    this.loading = false;
   }
 
 

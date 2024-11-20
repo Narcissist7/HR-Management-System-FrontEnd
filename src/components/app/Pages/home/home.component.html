@@ -1,29 +1,33 @@
-<div class="container">
-  <div class="header">
-    <img src="assets/logo-animated.gif" alt="Welcome GIF" class="welcome-gif" />
-    <h1>Welcome to NTG Clarity Networks Inc.</h1>
-  </div>
+  @if (loading) {
+    <app-ntg-apps-loader/>
+  } @else {
+    <div class="container">
+      <div class="header">
+        <img alt="Welcome GIF" class="welcome-gif" src="assets/logo-animated.gif"/>
+        <h1>Welcome to NTG Clarity Networks Inc.</h1>
+      </div>
 
-  <div class="content">
-    <div (click)="navigateTo('visitor')">
-      <img src="assets/img.png" alt="Visitor Image" class="image-button"   />
-      <h2>Visitor</h2>
+      <div class="content">
+        <div (click)="navigateTo('visitor')">
+          <img alt="Visitor Image" class="image-button" src="assets/img.png"/>
+          <h2>Visitor</h2>
+        </div>
+
+        <div (click)="navigateTo('registration-two')">
+          <img alt="Candidate Image" class="image-button" src="assets/img_1.png"/>
+          <h2>Candidate</h2>
+        </div>
+      </div>
+
+      <!-- Button for logEntry page -->
+      <div class="already-submitted">
+        <button (click)="navigateTo('logEntry')" class="btn alreadySubmitted_btn">
+          Already submitted before?
+        </button>
+      </div>
+
+      <div class="footer">
+        <p>All rights reserved for NTG.</p>
+      </div>
     </div>
-
-    <div (click)="navigateTo('registration-two')">
-      <img src="assets/img_1.png" alt="Candidate Image" class="image-button" />
-      <h2>Candidate</h2>
-    </div>
-  </div>
-
-  <!-- Button for logEntry page -->
-  <div class="already-submitted">
-    <button (click)="navigateTo('logEntry')" class="btn alreadySubmitted_btn">
-      Already submitted before?
-    </button>
-  </div>
-
-  <div class="footer">
-    <p>All rights reserved for NTG.</p>
-  </div>
-</div>
+  }
