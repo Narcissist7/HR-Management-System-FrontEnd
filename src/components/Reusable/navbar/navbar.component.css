@@ -29,7 +29,7 @@
 .nav-item .nav-link:hover {
   color: #fff !important;
   transform: translateY(-2px);
-  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .nav-item .nav-link.active {
@@ -80,7 +80,7 @@
 
 /* Adjust the nav-item to maintain spacing */
 .nav-item-adjust {
-  margin-top: 0px; /* Removes the previous -12px margin */
+  margin-top: 0; /* Removes the previous -12px margin */
 }
 
 /* Add some spacing between list items */
