@@ -1,41 +1,42 @@
 /* Navbar Background and General Styles */
 .navbar {
-  background: linear-gradient(45deg, #1f1c2c, #928dab); /* Cool gradient */
-  border-bottom: 2px solid #444;
+  background: rgb(139, 51, 41);
+  background: linear-gradient(178deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%); /* Cool gradient */
+  /*border-bottom: 2px solid #c24a4c;*/
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Navbar Brand */
 .navbar-brand {
-  color: #f0f0f0 !important;
+  color: #2D2D2D  !important;
   font-weight: bold;
   font-size: 1.5rem;
   transition: color 0.3s ease;
 }
 
 .navbar-brand:hover {
-  color: #fff;
+  color: #c24a4c ;
   text-shadow: 0 0 5px #fff, 0 0 10px #fff;
 }
 
 /* Navbar Items */
 .nav-item .nav-link {
-  color: #ddd !important;
+  color: #F4EAE6FF !important;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .nav-item .nav-link:hover {
-  color: #fff !important;
+  color: #c24a4c  !important;
   transform: translateY(-2px);
   text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
 }
 
 .nav-item .nav-link.active {
-  color: #fff !important;
+  color: #c24a4c!important;
   font-weight: bold;
-  border-bottom: 2px solid #28a745; /* Green underline for active link */
+  border-bottom: 2px solid #c24a4c; /* Green underline for active link */
 }
 
 /* Navbar Toggler Button */
@@ -87,6 +88,13 @@
 .nav-item + .nav-item {
   margin-left: 10px;
 }
+
+.navbar-nav{
+  padding-left:375px;
+  gap:30px;
+}
+
+
 
 /* Responsive Styles */
 @media (max-width: 576px) {
