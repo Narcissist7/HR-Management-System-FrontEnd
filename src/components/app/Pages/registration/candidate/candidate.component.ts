@@ -54,7 +54,7 @@ export class CandidateComponent implements OnInit {
       degree: ['', Validators.required],
       grade: ['', Validators.required],
       major: ['', Validators.required],
-      uniDate: ['', Validators.required]
+      date: ['', Validators.required]
     });
 
     const email = this.route.snapshot.queryParamMap.get('email');
@@ -150,9 +150,10 @@ export class CandidateComponent implements OnInit {
           birthPlace: ocrDataArray[6] || '',
           email: cvDataArray[1] || '',
           phone: cvDataArray[0]|| '',
-          university_name :cvDataArray[2],
+          university :cvDataArray[2],
           major:cvDataArray[3],
-          degree:cvDataArray[4]
+          degree:cvDataArray[4],
+          date : cvDataArray[5]
           // Add more fields if needed based on your cvData structure
         });
 
