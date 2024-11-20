@@ -1,0 +1,107 @@
+/* Navbar Background and General Styles */
+.navbar {
+  background: linear-gradient(45deg, #1f1c2c, #928dab); /* Cool gradient */
+  border-bottom: 2px solid #444;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Navbar Brand */
+.navbar-brand {
+  color: #f0f0f0 !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+/* Navbar Items */
+.nav-item .nav-link {
+  color: #ddd !important;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item .nav-link:hover {
+  color: #fff !important;
+  transform: translateY(-2px);
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+}
+
+.nav-item .nav-link.active {
+  color: #fff !important;
+  font-weight: bold;
+  border-bottom: 2px solid #28a745; /* Green underline for active link */
+}
+
+/* Navbar Toggler Button */
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  color: #fff; /* Ensure the default icon is visible */
+}
+
+/* Search Form */
+.form-control {
+  background: #2c2f36;
+  border: none;
+  color: #fff; /* Ensures the text inside the input is visible */
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-control::placeholder {
+  color: #bbb; /* Lighter placeholder for better contrast */
+}
+
+.form-control:focus {
+  background: #444851;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background-color: #28a745;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Adjust the nav-item to maintain spacing */
+.nav-item-adjust {
+  margin-top: 0px; /* Removes the previous -12px margin */
+}
+
+/* Add some spacing between list items */
+.nav-item + .nav-item {
+  margin-left: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .form-control {
+    margin-bottom: 5px;
+  }
+}
+
+/*Logo*/
+#logoutBtn{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

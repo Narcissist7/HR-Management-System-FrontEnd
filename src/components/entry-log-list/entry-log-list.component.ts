@@ -8,11 +8,12 @@ import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
+import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-entry-log-list',
   standalone: true,
-  imports: [RouterModule, MatPaginator, FormsModule, NgIf, NgForOf, LoaderComponent],
+  imports: [RouterModule, MatPaginator, FormsModule, NgIf, NgForOf, LoaderComponent, NavbarComponent],
   templateUrl: './entry-log-list.component.html',
   styleUrls: ['./entry-log-list.component.css']
 })

@@ -7,6 +7,7 @@ import {NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
+import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-visitor-list',
@@ -16,7 +17,8 @@ import {LoaderComponent} from '../Reusable/loader/loader.component';
     MatPaginator,
     NgIf,
     FormsModule,
-    LoaderComponent
+    LoaderComponent,
+    NavbarComponent
   ],
   templateUrl: './visitor-list.component.html',
   styleUrl: './visitor-list.component.css'

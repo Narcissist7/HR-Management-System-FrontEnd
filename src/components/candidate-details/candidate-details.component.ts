@@ -2,11 +2,14 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Candidate} from '../../Model/Candidate/candidate';
 import {Router} from '@angular/router';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
+import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-candidate-details',
   standalone: true,
-  imports: [],
+  imports: [
+    NavbarComponent
+  ],
   templateUrl: './candidate-details.component.html',
   styleUrl: './candidate-details.component.css'
 })

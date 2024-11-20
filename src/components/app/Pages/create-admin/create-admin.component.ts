@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {Observable} from 'rxjs';
 import {tokenserviceService} from '../../../../Services/token/tokenservice.service';
+import {NavbarComponent} from '../../../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-create-admin',
@@ -13,7 +14,8 @@ import {tokenserviceService} from '../../../../Services/token/tokenservice.servi
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    NavbarComponent
   ],
   templateUrl: './create-admin.component.html',
   styleUrl: './create-admin.component.css',

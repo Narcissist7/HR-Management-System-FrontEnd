@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/adminDashboard" routerLinkActive="active" >
+    <img ngSrc="assets/logo2.png" alt="ntg-logo" height="60" width="120"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item nav-item-adjust">
+          <a class="nav-link" routerLink="/logList" routerLinkActive="active">Logs</a>
+        </li>
+        <li class="nav-item nav-item-adjust">
+          <a class="nav-link" routerLink="/createAdmin" routerLinkActive="active">Admin</a>
+        </li>
+        <li class="nav-item nav-item-adjust">
+          <a class="nav-link" routerLink="/visitorList" routerLinkActive="active">Visitors</a>
+        </li>
+        <li class="nav-item nav-item-adjust">
+          <a class="nav-link" routerLink="/candidateList" routerLinkActive="active">Candidates</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <button class="logo-item" id="logoutBtn" (click)="logout()">
+          <img ngSrc="assets/output-onlinepngtools.png" alt="Logout" class="logo-img"  height="50" width="50"/>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

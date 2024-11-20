@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {PaginatorModule} from 'primeng/paginator';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
+import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-candidate-list',
@@ -14,7 +15,8 @@ import {LoaderComponent} from '../Reusable/loader/loader.component';
     RouterModule,
     MatPaginator,
     PaginatorModule,
-    LoaderComponent
+    LoaderComponent,
+    NavbarComponent
   ],
   templateUrl: './candidate-list.component.html',
   styleUrl: './candidate-list.component.css'
@@ -48,12 +50,20 @@ export class CandidateListComponent implements OnInit {
       this.candidateService.getPaginatedCandidates(this.page, this.size).subscribe(data => {
         this.candidates = data.content;
         this.totalElements = data.totalElements;
+        console.log(this.candidates);
+        console.log(this.totalElements);
+        console.log(this.page);
+        console.log(this.size);
       });
         this.loading = false;
     } else if(this.isSearching){
       this.candidateService.searchCandidatesByName(this.searchQuery, this.page, this.size).subscribe(data => {
         this.candidates = data.content;
         this.totalElements = data.totalElements;
+        console.log(this.candidates);
+        console.log(this.totalElements);
+        console.log(this.page);
+        console.log(this.size);
       });
         this.loading = false;
     }

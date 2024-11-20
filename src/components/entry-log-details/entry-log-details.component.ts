@@ -7,12 +7,14 @@ import {CandidateService} from '../../Services/Candidate/candidate.service';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
 import {DatePipe} from '@angular/common';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
+import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-entry-log-details',
   standalone: true,
   imports: [
-    DatePipe
+    DatePipe,
+    NavbarComponent
   ],
   templateUrl: './entry-log-details.component.html',
   styleUrl: './entry-log-details.component.css'

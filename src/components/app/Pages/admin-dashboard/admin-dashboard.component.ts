@@ -5,6 +5,7 @@ import {AnalyticsServiceService} from '../../../../Services/Analytics/analytics-
 import {tokenserviceService} from '../../../../Services/token/tokenservice.service';
 import {ChartModule} from 'primeng/chart';
 import { ChartComponent } from '../chart/chart.component';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,7 +14,8 @@ import { ChartComponent } from '../chart/chart.component';
   imports: [
     ToastModule,
     ChartModule,
-    ChartComponent
+    ChartComponent,
+    NgOptimizedImage
   ],
   styleUrls: ['./admin-dashboard.component.css']
 })

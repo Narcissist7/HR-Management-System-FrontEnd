@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import {Visitor} from '../../Model/Visitor/visitor';
 import {Router} from '@angular/router';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
+import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
 @Component({
   selector: 'app-visitor-details',
   standalone: true,
-  imports: [],
+  imports: [
+    NavbarComponent
+  ],
   templateUrl: './visitor-details.component.html',
   styleUrl: './visitor-details.component.css'
 })
