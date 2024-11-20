@@ -123,7 +123,6 @@ body {
   min-width: 195px;
   max-width: 195px;
   height:195px;
-  /*background: #CCCCCC;*/
   background: #f4eae6;
   background: linear-gradient(436deg, rgba(139,51,41,1) 0%, rgba(244,234,230,1) 0%);
   color: #ffffff;
@@ -296,7 +295,7 @@ body {
 .sidebar {
   width: 130px; /* Slightly narrower sidebar */
   height: 100%;
-  padding-top: 17px;
+  padding-top: 5px;
   background: rgb(139, 51, 41);
   background: linear-gradient(180deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%);
   position: fixed;
@@ -312,7 +311,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 60px; /* Less space between items */
+  margin-bottom: 15px; /* Less space between items */
 }
 
 .sidebar .logo-img {
@@ -331,6 +330,11 @@ body {
   text-align: center;
   margin-top: 5px; /* Space between icon and text */
   display: block; /* Ensure text is visible */
+}
+
+h6{
+  color:white;
+  font-size:14px;
 }
 
 /* Adjust content to account for the sidebar */

@@ -8,20 +8,28 @@
   <div class="navbar-logo">
     <img src="assets/logo2.png" alt="ntg-logo" class="logo" />
   </div>
+  <div class="logo-item" (click)="navigateTo('admin-dashboard')">
+    <img src="assets/white-home.png" alt="Entry Logs" class="logo-img" style="margin-top : 20px ; " />
+    <h6>Dashboard</h6>
+  </div>
   <div class="logo-item" (click)="navigateTo('logList')">
-    <img src="assets/attendant-list.png" alt="Entry Logs" class="logo-img" style="margin-top : 60px ; " />
+    <img src="assets/attendant-list.png" alt="Entry Logs" class="logo-img" />
+    <h6>Entry Log</h6>
   </div>
   <div class="logo-item" (click)="navigateTo('createAdmin')">
     <img src="assets/setting.png" alt="Create Admin" class="logo-img" />
+    <h6>Create Admin</h6>
   </div>
   <div class="logo-item" (click)="navigateTo('visitorList')">
     <img src="assets/id-card%20(1).png" alt="Visitors" class="logo-img" />
+    <h6>Visitor List</h6>
   </div>
   <div class="logo-item" (click)="navigateTo('candidateList')">
     <img src="assets/choosing.png" alt="Candidates" class="logo-img" />
+    <h6>Candidate List</h6>
   </div>
   <button class="logo-item" id="logoutBtn" (click)="logout()">
-    <img src="assets/output-onlinepngtools.png" alt="Logout" class="logo-img" />
+    <img src="assets/output-onlinepngtools.png" alt="Logout" class="logo-img" style="margin-bottom : 30px ;" />
   </button>
 </div>
 

@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { EntryLogService } from './entry-log.service';
 
 describe('EntryLogService', () => {

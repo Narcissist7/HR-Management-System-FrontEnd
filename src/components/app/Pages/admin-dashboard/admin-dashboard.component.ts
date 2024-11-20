@@ -4,7 +4,7 @@ import { ToastModule } from 'primeng/toast';
 import {AnalyticsServiceService} from '../../../../Services/Analytics/analytics-service.service';
 import {tokenserviceService} from '../../../../Services/token/tokenservice.service';
 import {ChartModule} from 'primeng/chart';
-import { ChartComponent } from '../chart/chart.component'
+import { ChartComponent } from '../chart/chart.component';
 
 @Component({
   selector: 'app-admin-dashboard',

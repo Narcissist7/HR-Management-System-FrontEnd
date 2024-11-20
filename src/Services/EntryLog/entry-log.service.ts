@@ -82,4 +82,14 @@ export class EntryLogService {
 
     return this.http.post<any>('api/entry_managment_sys/log/filter', body, { headers });
   }
+
+  getChartData(): Observable<any> {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    // Assuming the API endpoint for chart data
+    return this.http.get<any>('api/entry_managment_sys/log/people_last_seven_days/visitor', { headers });
+  }
 }
