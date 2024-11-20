@@ -3,20 +3,20 @@
   width: 90%;
   max-width: 1500px;
   margin: 30px auto;
-  background-color: #fafafa; /* Soft background */
+  /*background-color: #fafafa; !* Soft background *!*/
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Light shadow */
 }
 
-.title {
-  text-align: center;
-  font-size: 2rem;
-  color: #C9261D;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #e0e0e0;
-}
+/*.title {*/
+/*  text-align: center;*/
+/*  font-size: 2rem;*/
+/*  color: #C9261D;*/
+/*  padding-bottom: 20px;*/
+/*  margin-bottom: 30px;*/
+/*  border-bottom: 2px solid #e0e0e0;*/
+/*}*/
 
 .table-wrapper {
   overflow-x: auto; /* Allows horizontal scrolling if needed */
@@ -30,13 +30,15 @@
 
 .data-table th, .data-table td {
   padding: 12px 20px;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  border: 1px solid #f4cdc5;
+
 }
 
 .data-table th {
-  background-color: #f5f5f5;
-  color: #C9261D;
+  background-color: #c24a4c;
+  color: #ffffff;
+  text-align:center;
   font-weight: bold;
 }
 
@@ -51,7 +53,7 @@
 
 .btn-action {
   padding: 8px 15px;
-  background-color: #C9261D;
+  background-color: #c24a4c;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -60,7 +62,7 @@
 }
 
 .btn-action:hover {
-  background-color: #9e2626; /* Darker red on hover */
+  background-color: #bc7b72; /* Darker red on hover */
 }
 
 /*Paginator CSS*/
@@ -90,7 +92,7 @@
 
 .mat-paginator .mat-button {
   background-color: transparent;
-  color: #333; /* Darker color for contrast */
+  color: #F4EAE6FF; /* Darker color for contrast */
   border: none;
 }
 
@@ -148,16 +150,16 @@
 }
 
 /* Search button/icon */
-.search-icon {
-  background-color: #ff0033;
-  border: none; /* Removes border for smoothness */
-  padding: 12px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+/*.search-icon {*/
+/*  background-color: #ff0033;*/
+/*  border: none; !* Removes border for smoothness *!*/
+/*  padding: 12px 20px;*/
+/*  cursor: pointer;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  transition: background-color 0.3s ease, transform 0.2s ease;*/
+/*}*/
 
 .search-icon:hover {
   background-color: #ff6666;
@@ -183,7 +185,7 @@
 
 /* Reset button styles */
 .reset-icon {
-  background-color: #ccc;
+  background-color: #f4cdc5;
   border: none;
   padding: 12px 20px;
   cursor: pointer;
@@ -191,11 +193,11 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  border-left: 2px solid #ddd; /* Same border style as container */
+  border-left: 2px solid #f4cdc5; /* Same border style as container */
 }
 
 .reset-icon:hover {
-  background-color: #999;
+  background-color: #bc7b72;
   transform: scale(1.05);
 }
 
@@ -209,7 +211,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  border: 2px solid #ddd;
+  border: 2px solid #f4cdc5;
   border-radius: 30px;
   overflow: hidden;
 }
