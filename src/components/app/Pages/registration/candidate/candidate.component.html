@@ -17,7 +17,7 @@
       {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
     </button>
     <div class="text-center">
-      <button (click)="nextStep()" class="btn btn-secondary" type="button">Next</button>
+      <button (click)="nextStep()" class="btn btn-secondary" type="button"> Next <i class="arrow right"></i></button>
     </div>
   </div>
 
@@ -109,8 +109,8 @@
       </div>
 
       <div class="text-center">
-        <button (click)="previousStep()" class="btn btn-secondary" type="button">Back</button>
-        <button (click)="nextStep()" class="btn btn-secondary" type="button">Next</button>
+        <button (click)="previousStep()" class="btn btn-secondary" type="button"><i class="arrow left"></i>Back</button>
+        <button (click)="nextStep()" class="btn btn-secondary" type="button">Next <i class="arrow right"></i></button>
       </div>
     </div>
 
@@ -149,8 +149,8 @@
       </div>
       <button (click)="addWorkExperience()" class="btn btn-primary mb-4" type="button">+ Add Work Experience</button>
       <div class="text-center">
-        <button (click)="previousStep()" class="btn btn-secondary" type="button">Back</button>
-        <button (click)="nextStep()" class="btn btn-secondary" type="button">Next</button>
+        <button (click)="previousStep()" class="btn btn-secondary" type="button"> <i class="arrow left"></i>Back</button>
+        <button (click)="nextStep()" class="btn btn-secondary" type="button">Next<i class="arrow right"></i></button>
       </div>
     </div>
 
@@ -179,7 +179,7 @@
         <input class="form-control" formControlName="date" type="text"/>
       </div>
       <div class="text-center">
-        <button (click)="previousStep()" class="btn btn-secondary" type="button">Back</button>
+        <button (click)="previousStep()" class="btn btn-secondary" type="button"><i class="arrow left"></i>Back </button>
       </div>
       <!-- Submit Button -->
       <div class="text-center mt-4">
