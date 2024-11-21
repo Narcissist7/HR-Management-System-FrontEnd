@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {CommonModule, NgFor, NgIf} from '@angular/common';
 import {MessageService} from 'primeng/api';
@@ -14,7 +14,7 @@ import {NtgAppsLoaderComponent} from '../../../Reusable/ntg-apps-loader/ntg-apps
   imports: [
 
     ReactiveFormsModule,
-    MatSnackBarModule, CommonModule, NgIf, NgFor, ToastModule, NtgAppsLoaderComponent
+    MatSnackBarModule, CommonModule, NgIf, NgFor, ToastModule, NtgAppsLoaderComponent, RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],

@@ -6,6 +6,42 @@ body {
   margin: 0;
   padding: 0;
 }
+/* From Uiverse.io by alexmaracinaru */
+.card {
+  width: 70%;
+  height: 70%;
+  background: #C24A4C;
+  margin-top:80px;
+  margin-left:80px;
+  border-radius: 15px;
+  box-shadow: 1px 5px 10px 0px #C24C4C;
+}
+
+.card .card-border-top {
+  width: 60%;
+  height: 3%;
+  background: white;
+  margin-left:90zzpx;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.card span {
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  display: block;
+  padding-top: 10px;
+  font-size: 16px;
+}
+
+.card .job {
+  font-weight: 400;
+  color: white;
+  display: block;
+  text-align: center;
+  padding-top: 3px;
+  font-size: 12px;
+}
 
 /* Candidate List Header */
 .title {
@@ -153,6 +189,3 @@ ul li strong {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
-
-
-

@@ -36,7 +36,7 @@ export class CandidateListComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.tokenService.validateToken()) {
-      this.loading = false;
+      this.loading = true;
       this.fetchCandidates();
     }
     else
@@ -73,17 +73,20 @@ export class CandidateListComponent implements OnInit {
   onPageChange(event: any): void {
     this.page = event.pageIndex;
     this.size = event.pageSize;
+    this.loading = true;
     this.fetchCandidates();
   }
 
   resetFilters() {
     this.searchQuery = null; // Clear search query
     this.isSearching = false;
+    this.loading = true;
     this.fetchCandidates();
   }
 
   onSearch() {
     this.isSearching = true;
+    this.loading = true;
     this.fetchCandidates();
   }
 }
