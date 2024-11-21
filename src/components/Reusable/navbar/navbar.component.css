@@ -1,7 +1,7 @@
 /* Navbar Background and General Styles */
 .navbar {
   background: rgb(139, 51, 41);
-  background: linear-gradient(178deg, rgba(244, 234, 230, 1) 0%, rgba(139, 51, 41, 1) 100%); /* Cool gradient */
+  background: linear-gradient(178deg, #F4EAE6FF 0%, #AF0505FF 100%); /* Cool gradient */
   /*border-bottom: 2px solid #c24a4c;*/
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
