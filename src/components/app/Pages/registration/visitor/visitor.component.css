@@ -1,129 +1,93 @@
-.wrapper{
-  padding: 20px;
-  background:#F7F7F7;
-
+.wrapper {
+  background-color: floralwhite;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .container {
-  max-width: 800px; /* Increased width for a more balanced layout */
+  background-color: whitesmoke;
   padding: 20px;
-  border: 2px solid #8B0000; /* Dark red border */
-  border-radius: 15px;
-}
-
-/* Card styling */
-.card {
-  border: 1px solid #ff0000; /* Pure red border */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-color: #ffffff;
-  padding: 20px; /* Added padding inside card */
-}
-.text-uploadImg{
-  color:#E14E23;
-}
-/* Card header */
-.card-body h2 {
-  color: #000000;
-  font-weight: bold;
-  margin-bottom: 20px; /* Extra margin for separation */
-}
-
-/* Form input fields */
-.form-control {
-  border: 1px solid #0c0101;
   border-radius: 8px;
-  padding: 15px;
-  color: #000000;
-  transition: all 0.3s ease-in-out;
-  font-size: 16px; /* Larger font size for readability */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  color: black;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+h4 {
+  color: black;
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+}
+
+.form-label {
+  color: black;
+  font-weight: 600;
+}
+
+.form-control {
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
 }
 
 .form-control:focus {
-  border-color: #b30000;
-  box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
+  border-color: #c24a4c;
+  box-shadow: 0 0 0 0.2rem rgba(194, 74, 76, 0.25);
 }
 
-/* Labels */
-.form-label {
-  color: #000000;
-  font-weight: 500;
-  font-size: 14px;
+.form-control.ng-invalid.ng-touched {
+  border-color: #c24a4c;
+  box-shadow: 0 0 0 0.2rem rgba(194, 74, 76, 0.25);
 }
 
-/* Button styling */
 .btn-primary {
-  background-color: #E14E23;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease-in-out;
-  font-size: 16px;
+  background-color: #c24a4c;
+  border-color: #c24a4c;
 }
 
 .btn-primary:hover {
-  background-color: #cc0000;
-  box-shadow: 0 4px 8px rgba(204, 0, 0, 0.2);
+  background-color: darkred;
+  border-color: darkred;
 }
 
-.btn-primary:focus {
-  background-color: #b30000;
-  box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);
+.btn-success {
+  background-color: #c24a4c;
+  border-color: #c24a4c;
+  padding: 10px 30px;
+  font-weight: bold;
 }
 
-/* Checkbox and Select styling */
-.form-check-input {
-  border-color: #ff0000;
+.btn-success:hover {
+  background-color: darkred;
+  border-color: darkred;
 }
 
-.form-select {
-  border: 1px solid #ff0000;
-  border-radius: 8px;
-  padding: 12px;
-  color: #000000;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
+/* Error and Validation Styling */
+.ng-invalid.ng-touched:not(form) {
+  border: 1px solid #c24a4c;
 }
 
-.form-select:focus {
-  border-color: #b30000;
-  box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 15px;
+  }
 }
 
-/* Text link */
-a {
-  color: #ff0000;
-  transition: color 0.3s ease;
+/* Toast Customization */
+.p-toast {
+  --primary-color: #c24a4c;
 }
 
-a:hover {
-  color: #b30000;
-}
-
-/* Adjusted spacing for larger layout */
-.mb-3,
-.mb-4 {
-  margin-bottom: 1.5rem !important;
-}
-
-.row .col-md-6 {
-  padding-right: 15px; /* Increased padding between columns */
-}
-.error-toast {
-  background-color: #f44336; /* Red color */
+.p-toast-message-error {
+  background-color: #c24a4c;
   color: white;
 }
 
-.ng-invalid.ng-touched .form-control {
-  border-color: red;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.875em;
-}
 
