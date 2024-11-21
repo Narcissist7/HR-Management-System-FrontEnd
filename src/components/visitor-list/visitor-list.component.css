@@ -93,7 +93,7 @@
 .mat-paginator .mat-button {
   background-color: transparent;
   color: #F4EAE6FF; /* Darker color for contrast */
-  border: none;
+  border: 10px wave;
 }
 
 .mat-paginator .mat-button:hover {

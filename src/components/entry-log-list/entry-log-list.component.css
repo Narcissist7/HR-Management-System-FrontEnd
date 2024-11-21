@@ -3,7 +3,7 @@
   width: 90%;
   max-width: 1500px;
   margin: 30px auto;
-  /*background-color: #fafafa; !* Soft background *!*/
+  background-color: #f5f5f5; /* Soft background */
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Light shadow */
@@ -76,7 +76,7 @@
   background-color: #f5f5f5; /* Light soothing background color */
   padding: 10px;
   border-radius: 8px; /* Rounded corners for a modern look */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
 .mat-paginator-page-size-label,
@@ -232,7 +232,7 @@
   margin-top: 15px;
   background-color: #f4f4f4;
   padding: 10px;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap if needed */
@@ -255,13 +255,16 @@
 }
 
 button {
-  padding: 8px 15px;
+  /*padding: 8px 15px;*/
   background-color: #c24a4c;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 20px; /* Larger padding for better spacing */
+
 }
 
 button:hover {
