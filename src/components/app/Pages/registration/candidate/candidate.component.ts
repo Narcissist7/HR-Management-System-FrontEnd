@@ -28,6 +28,7 @@ export class CandidateComponent implements OnInit {
   jobTitles: string[] = []; // Array to store job titles
 
   registrationForm: FormGroup;
+  step: number = 1;
 
   constructor(
     private http: HttpClient,
@@ -207,7 +208,7 @@ export class CandidateComponent implements OnInit {
           degree: formValues.degree,
           grade: formValues.grade,
           major: formValues.major,
-          date: formValues.uniDate,
+          date: formValues.date,
         }
       ],
       experiences: formValues.workExperiences.map((experience: any) => ({
@@ -244,5 +245,15 @@ export class CandidateComponent implements OnInit {
       );
   }
 
+  nextStep() {
+    if (this.step < 4) {
+      this.step++;
+    }
+  }
 
+  previousStep() {
+    if (this.step > 1) {
+      this.step--;
+    }
+  }
 }

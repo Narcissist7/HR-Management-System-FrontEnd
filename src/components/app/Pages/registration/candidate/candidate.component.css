@@ -1,124 +1,155 @@
-/* Wider container for the second registration page */
+/* Global Styles */
+:root {
+  --primary-color: #ff0000;
+  --secondary-color: #b30000;
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  line-height: 1.6;
+}
+
 .container {
-    max-width: 700px; /* Increased width for a more balanced layout */
-    margin-top: 50px;
-    padding: 20px;
-  }
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: var(--white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
 
-  /* Card styling */
-  .card {
-    border: 1px solid #ff0000; /* Pure red border */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: #ffffff;
-    padding: 20px; /* Added padding inside card */
-  }
+/* Typography */
+h2, h4 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  /* Card header */
-  .card-body h2 {
-    color: #000000;
-    font-weight: bold;
-    margin-bottom: 20px; /* Extra margin for separation */
-  }
+/* Form Elements */
+.form-label {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
 
-  /* Form input fields */
-  .form-control {
-    border: 1px solid #0b0a0a;
-    border-radius: 8px;
-    padding: 15px;
-    color: #000000;
-    transition: all 0.3s ease-in-out;
-    font-size: 16px; /* Larger font size for readability */
-  }
+.form-control, .form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
 
-  .form-control:focus {
-    border-color: #b30000;
-    box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
-  }
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+  outline: none;
+}
 
-  /* Labels */
-  .form-label {
-    color: #000000;
-    font-weight: 500;
-    font-size: 14px;
-  }
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-  /* Button styling */
-  .btn-primary {
-    background-color: #ff0000;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease-in-out;
-    font-size: 16px;
-  }
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
 
-  .btn-primary:hover {
-    background-color: #cc0000;
-    box-shadow: 0 4px 8px rgba(204, 0, 0, 0.2);
-  }
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
 
-  .btn-primary:focus {
-    background-color: #b30000;
-    box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);
-  }
+.btn-secondary {
+  background-color: #f1f1f1;
+  color: var(--text-color);
+  border: 1px solid #ccc;
+}
 
-  /* Checkbox and Select styling */
-  .form-check-input {
-    border-color: #ff0000;
-  }
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
 
-  .form-select {
-    border: 1px solid #ff0000;
-    border-radius: 8px;
-    padding: 12px;
-    color: #000000;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-  }
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
-  .form-select:focus {
-    border-color: #b30000;
-    box-shadow: 0 0 8px rgba(179, 0, 0, 0.3);
-  }
+/* Step Navigation */
+.text-center {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
-  /* Text link */
-  a {
-    color: #ff0000;
-    transition: color 0.3s ease;
-  }
+.step {
+  display: none;
+}
 
-  a:hover {
-    color: #b30000;
-  }
+.step.active {
+  display: block;
+}
 
-  /* Adjusted spacing for larger layout */
-  .mb-3,
-  .mb-4 {
-    margin-bottom: 1.5rem !important;
-  }
+/* Work Experience */
+.work-entry {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
 
-  .row .col-md-6 {
-    padding-right: 15px; /* Increased padding between columns */
-  }
+.work-entry .btn-danger {
+  background-color: #dc3545;
+  color: var(--white);
+}
 
+.work-entry .btn-danger:hover {
+  background-color: #c82333;
+}
 
+/* Responsive Layout */
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.col-md-6 {
+  flex: 1;
+}
+
+/* Error & Validation */
 .error-message {
   color: red;
   font-size: 0.875em;
 }
 
-
-/* Style for valid input (non-empty) */
-input.ng-valid, select.ng-valid, textarea.ng-valid {
-  color: black; /* Text is black when valid */
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid {
+  border-color: red;
 }
 
-/* Style for invalid input (empty or invalid) */
-input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
-  color: red; /* Text is red when invalid */
+/* Spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
