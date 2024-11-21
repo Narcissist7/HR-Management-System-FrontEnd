@@ -1,21 +1,22 @@
+/* Table Container */
 .table-container {
   width: 90%;
   max-width: 1500px;
   margin: 30px auto;
-  background-color: #fafafa; /* Soft background */
+  /*background-color: #fafafa; !* Soft background *!*/
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Light shadow */
 }
 
-.title {
-  text-align: center;
-  font-size: 2rem;
-  color:  #C9261D;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #e0e0e0;
-}
+/*.title {*/
+/*  text-align: center;*/
+/*  font-size: 2rem;*/
+/*  color: #C9261D;*/
+/*  padding-bottom: 20px;*/
+/*  margin-bottom: 30px;*/
+/*  border-bottom: 2px solid #e0e0e0;*/
+/*}*/
 
 .table-wrapper {
   overflow-x: auto; /* Allows horizontal scrolling if needed */
@@ -29,13 +30,15 @@
 
 .data-table th, .data-table td {
   padding: 12px 20px;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  border: 1px solid #f4cdc5;
+
 }
 
 .data-table th {
-  background-color: #f5f5f5;
-  color: #C9261D;
+  background-color: #c24a4c;
+  color: #ffffff;
+  text-align:center;
   font-weight: bold;
 }
 
@@ -50,7 +53,7 @@
 
 .btn-action {
   padding: 8px 15px;
-  background-color:  #C9261D;
+  background-color: #c24a4c;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -59,41 +62,57 @@
 }
 
 .btn-action:hover {
-  background-color: #9e2626; /* Darker red on hover */
+  background-color: #bc7b72; /* Darker red on hover */
 }
 
+/*Paginator CSS*/
+.mat-paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-.btn-action:hover {
-  background-color: #b71c1c;
+.mat-paginator-outer-container {
+  background-color: #f5f5f5; /* Light soothing background color */
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+.mat-paginator-page-size-label,
+.mat-paginator-range-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #555; /* Softer text color */
+}
+
+.mat-paginator-icon {
+  color: #e91e63; /* A calm pink shade for icons */
+}
+
+.mat-paginator .mat-button {
+  background-color: transparent;
+  color: #F4EAE6FF; /* Darker color for contrast */
+  border: none;
+}
+
+.mat-paginator .mat-button:hover {
+  background-color: #f0f0f0; /* Subtle hover effect */
+}
+
+.mat-paginator-page-size {
+  margin-right: 10px;
 }
 
 .paginator-container {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  align-items: center;
+  margin: 30px 0;
 }
-
-.paginator-container button {
-  margin: 0 5px;
-  padding: 8px 12px;
-  background-color: #d32f2f;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
+.mat-paginator .mat-button {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-.paginator-container button:disabled {
-  background-color: #e0e0e0;
-  color: #9e9e9e;
-  cursor: not-allowed;
-}
-
-.paginator-container button:hover:not(:disabled) {
-  background-color: #b71c1c;
-}
-
 /*Filter Style*/
 /* Filter Section */
 .filter-container {
@@ -184,7 +203,7 @@
 
 .data-table th, .data-table td {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border: 1px solid #ddd;
 }
 
@@ -237,7 +256,7 @@
 
 button {
   padding: 8px 15px;
-  background-color: #C9261D;
+  background-color: #c24a4c;
   color: #fff;
   border: none;
   border-radius: 5px;

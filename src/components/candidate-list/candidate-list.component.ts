@@ -55,7 +55,6 @@ export class CandidateListComponent implements OnInit {
         console.log(this.totalElements);
         console.log(this.page);
         console.log(this.size);
-        this.loading = false;
       });
     } else if(this.isSearching){
       this.candidateService.searchCandidatesByName(this.searchQuery, this.page, this.size).subscribe(data => {
@@ -65,9 +64,9 @@ export class CandidateListComponent implements OnInit {
         console.log(this.totalElements);
         console.log(this.page);
         console.log(this.size);
-        this.loading = false;
       });
     }
+        this.loading = false;
   }
 
   onPageChange(event: any): void {
