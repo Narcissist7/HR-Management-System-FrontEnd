@@ -1,155 +1,102 @@
-/* General styling for the page */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f3f4f6; /* Soft background for the entire page */
-  color: #444444;
-  margin: 0;
-  padding: 0;
+  background-color: #f9f9fa;
 }
 
-/* Candidate List Header */
-.title {
-  text-align: center;
-  font-size: 2.2rem;
-  color: black;
-  padding: 25px;
-  border-bottom: 2px solid #C9261D;
-  margin-bottom: 30px;
-  background-color: #ffffff; /* Change to white for a cleaner look */
-  font-weight: bold;
+.padding {
+  padding: 3rem !important;
 }
 
-/* Candidate card styles */
-.candidate-list, .visitor-list, .log-list{
+.user-card-full {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.candidate-card, .visitor-card, .log-card {
-  width: 80%;
+  width: 100%;
   max-width: 900px;
-  background: #ffffff; /* Solid white background for card */
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: auto;
 }
 
-.candidate-card:hover, .visitor-card:hover, .log-card:hover {
-  transform: scale(1.02); /* Slightly less scaling */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
-
-/* Candidate header styles */
-.candidate-header, .visitor-header, .log-header {
-  background-color: #ffffff; /* Change to white for a cleaner look */
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  border-left: 5px solid #C9261D; /* Keep the accent color */
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  gap: 10px; /* Space between items */
-}
-
-.candidate-name, .visitor-name, .log-name {
-  font-size: 1.8rem;
-  color: black;
-  font-weight: bold;
-}
-
-.candidate-info, .visitor-info, .log-info {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-}
-
-.candidate-info strong, .visitor-info strong, .log-info strong {
-  color: #C9261D;
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-/* Section styles for Education and Experience */
-.candidate-body, .visitor-body, .log-body {
-  margin-top: 15px;
-}
-
-h4 {
-  color: black;
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.education-section, .experience-section {
-  margin-bottom: 25px;
-  padding: 15px; /* Increased padding for better spacing */
-  background-color: #f9f9f9; /* Light gray background for sections */
-  border-radius: 8px;
-  border-left: 4px solid #C9261D; /* Accent color */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-ul li {
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 8px;
-}
-
-ul li strong {
-  font-weight: bold;
-  color: #C9261D;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .candidate-card {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .candidate-name, .visitor-name, .log-name {
-    font-size: 1.6rem;
-  }
-}
-
-/* Button Style */
-.view-details-button {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.btn-view-details {
-  padding: 12px 25px;
-  background: linear-gradient(145deg, #b32e2e, #a02727);
-  color: #fff;
+.card {
+  border-radius: 5px;
+  box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
-.btn-view-details:hover {
-  background-color: #9e2626;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+.user-card-full .user-profile {
+  border-radius: 5px 0 0 5px;
+  flex: 1;
+}
+
+.bg-c-lite-green {
+  background: linear-gradient(to right, #ee5a6f, #f29263);
+}
+
+.user-profile {
+  padding: 20px 0;
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.m-b-25 {
+  margin-bottom: 25px;
+}
+
+.img-radius {
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+}
+
+h6 {
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.card .card-block p {
+  line-height: 25px;
+  word-wrap: break-word;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.col-sm-6 {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 150px;
+}
+
+.text-muted {
+  color: #919aa3 !important;
+  word-wrap: break-word;
+}
+
+.f-w-600 {
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 768px) {
+  .user-card-full {
+    flex-direction: row;
+  }
+
+  .col-sm-4 {
+    flex: 0 0 30%;
+  }
+
+  .col-sm-8 {
+    flex: 0 0 70%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .col-sm-4,
+  .col-sm-8 {
+    flex: 1 1 100%;
+  }
 }

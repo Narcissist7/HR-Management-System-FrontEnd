@@ -1,79 +1,208 @@
-<app-navbar/>
-<div class="log-list">
+<!--<app-navbar/>-->
+<!--<div class="log-list">-->
 
-  <div class="log-card">
-    <!-- Visitor Header Section -->
-    <div class="log-header">
-      <h3 class="log-name">{{ logDetails.date }}</h3>
-      <p class="log-info"><strong>Time:</strong> {{ logDetails.time }}</p>
-      @if (logDetails.role == 'visitor'){
-      <p class="log-info"><strong>Visitee:</strong> {{ logDetails.visitee }}</p>
-      }
-    </div>
-  </div>
+<!--  <div class="log-card">-->
+<!--    &lt;!&ndash; Visitor Header Section &ndash;&gt;-->
+<!--    <div class="log-header">-->
+<!--      <h3 class="log-name">{{ logDetails.date }}</h3>-->
+<!--      <p class="log-info"><strong>Time:</strong> {{ logDetails.time }}</p>-->
+<!--      @if (logDetails.role == 'visitor'){-->
+<!--      <p class="log-info"><strong>Visitee:</strong> {{ logDetails.visitee }}</p>-->
+<!--      }-->
+<!--    </div>-->
+<!--  </div>-->
 
-  @if (candidateDetails.ssn != ''){
-  <!-- Candidate Card Section -->
-  <div class="candidate-card">
-    <!-- Candidate Header Section -->
-    <div class="candidate-header">
-      <h3 class="candidate-name">{{ candidateDetails.name }}</h3>
-      <p class="candidate-info"><strong>Job title :</strong> {{ candidateDetails.job_title}}</p>
-      <p class="candidate-info"><strong>Email:</strong> {{ candidateDetails.email }}</p>
-      <p class="candidate-info"><strong>Phone:</strong> {{ candidateDetails.phone }}</p>
-      <p class="candidate-info"><strong>National ID:</strong> {{ candidateDetails.ssn }}</p>
-      <p class="candidate-info"><strong>Address:</strong> {{ candidateDetails.address }}</p>
-      <p class="candidate-info"><strong>Date of Birth:</strong> {{ candidateDetails.dob }}</p>
-      <p class="candidate-info"><strong>Place of Birth:</strong> {{ candidateDetails.pob }}</p>
-      <p class="candidate-info"><strong>Gender:</strong> {{ candidateDetails.gender }}</p>
-      <p class="candidate-info"><strong>Marital Status:</strong> {{ candidateDetails.martial_status }}</p>
-      <p class="candidate-info"><strong>Military Status:</strong> {{ candidateDetails.military_status }}</p>
-    </div>
+<!--  @if (candidateDetails.ssn != ''){-->
+<!--  &lt;!&ndash; Candidate Card Section &ndash;&gt;-->
+<!--  <div class="candidate-card">-->
+<!--    &lt;!&ndash; Candidate Header Section &ndash;&gt;-->
+<!--    <div class="candidate-header">-->
+<!--      <h3 class="candidate-name">{{ candidateDetails.name }}</h3>-->
+<!--      <p class="candidate-info"><strong>Job title :</strong> {{ candidateDetails.job_title}}</p>-->
+<!--      <p class="candidate-info"><strong>Email:</strong> {{ candidateDetails.email }}</p>-->
+<!--      <p class="candidate-info"><strong>Phone:</strong> {{ candidateDetails.phone }}</p>-->
+<!--      <p class="candidate-info"><strong>National ID:</strong> {{ candidateDetails.ssn }}</p>-->
+<!--      <p class="candidate-info"><strong>Address:</strong> {{ candidateDetails.address }}</p>-->
+<!--      <p class="candidate-info"><strong>Date of Birth:</strong> {{ candidateDetails.dob }}</p>-->
+<!--      <p class="candidate-info"><strong>Place of Birth:</strong> {{ candidateDetails.pob }}</p>-->
+<!--      <p class="candidate-info"><strong>Gender:</strong> {{ candidateDetails.gender }}</p>-->
+<!--      <p class="candidate-info"><strong>Marital Status:</strong> {{ candidateDetails.martial_status }}</p>-->
+<!--      <p class="candidate-info"><strong>Military Status:</strong> {{ candidateDetails.military_status }}</p>-->
+<!--    </div>-->
 
-    <!-- Candidate Body -->
-    <div class="candidate-body">
-      <!-- Education Section -->
-      @for (education of educations; track $index) {
-  <div class="education-section">
-    <h4>Education</h4>
-    <ul>
-      <li><strong>University Name:</strong> {{ education.university }}</li>
-      <li><strong>Major:</strong> {{ education.major }}</li>
-      <li><strong>Degree:</strong> {{ education.degree }}</li>
-      <li><strong>Grade:</strong> {{ education.grade }}</li>
-      <li><strong>Graduation Year:</strong> {{ education.date }}</li>
-    </ul>
-  </div>
-  }
+<!--    &lt;!&ndash; Candidate Body &ndash;&gt;-->
+<!--    <div class="candidate-body">-->
+<!--      &lt;!&ndash; Education Section &ndash;&gt;-->
+<!--      @for (education of educations; track $index) {-->
+<!--  <div class="education-section">-->
+<!--    <h4>Education</h4>-->
+<!--    <ul>-->
+<!--      <li><strong>University Name:</strong> {{ education.university }}</li>-->
+<!--      <li><strong>Major:</strong> {{ education.major }}</li>-->
+<!--      <li><strong>Degree:</strong> {{ education.degree }}</li>-->
+<!--      <li><strong>Grade:</strong> {{ education.grade }}</li>-->
+<!--      <li><strong>Graduation Year:</strong> {{ education.date }}</li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--  }-->
 
-  <!-- Experience Section -->
-  @for (experience of experiences; track $index) {
-  <div class="experience-section">
-    <h4>Experience</h4>
-    <ul>
-      <li><strong>Company Name:</strong> {{ experience.company_name }}</li>
-      <li><strong>Position:</strong> {{ experience.postion }}</li>
-      <li><strong>Start Date:</strong> {{ experience.start_date }}</li>
-      <li><strong>End Date:</strong> {{ experience.end_date }}</li>
-      <li><strong>Reason for Leaving:</strong> {{ experience.reason }}</li>
-    </ul>
-  </div>
-  }
-  </div> <!-- End of candidate body -->
-</div> <!-- End of candidate card -->
-  } @else if (visitorDetails.ssn != ''){
-    <div class="visitor-card">
-      <!-- Visitor Header Section -->
-      <div class="visitor-header">
-        <h3>{{ visitorDetails.name }}</h3>
-        <p class="log-info"><strong>Phone:</strong> {{ visitorDetails.phone }}</p>
-        <p class="log-info"><strong>SSN:</strong> {{ visitorDetails.ssn }}</p>
-        <p class="log-info"><strong>Gender:</strong> {{ visitorDetails.gender }}</p>
-        <p class="log-info"><strong>Date of Birth:</strong> {{ visitorDetails.dob | date }}</p>
-        <p class="log-info"><strong>Place of Birth:</strong> {{ visitorDetails.pob }}</p>
-        <p class="log-info"><strong>Address:</strong> {{ visitorDetails.address }}</p>
+<!--  &lt;!&ndash; Experience Section &ndash;&gt;-->
+<!--  @for (experience of experiences; track $index) {-->
+<!--  <div class="experience-section">-->
+<!--    <h4>Experience</h4>-->
+<!--    <ul>-->
+<!--      <li><strong>Company Name:</strong> {{ experience.company_name }}</li>-->
+<!--      <li><strong>Position:</strong> {{ experience.postion }}</li>-->
+<!--      <li><strong>Start Date:</strong> {{ experience.start_date }}</li>-->
+<!--      <li><strong>End Date:</strong> {{ experience.end_date }}</li>-->
+<!--      <li><strong>Reason for Leaving:</strong> {{ experience.reason }}</li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--  }-->
+<!--  </div> &lt;!&ndash; End of candidate body &ndash;&gt;-->
+<!--</div> &lt;!&ndash; End of candidate card &ndash;&gt;-->
+<!--  } @else if (visitorDetails.ssn != ''){-->
+<!--    <div class="visitor-card">-->
+<!--      &lt;!&ndash; Visitor Header Section &ndash;&gt;-->
+<!--      <div class="visitor-header">-->
+<!--        <h3>{{ visitorDetails.name }}</h3>-->
+<!--        <p class="log-info"><strong>Phone:</strong> {{ visitorDetails.phone }}</p>-->
+<!--        <p class="log-info"><strong>SSN:</strong> {{ visitorDetails.ssn }}</p>-->
+<!--        <p class="log-info"><strong>Gender:</strong> {{ visitorDetails.gender }}</p>-->
+<!--        <p class="log-info"><strong>Date of Birth:</strong> {{ visitorDetails.dob | date }}</p>-->
+<!--        <p class="log-info"><strong>Place of Birth:</strong> {{ visitorDetails.pob }}</p>-->
+<!--        <p class="log-info"><strong>Address:</strong> {{ visitorDetails.address }}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  }-->
+
+<!--</div> &lt;!&ndash; End of log list &ndash;&gt;-->
+
+<div class="page-content page-container" id="page-content">
+  <div class="padding">
+    <div class="row container d-flex justify-content-center">
+      <div class="col-xl-6 col-md-12">
+        <div class="card user-card-full">
+          <!-- Candidate Details -->
+          <div *ngIf="candidateDetails.ssn !== ''" class="row m-l-0 m-r-0">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                <div class="m-b-25">
+                  <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                </div>
+                <h6 class="f-w-600">{{ candidateDetails.name }}</h6>
+                <p>{{ candidateDetails.job_title }}</p>
+                <i class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="card-block">
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Email</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.email }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Phone</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.phone }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">NID</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.ssn }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Address</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.address }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Birth Date</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.dob }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Occupation</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.pob }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Gender</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.gender }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Marital Status</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.martial_status }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Military Status</p>
+                    <h6 class="text-muted f-w-400">{{ candidateDetails.military_status }}</h6>
+                  </div>
+                </div>
+                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Details</h6>
+                <div class="row">
+                  <p class="m-b-10 f-w-600">Education</p>
+                  <div *ngFor="let education of educations" class="col-sm-6">
+                    <p class="m-b-10 f-w-600">{{ education.university }}</p>
+                    <h6 class="text-muted f-w-400">{{ education.major }}</h6>
+                    <h6 class="text-muted f-w-400">{{ education.grade }}</h6>
+                    <h6 class="text-muted f-w-400">{{ education.date }}</h6>
+                  </div>
+                  <p class="m-b-10 f-w-600">Experience</p>
+                  <div *ngFor="let experience of experiences" class="col-sm-6">
+                    <p class="m-b-10 f-w-600">{{ experience.company_name }}</p>
+                    <h6 class="text-muted f-w-400">{{ experience.postion }}</h6>
+                    <h6 class="text-muted f-w-400">{{ experience.start_date }}</h6>
+                    <h6 class="text-muted f-w-400">{{ experience.end_date }}</h6>
+                    <h6 class="text-muted f-w-400">{{ experience.reason }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Visitor Details -->
+          <div *ngIf="visitorDetails.ssn !== ''" class="row m-l-0 m-r-0">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                <div class="m-b-25">
+                  <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                </div>
+                <h6 class="f-w-600">{{ visitorDetails.name }}</h6>
+                <i class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="card-block">
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Phone</p>
+                    <h6 class="text-muted f-w-400">{{ visitorDetails.phone }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">NID</p>
+                    <h6 class="text-muted f-w-400">{{ visitorDetails.ssn }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Address</p>
+                    <h6 class="text-muted f-w-400">{{ visitorDetails.address }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Birth Date</p>
+                    <h6 class="text-muted f-w-400">{{ visitorDetails.dob }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Occupation</p>
+                    <h6 class="text-muted f-w-400">{{ visitorDetails.pob }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Gender</p>
+                    <h6 class="text-muted f-w-400">{{ visitorDetails.gender }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  }
+  </div>
+</div>
 
-</div> <!-- End of log list -->

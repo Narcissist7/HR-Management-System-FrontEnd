@@ -5,7 +5,7 @@ import {Candidate} from '../../Model/Candidate/candidate';
 import {Visitor} from '../../Model/Visitor/visitor';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 
@@ -14,7 +14,9 @@ import {NavbarComponent} from '../Reusable/navbar/navbar.component';
   standalone: true,
   imports: [
     DatePipe,
-    NavbarComponent
+    NavbarComponent,
+    NgForOf,
+    NgIf
   ],
   templateUrl: './entry-log-details.component.html',
   styleUrl: './entry-log-details.component.css'
