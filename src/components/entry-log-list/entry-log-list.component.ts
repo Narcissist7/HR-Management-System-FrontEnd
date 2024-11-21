@@ -36,7 +36,7 @@ export class EntryLogListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.tokenService.validateToken() == true) {
+    if (this.tokenService.validateToken()) {
       this.loading = true;
       this.loadLogs();
     }

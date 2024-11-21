@@ -36,7 +36,7 @@ export class CandidateListComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.tokenService.validateToken()) {
-      this.loading = false;
+      this.loading = true;
       this.fetchCandidates();
     }
     else
@@ -55,6 +55,7 @@ export class CandidateListComponent implements OnInit {
         console.log(this.totalElements);
         console.log(this.page);
         console.log(this.size);
+        this.loading = false;
       });
     } else if(this.isSearching){
       this.candidateService.searchCandidatesByName(this.searchQuery, this.page, this.size).subscribe(data => {
@@ -64,25 +65,28 @@ export class CandidateListComponent implements OnInit {
         console.log(this.totalElements);
         console.log(this.page);
         console.log(this.size);
+        this.loading = false;
       });
     }
-        this.loading = false;
   }
 
   onPageChange(event: any): void {
     this.page = event.pageIndex;
     this.size = event.pageSize;
+    this.loading = true;
     this.fetchCandidates();
   }
 
   resetFilters() {
     this.searchQuery = null; // Clear search query
     this.isSearching = false;
+    this.loading = true;
     this.fetchCandidates();
   }
 
   onSearch() {
     this.isSearching = true;
+    this.loading = true;
     this.fetchCandidates();
   }
 }
