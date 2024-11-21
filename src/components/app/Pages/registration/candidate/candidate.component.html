@@ -65,7 +65,11 @@
 
         <div class="col-md-6 mb-3">
           <label class="form-label" for="gender">Gender</label>
-          <input class="form-control" formControlName="gender" id="gender" required type="text"/>
+          <select id="gender" class="form-control" formControlName="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
       </div>
 
@@ -118,7 +122,7 @@
     <!-- Work Experience Section -->
     <div *ngIf="step === 3">
       <h4>Step Three: Work Experience</h4>
-      <h4 class="mb-3">Work Experience</h4>
+<!--      <h4 class="mb-3">Work Experience</h4>-->
       <div formArrayName="workExperiences">
         <div *ngFor="let experience of workExperiences.controls; let i = index" [formGroupName]="i"
              class="work-entry mb-4">
