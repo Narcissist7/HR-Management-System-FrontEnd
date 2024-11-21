@@ -1,0 +1,50 @@
+<div class="center-content">
+  <img src="assets/forgot.png" alt="Visitor Image" class="image-button" />
+  <h2 class="text-danger">Forgot password</h2>
+</div>
+
+<style>
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 55vh; /* This will center the content vertically on the page */
+  }
+
+  .image-button {
+    max-width: 250px;
+    height: auto;
+  }
+</style>
+
+
+
+<h6 class="text-danger text-center">please provide here your Email address to send your reset verification code</h6>
+<div class="form-container">
+
+
+
+  <form [formGroup]="sendmail" (ngSubmit)="onSubmit()">
+
+    <!-- Egyptian National ID Field -->
+    <div class="form-field">
+      <label for="email">Email </label>
+      <input id="email" formControlName="email" type="text" required>
+      <!-- Error message for NID field -->
+      <div *ngIf="sendmail.get('email')?.invalid && sendmail.get('email')?.touched" class="error-message">
+        Email is required
+      </div>
+    </div>
+
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">Submit
+      <span *ngIf="isLoading" class="spinner"></span>
+    </button>
+  </form>
+</div>
+
+
+<p-toast></p-toast>

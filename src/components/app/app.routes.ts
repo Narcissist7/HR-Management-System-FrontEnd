@@ -21,6 +21,10 @@ import {EntryLogDetailsComponent} from '../entry-log-details/entry-log-details.c
 import {CreateAdminComponent} from './Pages/create-admin/create-admin.component';
 import {NotAuthorizedComponent} from './Pages/not-authorized/not-authorized.component';
 import {AnalyticsComponent} from './Pages/analytics/analytics.component';
+import {SendemailComponent} from './Pages/forget-password/sendemail/sendemail.component';
+import {ValidatetokenComponent} from './Pages/forget-password/validatetoken/validatetoken.component';
+import {ChangepasswordComponent} from './Pages/forget-password/changepassword/changepassword.component';
+
 // import {ChartComponent} from './Pages/chart/chart.component';
 
 
@@ -115,5 +119,17 @@ export const routes: Routes = [
   {
     path:"analytics",
     component:AnalyticsComponent
+  },
+  {
+    path:"sendemail",
+    component:SendemailComponent
+  },
+  {
+    path:"validatetoken",
+    component:ValidatetokenComponent
+  },
+  {
+    path:"changePassword",
+    component:ChangepasswordComponent
   }
 ];

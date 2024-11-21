@@ -1,5 +1,5 @@
 <div class="container d-flex justify-content-center align-items-center vh-100 bg-white">
-  @if (loading){
+  @if (loading) {
     <app-ntg-apps-loader/>
   } @else {
     <div class="card shadow-lg p-4 rounded" style="width: 400px;">
@@ -14,7 +14,7 @@
       <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
         <div class="mb-3">
           <label class="form-label" for="email">Email</label>
-          <input class="form-control" formControlName="email" id="email" required type="email"/>
+          <input class="form-control" formControlName="email" id="email" required type="email" />
           <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
             <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
             <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
@@ -42,8 +42,18 @@
           Login
         </button>
       </form>
+
+      <!-- Text button for forget password -->
+      <div class="text-center mt-3">
+        <a
+          class="text-muted"
+          style="cursor: pointer; text-decoration: underline;"
+          (click)="onForgotPassword()"
+        >
+          Forgot Password?
+        </a>
+      </div>
     </div>
   }
 </div>
 <p-toast></p-toast>
-
