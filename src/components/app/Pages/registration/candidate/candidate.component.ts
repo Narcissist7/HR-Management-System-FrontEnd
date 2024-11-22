@@ -8,6 +8,7 @@ import { ToastModule } from 'primeng/toast'; // Import the ToastModule
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { TimelineModule } from 'primeng/timeline';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
@@ -15,7 +16,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   standalone: true,
   imports: [
     FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf,
-    ToastModule, DropdownModule, ButtonModule, InputTextModule, ProgressSpinnerModule
+    ToastModule, DropdownModule, ButtonModule, InputTextModule, ProgressSpinnerModule , TimelineModule
   ],
   providers: [MessageService],
   templateUrl: './candidate.component.html',
@@ -63,6 +64,8 @@ export class CandidateComponent implements OnInit {
       this.registrationForm.patchValue({ email });
     }
   }
+
+
 
   ngOnInit(): void {
     this.fetchJobTitles(); // Fetch job titles when the component initializes

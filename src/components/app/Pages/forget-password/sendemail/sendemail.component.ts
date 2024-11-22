@@ -52,7 +52,9 @@ export class SendemailComponent {
               });
 
               setTimeout(() => {
-                this.router.navigate(['validatetoken'], { queryParams: { email: this.sendmail.value.email } });
+                this.router.navigate(['validatetoken'], {
+                  queryParams: { allowedAccess: true, email: this.sendmail.value.email }
+                });
               }, 1000);
             }
           },

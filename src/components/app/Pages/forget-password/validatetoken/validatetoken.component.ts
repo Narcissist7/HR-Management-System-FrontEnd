@@ -77,7 +77,7 @@ export class ValidatetokenComponent {
 
               // Pass email as a query parameter while navigating to the next page
               setTimeout(() => {
-                this.router.navigate(['changePassword'], { queryParams: { email: this.email } });
+                this.router.navigate(['changePassword'], { queryParams: {allowedAccess: true ,  email: this.email } });
               }, 2000);
             }
           },

@@ -24,6 +24,8 @@ import {AnalyticsComponent} from './Pages/analytics/analytics.component';
 import {SendemailComponent} from './Pages/forget-password/sendemail/sendemail.component';
 import {ValidatetokenComponent} from './Pages/forget-password/validatetoken/validatetoken.component';
 import {ChangepasswordComponent} from './Pages/forget-password/changepassword/changepassword.component';
+import {AuthGuard} from '../../Services/auth.guard';
+import {adminDashboardGuard} from '../../Services/admin-dashboard.guard';
 
 // import {ChartComponent} from './Pages/chart/chart.component';
 
@@ -106,7 +108,7 @@ export const routes: Routes = [
   },
   {
     path: 'adminDashboard',
-    component: AdminDashboardComponent
+    component: AdminDashboardComponent , canActivate: [adminDashboardGuard]
   },
   {
     path:"createAdmin",
@@ -126,10 +128,10 @@ export const routes: Routes = [
   },
   {
     path:"validatetoken",
-    component:ValidatetokenComponent
+    component:ValidatetokenComponent , canActivate: [AuthGuard]
   },
   {
     path:"changePassword",
-    component:ChangepasswordComponent
+    component:ChangepasswordComponent , canActivate:[AuthGuard]
   }
 ];
