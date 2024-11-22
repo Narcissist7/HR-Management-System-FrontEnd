@@ -26,6 +26,7 @@ import {ValidatetokenComponent} from './Pages/forget-password/validatetoken/vali
 import {ChangepasswordComponent} from './Pages/forget-password/changepassword/changepassword.component';
 import {AuthGuard} from '../../Services/auth.guard';
 import {adminDashboardGuard} from '../../Services/admin-dashboard.guard';
+import {ChartRadarDemo} from './Pages/chart/chart-radar-demo/chart-radar-demo.component';
 
 // import {ChartComponent} from './Pages/chart/chart.component';
 
@@ -133,5 +134,9 @@ export const routes: Routes = [
   {
     path:"changePassword",
     component:ChangepasswordComponent , canActivate:[AuthGuard]
+  },
+  {
+    path:"radar",
+    component:ChartRadarDemo
   }
 ];
