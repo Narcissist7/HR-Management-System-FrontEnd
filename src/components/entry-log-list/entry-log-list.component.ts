@@ -9,11 +9,36 @@ import {NgForOf, NgIf} from '@angular/common';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow,
+  MatHeaderRowDef, MatRow, MatRowDef, MatTable
+} from '@angular/material/table';
 
 @Component({
   selector: 'app-entry-log-list',
   standalone: true,
-  imports: [RouterModule, MatPaginator, FormsModule, NgIf, NgForOf, LoaderComponent, NavbarComponent],
+  imports: [
+    RouterModule,
+    MatPaginator,
+    NgIf,
+    FormsModule,
+    LoaderComponent,
+    NavbarComponent,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatTable
+  ],
   templateUrl: './entry-log-list.component.html',
   styleUrls: ['./entry-log-list.component.css']
 })
@@ -22,7 +47,7 @@ export class EntryLogListComponent implements OnInit {
   logs: EntryLog[] = [];
   totalElements: number = 0;
   page: number = 0;
-  size: number = 10; // Default page size
+  size: number = 5; // Default page size
   loading: boolean = false;
   showDateFilter: boolean = false;
   showTimeFilter: boolean = false;

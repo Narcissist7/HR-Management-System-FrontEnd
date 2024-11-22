@@ -1,88 +1,85 @@
-<app-navbar/>
-<!-- Log Table -->
+<app-navbar></app-navbar>
 <div class="table-container">
-
   <div class="filter-container">
-
-  <div class="filter-icons">
-
-    <!-- Today Filter -->
-    <div class="filter-item">
-      <button (click)="filterToday()">📅 Today Filter</button>
-    </div>
-
-    <!-- Date Filter -->
-    <div class="filter-item">
-      <button (click)="toggleDateFilter()">📅 Date Filter</button>
-      <div *ngIf="showDateFilter">
-        <input type="date" [(ngModel)]="filterRequest.startDate" placeholder="Start Date" />
-        <input type="date" [(ngModel)]="filterRequest.endDate" placeholder="End Date" />
+    <div class="filter-icons">
+      <div class="filter-item">
+        <button (click)="filterToday()">📅 Today Filter</button>
       </div>
-    </div>
 
-    <!-- Time Filter -->
-    <div class="filter-item">
-      <button (click)="toggleTimeFilter()">🕒 Time Filter</button>
-      <div *ngIf="showTimeFilter">
-        <input type="time" [(ngModel)]="filterRequest.startTime" placeholder="Start Time" />
-        <input type="time" [(ngModel)]="filterRequest.endTime" placeholder="End Time" />
+      <div class="filter-item">
+        <button (click)="toggleDateFilter()">📅 Date Filter</button>
+        <div *ngIf="showDateFilter">
+          <input type="date" [(ngModel)]="filterRequest.startDate" placeholder="Start Date" />
+          <input type="date" [(ngModel)]="filterRequest.endDate" placeholder="End Date" />
+        </div>
       </div>
-    </div>
 
-    <!-- Role Filter -->
-    <div class="filter-item">
-      <button (click)="toggleRoleFilter()">👥 Role Filter</button>
-      <div *ngIf="showRoleFilter">
-        <select [(ngModel)]="filterRequest.role">
-          <option value="">All</option>
-          <option value="candidate">Candidate</option>
-          <option value="visitor">Visitor</option>
-        </select>
+      <div class="filter-item">
+        <button (click)="toggleTimeFilter()">🕒 Time Filter</button>
+        <div *ngIf="showTimeFilter">
+          <input type="time" [(ngModel)]="filterRequest.startTime" placeholder="Start Time" />
+          <input type="time" [(ngModel)]="filterRequest.endTime" placeholder="End Time" />
+        </div>
       </div>
-    </div>
 
-    <button (click)="applyFilter()">🔍Apply</button>
-    <button (click)="resetFilters()">🔃Reset</button>
+      <div class="filter-item">
+        <button (click)="toggleRoleFilter()">👥 Role Filter</button>
+        <div *ngIf="showRoleFilter">
+          <select [(ngModel)]="filterRequest.role">
+            <option value="">All</option>
+            <option value="candidate">Candidate</option>
+            <option value="visitor">Visitor</option>
+          </select>
+        </div>
+      </div>
+
+      <button (click)="applyFilter()">🔍Apply</button>
+      <button (click)="resetFilters()">🔃Reset</button>
+    </div>
   </div>
-</div>
 
-
-  @if (loading){
-    <app-loader/>
-  } @else {
-    <table class="data-table">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <ng-container *ngFor="let log of logs;">
-        <tr>
-          <td>{{ log.name }}</td>
-          <td>{{ log.role }}</td>
-          <td>{{ log.date }}</td>
-          <td>{{ log.time }}</td>
-          <td>
-            <button class="btn-action" [routerLink]="['/logDetails']" [state]="{ data: log }">
-              View Details
-            </button>
-          </td>
-        </tr>
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="logs" class="data-table">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let log">{{ log.name }}</td>
       </ng-container>
-      </tbody>
+
+      <ng-container matColumnDef="Role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let log">{{ log.role }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let log">{{ log.date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Time">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let log">{{ log.time }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let log">
+          <button class="btn-action" [routerLink]="['/logDetails']" [state]="{ data: log }">
+            View Details
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['Name', 'Role', 'Date', 'Time', 'Actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Name', 'Role', 'Date', 'Time', 'Actions']"></tr>
     </table>
 
-  <div class="paginator-container">
-    <mat-paginator
-      (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
-    </mat-paginator>
+    <div class="paginator-container">
+      <mat-paginator
+        (page)="onPageChange($event)"
+        [length]="totalElements"
+        [pageSizeOptions]="[10, 20, 30]"
+        [pageSize]="size">
+      </mat-paginator>
+    </div>
   </div>
-  }
 </div>
-
-

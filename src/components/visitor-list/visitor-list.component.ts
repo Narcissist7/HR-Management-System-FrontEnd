@@ -8,6 +8,14 @@ import {FormsModule} from '@angular/forms';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow,
+  MatHeaderRowDef, MatRow, MatRowDef, MatTable
+} from '@angular/material/table';
 
 @Component({
   selector: 'app-visitor-list',
@@ -18,7 +26,17 @@ import {NavbarComponent} from '../Reusable/navbar/navbar.component';
     NgIf,
     FormsModule,
     LoaderComponent,
-    NavbarComponent
+    NavbarComponent,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatTable
   ],
   templateUrl: './visitor-list.component.html',
   styleUrl: './visitor-list.component.css'
@@ -27,7 +45,7 @@ export class VisitorListComponent implements OnInit {
   visitors: Visitor[] = [];
   totalElements: number = 0;
   page: number = 0;
-  size: number = 10;
+  size: number = 1;
   searchQuery: string = '';
   loading: boolean = false;
 

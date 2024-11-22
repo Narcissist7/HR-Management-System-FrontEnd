@@ -1,53 +1,59 @@
-<app-navbar/>
-
+<app-navbar></app-navbar>
 <div class="table-container">
-
   <div class="search-bar-container">
     <input type="text" class="search-bar" placeholder="Search candidates..." [(ngModel)]="searchQuery" (input)="onSearch()" />
-
     <button class="reset-icon" (click)="resetFilters()">
       <i class="material-icons">close</i>
     </button>
   </div>
 
-    @if (loading){
-      <app-loader/>
-    } @else {
   <div class="table-wrapper">
+    <table mat-table [dataSource]="candidates" class="data-table">
+      <ng-container matColumnDef="National ID">
+        <th mat-header-cell *matHeaderCellDef>National ID</th>
+        <td mat-cell *matCellDef="let candidate">{{ candidate.ssn }}</td>
+      </ng-container>
 
-    <table class="data-table">
-      <thead>
-      <tr>
-        <th>National ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Address</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-        @for (candidate of candidates; track $index) {
-          <tr>
-            <td>{{ candidate.ssn }}</td>
-            <td>{{ candidate.name }}</td>
-            <td>{{ candidate.email }}</td>
-            <td>{{ candidate.phone }}</td>
-            <td>{{ candidate.address }}</td>
-            <td>
-              <button class="btn-action" [routerLink]="['/candidateDetails']" [state]="{ data: candidate }">
-                View Details
-              </button>
-            </td>
-          </tr>
-        }
-      </tbody>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let candidate">{{ candidate.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let candidate">{{ candidate.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let candidate">{{ candidate.phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let candidate">{{ candidate.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let candidate">
+          <button class="btn-action" [routerLink]="['/candidateDetails']" [state]="{ data: candidate }">
+            View Details
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['National ID', 'Name', 'Email', 'Phone', 'Address', 'Actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['National ID', 'Name', 'Email', 'Phone', 'Address', 'Actions']"></tr>
     </table>
+
     <div class="paginator-container">
       <mat-paginator
-        (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
+        (page)="onPageChange($event)"
+        [length]="totalElements"
+        [pageSizeOptions]="[10, 20, 30]"
+        [pageSize]="size">
       </mat-paginator>
     </div>
   </div>
-    }
 </div>

@@ -7,6 +7,16 @@ import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {PaginatorModule} from 'primeng/paginator';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
+import {NgIf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow,
+  MatHeaderRowDef, MatRow, MatRowDef, MatTable
+} from '@angular/material/table';
 
 @Component({
   selector: 'app-candidate-list',
@@ -14,9 +24,20 @@ import {NavbarComponent} from '../Reusable/navbar/navbar.component';
   imports: [
     RouterModule,
     MatPaginator,
-    PaginatorModule,
+    NgIf,
+    FormsModule,
     LoaderComponent,
-    NavbarComponent
+    NavbarComponent,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatTable
   ],
   templateUrl: './candidate-list.component.html',
   styleUrl: './candidate-list.component.css'

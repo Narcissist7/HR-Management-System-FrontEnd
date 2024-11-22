@@ -1,50 +1,54 @@
-<app-navbar/>
+<app-navbar></app-navbar>
 <div class="table-container">
-
   <div class="search-bar-container">
     <input type="text" class="search-bar" placeholder="Search visitors..." [(ngModel)]="searchQuery" (input)="onSearch()" />
-
     <button class="reset-icon" (click)="resetFilters()">
       <i class="material-icons">close</i>
     </button>
   </div>
-  @if (loading){
-    <app-loader/>
-  } @else {
-    <div class="table-wrapper">
-      <table class="data-table">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>DOB</th>
-          <th>Phone</th>
-          <th>Address</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-          @for (visitor of visitors; track $index) {
-            <tr>
-              <td>{{ visitor.name }}</td>
-              <td>{{ visitor.dob }}</td>
-              <td>{{ visitor.phone }}</td>
-              <td>{{ visitor.address }}</td>
-              <td>
-                <button class="btn-action" [routerLink]="['/visitorDetails']" [state]="{ data: visitor }">
-                  View Details
-                </button>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-      <div class="paginator-container">
-        <mat-paginator
-          (page)="onPageChange($event)" [length]="totalElements" [pageSizeOptions]="[10, 20, 30]" [pageSize]="size">
-        </mat-paginator>
-      </div>
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="visitors" class="data-table">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let visitor">{{ visitor.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="DOB">
+        <th mat-header-cell *matHeaderCellDef>DOB</th>
+        <td mat-cell *matCellDef="let visitor">{{ visitor.dob }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let visitor">{{ visitor.phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let visitor">{{ visitor.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let visitor">
+          <button class="btn-action" [routerLink]="['/visitorDetails']" [state]="{ data: visitor }">
+            View Details
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['Name', 'DOB', 'Phone', 'Address', 'Actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Name', 'DOB', 'Phone', 'Address', 'Actions']"></tr>
+    </table>
+
+    <div class="paginator-container">
+      <mat-paginator
+        (page)="onPageChange($event)"
+        [length]="totalElements"
+        [pageSizeOptions]="[10, 20, 30]"
+        [pageSize]="size">
+      </mat-paginator>
     </div>
-  }
-
-
+  </div>
 </div>
