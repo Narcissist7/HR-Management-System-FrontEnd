@@ -1,4 +1,4 @@
-/* General styling for the page */
+/*!* General styling for the page *!*/
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f3f4f6; /* Soft background for the entire page */
@@ -6,186 +6,102 @@ body {
   margin: 0;
   padding: 0;
 }
-/* From Uiverse.io by alexmaracinaru */
-.card {
-  width: 70%;
-  height: 70%;
-  background: #C24A4C;
-  margin-top:80px;
-  margin-left:80px;
-  border-radius: 15px;
-  box-shadow: 1px 5px 10px 0px #C24C4C;
-}
 
-.card .card-border-top {
-  width: 60%;
-  height: 3%;
-  background: white;
-  margin-left:90zzpx;
-  border-radius: 0px 0px 15px 15px;
-}
 
-.card span {
-  font-weight: 600;
-  color: white;
-  text-align: center;
-  display: block;
-  padding-top: 10px;
-  font-size: 16px;
-}
 
-.card .job {
-  font-weight: 400;
-  color: white;
-  display: block;
-  text-align: center;
-  padding-top: 3px;
-  font-size: 12px;
-}
-
-/* Candidate List Header */
-.title {
-  text-align: center;
-  font-size: 2.2rem;
-  color: black;
-  padding: 25px;
-  border-bottom: 2px solid #C9261D;
-  margin-bottom: 30px;
-  background-color: #ffffff; /* Change to white for a cleaner look */
-  font-weight: bold;
-}
-
-/* Candidate card styles */
-.candidate-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
+/* General card styling */
 .candidate-card {
-  width: 80%;
-  max-width: 900px;
-  background: #ffffff; /* Solid white background for card */
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.candidate-card:hover {
-  transform: scale(1.02); /* Slightly less scaling */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
-
-/* Candidate header styles */
-.candidate-header {
-  background-color: #ffffff; /* Change to white for a cleaner look */
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr; /* Three columns layout */
+  gap: 20px;
   padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  border-left: 5px solid #C9261D; /* Keep the accent color */
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  gap: 10px; /* Space between items */
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: auto;
+  max-width: 900px; /* Maximum width for responsiveness */
+  height: 400px; /* Static height */
+  overflow: hidden; /* Prevent content from overflowing */
+  margin:70px auto;
 }
 
-.candidate-name {
-  font-size: 1.8rem;
-  color: black;
-  font-weight: bold;
+/* Left column with gradient background */
+.left-column {
+  background: rgb(139, 51, 41);
+  background: linear-gradient(178deg, #F4EAE6FF 0%, #AF0505FF 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 0px;
+  text-align: center;
+  margin-top:-20px;
+  margin-left:-20px;
 }
 
-.candidate-info {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-}
-
-.candidate-info strong {
-  color: #C9261D;
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-/* Section styles for Education and Experience */
-.candidate-body {
-  margin-top: 15px;
-}
-
-h4 {
-  color: black;
-  font-size: 1.4rem;
+/* Image container in the left column */
+.image-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
   margin-bottom: 10px;
+  margin-top:50px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name and basic info in the left column */
+.user-name {
+  font-size: 1.5rem;
   font-weight: bold;
-  text-transform: uppercase;
 }
 
-.education-section, .experience-section {
-  margin-bottom: 25px;
-  padding: 15px; /* Increased padding for better spacing */
-  background-color: #f9f9f9; /* Light gray background for sections */
-  border-radius: 8px;
-  border-left: 4px solid #C9261D; /* Accent color */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+.phone {
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Center column for personal info */
+.center-column {
+  padding: 20px;
+  /*background-color: #f9f9f9;*/
+  /*border-radius: 10px;*/
 }
 
-ul li {
+/* Right column for education & experience info */
+.right-column {
+  padding: 20px;
+  /*background-color: #f9f9f9;*/
+  /*border-radius: 10px;*/
+}
+
+/* Header for sections */
+h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Adjust text for different information sections */
+p, li {
   font-size: 1rem;
   color: #444;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-ul li strong {
-  font-weight: bold;
-  color: #C9261D;
+/* Adjust the list items in education and experience sections */
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-/* Responsive Design */
+/* Make the layout responsive */
 @media (max-width: 768px) {
   .candidate-card {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .candidate-name {
-    font-size: 1.6rem;
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
   }
 }
 
-/* Button Style */
-.view-details-button {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.btn-view-details {
-  padding: 12px 25px;
-  background: linear-gradient(145deg, #b32e2e, #a02727);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-view-details:hover {
-  background-color: #9e2626;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
-}
