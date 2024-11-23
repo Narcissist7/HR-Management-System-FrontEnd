@@ -1,65 +1,74 @@
-import {Component, OnInit} from '@angular/core';
-import {ChartModule} from 'primeng/chart';
+import { Component, OnInit } from '@angular/core';
+import { ChartModule } from 'primeng/chart';
+import { AnalyticsServiceService } from '../../../../../Services/Analytics/analytics-service.service';
+import { forkJoin } from 'rxjs'; // Import forkJoin
 
 @Component({
   selector: 'app-chart-radar-demo',
   standalone: true,
   imports: [ChartModule],
   templateUrl: './chart-radar-demo.component.html',
-  styleUrl: './chart-radar-demo.component.css'
+  styleUrls: ['./chart-radar-demo.component.css'] // Ensure correct plural form
 })
 export class ChartRadarDemo implements OnInit {
   data: any;
-
   options: any;
+
+  constructor(private analyticsService: AnalyticsServiceService) {}
 
   ngOnInit() {
     const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const textColor = documentStyle.getPropertyValue('--text-color').trim();
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary').trim();
 
-    this.data = {
-      labels: ['devops', 'testing', 'java', 'Dot net', 'Business analysis', 'Implemenation', 'Mobile'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          borderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointBackgroundColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-          label: 'My Second dataset',
-          borderColor: documentStyle.getPropertyValue('--pink-400'),
-          pointBackgroundColor: documentStyle.getPropertyValue('--pink-400'),
-          pointBorderColor: documentStyle.getPropertyValue('--pink-400'),
-          pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
-          data: [28, 48, 40, 19, 96, 27, 100]
-        }
-      ]
-    };
-
-    this.options = {
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor
-          }
-        }
-      },
-      scales: {
-        r: {
-          grid: {
-            color: textColorSecondary
+    // Handle both API calls concurrently
+    forkJoin({
+      maleData: this.analyticsService.radarMaleAnalytics(),
+      femaleData: this.analyticsService.radarFemaleAnalytics()
+    }).subscribe(({ maleData, femaleData }) => {
+      this.data = {
+        labels: maleData.jobtitle || [], // Use male data labels (assuming both have the same structure)
+        datasets: [
+          {
+            label: 'Males',
+            borderColor: documentStyle.getPropertyValue('--bluegray-400').trim(),
+            pointBackgroundColor: documentStyle.getPropertyValue('--bluegray-400').trim(),
+            pointBorderColor: documentStyle.getPropertyValue('--bluegray-400').trim(),
+            pointHoverBackgroundColor: textColor,
+            pointHoverBorderColor: documentStyle.getPropertyValue('--bluegray-400').trim(),
+            data: maleData.counts || [] // Male-specific data
           },
-          pointLabels: {
-            color: textColorSecondary
+          {
+            label: 'Females',
+            borderColor: documentStyle.getPropertyValue('--pink-400').trim(),
+            pointBackgroundColor: documentStyle.getPropertyValue('--pink-400').trim(),
+            pointBorderColor: documentStyle.getPropertyValue('--pink-400').trim(),
+            pointHoverBackgroundColor: textColor,
+            pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400').trim(),
+            data: femaleData.counts || [] // Female-specific data
+          }
+        ]
+      };
+
+      this.options = {
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor
+            }
+          }
+        },
+        scales: {
+          r: {
+            grid: {
+              color: textColorSecondary
+            },
+            pointLabels: {
+              color: textColorSecondary
+            }
           }
         }
-      }
-    };
+      };
+    });
   }
 }

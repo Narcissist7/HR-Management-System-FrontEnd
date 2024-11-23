@@ -7,6 +7,7 @@ import {ChartModule} from 'primeng/chart';
 import { ChartComponent } from '../chart/chart.component';
 import {NgOptimizedImage} from '@angular/common';
 import {LoaderComponent} from '../../../Reusable/loader/loader.component';
+import {ChartRadarDemo} from '../chart/chart-radar-demo/chart-radar-demo.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,7 +18,8 @@ import {LoaderComponent} from '../../../Reusable/loader/loader.component';
     ChartModule,
     ChartComponent,
     NgOptimizedImage,
-    LoaderComponent
+    LoaderComponent,
+    ChartRadarDemo
   ],
   styleUrls: ['./admin-dashboard.component.css']
 })

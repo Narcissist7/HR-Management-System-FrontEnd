@@ -11,6 +11,8 @@ export class AnalyticsServiceService {
   private apiUrl = 'api/entry_managment_sys/log/count';
   private visitorUrl = 'api/entry_managment_sys/log/people_last_seven_days/visitor'
   private candidateUrl = 'api/entry_managment_sys/log/people_last_seven_days/candidate'
+  private radarMaleUrl = 'api/entry_managment_sys/candidate/radar/ذكر'
+  private radarFemaleUrl = 'api/entry_managment_sys/candidate/radar/انثى'
 
 
   constructor(private http: HttpClient , private router:Router) {}
@@ -60,6 +62,39 @@ export class AnalyticsServiceService {
         return { dates, counts }; // Return an object with dates and counts
       })
     );
+  }
+
+  radarMaleAnalytics(): Observable<{ jobtitle: string[] , counts: number[] }>
+  {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.get<{ [key: string]: number }>(this.radarMaleUrl, { headers }).pipe(
+    map((respoonse : {[key:string]: number}) => {
+      const jobtitle = Object.keys(respoonse);
+      const counts = Object.values(respoonse);
+      return{jobtitle , counts};
+    })
+    );
+
+  }
+
+
+  radarFemaleAnalytics(): Observable<{ jobtitle: string[] , counts: number[] }>
+  {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.get<{ [key: string]: number }>(this.radarFemaleUrl, { headers }).pipe(
+      map((respoonse : {[key:string]: number}) => {
+        const jobtitle = Object.keys(respoonse);
+        const counts = Object.values(respoonse);
+        return{jobtitle , counts};
+      })
+    );
+
   }
 
 }
