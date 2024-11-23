@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-visitor',
@@ -14,7 +14,8 @@ import {NgForOf} from '@angular/common';
     FormsModule,
     NgForOf,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    NgIf
   ],
   templateUrl: './visitor.component.html',
   styleUrls: ['./visitor.component.css'],
@@ -23,6 +24,7 @@ import {NgForOf} from '@angular/common';
 export class VisitorComponent {
   selectedFile: File | null = null;
   ocrData: any = {};
+  imagedata : string | null = null ;
   isLoading: boolean = false;
 
   registrationForm: FormGroup;
@@ -54,11 +56,13 @@ export class VisitorComponent {
     }
   }
 
+
   onUpload() {
     if (!this.selectedFile) {
       alert('Please select a file to upload.');
       return;
     }
+
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
@@ -66,7 +70,10 @@ export class VisitorComponent {
 
     this.http.post<any>('http://127.0.0.1:5000/visitor', formData).subscribe(
       (response) => {
+        // Extract OCR data
         const ocrDataArray = response.ocr_data;
+
+        // Set form fields using OCR data
         this.registrationForm.patchValue({
           firstname: ocrDataArray[0] || '',
           secondname: ocrDataArray[1] || '',
@@ -76,6 +83,10 @@ export class VisitorComponent {
           gender: ocrDataArray[5] || '',
           birthPlace: ocrDataArray[6] || ''
         });
+
+        // Set base64 image data for display
+        this.imagedata = 'data:image/jpeg;base64,' + response.image;
+
         this.isLoading = false;
       },
       (error) => {
@@ -84,6 +95,8 @@ export class VisitorComponent {
       }
     );
   }
+
+
 
   onSubmit() {
     if (this.registrationForm.invalid) {
@@ -104,11 +117,19 @@ export class VisitorComponent {
       visitee: this.registrationForm.value.visitee
     };
 
-    // Append JSON payload and image file to FormData
+
     formData.append('visitorData', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
+
     if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
+      formData.append('image', this.selectedFile);  // Correct way to send the file
     }
+
+//
+
+    formData.append('pic', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
+    formData.append('pic', this.imagedata as string);
+
+
 
     this.http.post('http://localhost:8080/api/entry_managment_sys/visitor', formData, { observe: 'response', responseType: 'text' })
       .subscribe(
