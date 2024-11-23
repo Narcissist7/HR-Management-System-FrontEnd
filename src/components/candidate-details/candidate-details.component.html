@@ -1,19 +1,17 @@
-<app-navbar/>
-
+<app-navbar></app-navbar>
 
 <div class="candidate-card">
   <div class="left-column">
-    <!-- User Image and Information -->
     <div class="image-container">
-      <img src="" alt="User Image">
+      <img src="./assets/CandidateM.png" alt="Candidate Image">
     </div>
     <h3 class="user-name">{{ candidateDetails.name }}</h3>
     <p class="phone">Phone: {{ candidateDetails.phone }}</p>
-    <!-- Add any other info you want to include in the left column -->
   </div>
 
   <div class="center-column">
     <h4>Personal Information</h4>
+    <div class="personal-section">
     <p><strong>Job title:</strong> {{ candidateDetails.job_title }}</p>
     <p><strong>Email:</strong> {{ candidateDetails.email }}</p>
     <p><strong>National ID:</strong> {{ candidateDetails.ssn }}</p>
@@ -23,12 +21,13 @@
     <p><strong>Gender:</strong> {{ candidateDetails.gender }}</p>
     <p><strong>Marital Status:</strong> {{ candidateDetails.martial_status }}</p>
     <p><strong>Military Status:</strong> {{ candidateDetails.military_status }}</p>
+    </div>
   </div>
 
   <div class="right-column">
-    <h4>Education Information</h4>
-    @for (education of educations; track $index) {
-      <div class="education-section">
+    <div *ngIf="educations && educations.length > 0">
+      <h4>Education Information</h4>
+      <div *ngFor="let education of educations; index as i" class="education-section">
         <ul>
           <li><strong>University Name:</strong> {{ education.university }}</li>
           <li><strong>Major:</strong> {{ education.major }}</li>
@@ -37,19 +36,24 @@
           <li><strong>Graduation Year:</strong> {{ education.date }}</li>
         </ul>
       </div>
-    }
+    </div>
+  </div>
 
-    <h4>Experience Information</h4>
-    @for (experience of experiences; track $index) {
-      <div class="experience-section">
-        <ul>
-          <li><strong>Company Name:</strong> {{ experience.company_name }}</li>
-          <li><strong>Position:</strong> {{ experience.postion }}</li>
-          <li><strong>Start Date:</strong> {{ experience.start_date }}</li>
-          <li><strong>End Date:</strong> {{ experience.end_date }}</li>
-          <li><strong>Reason for Leaving:</strong> {{ experience.reason }}</li>
-        </ul>
+  <!-- New Experience Column -->
+  <div class="experience-column">
+    <div *ngIf="experiences && experiences.length > 0">
+      <h4>Experience Information</h4>
+      <div class="experience-grid">
+        <div *ngFor="let experience of experiences; index as i" class="experience-section">
+          <ul>
+            <li><strong>Company Name:</strong> {{ experience.company_name }}</li>
+            <li><strong>Position:</strong> {{ experience.postion }}</li>
+            <li><strong>Start Date:</strong> {{ experience.start_date }}</li>
+            <li><strong>End Date:</strong> {{ experience.end_date }}</li>
+            <li><strong>Reason for Leaving:</strong> {{ experience.reason }}</li>
+          </ul>
+        </div>
       </div>
-    }
+    </div>
   </div>
 </div>
