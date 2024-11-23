@@ -1,135 +1,58 @@
-/* General styling for the page */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f3f4f6; /* Soft background for the entire page */
-  color: #444444;
+  background: linear-gradient(to bottom, #e9f0ff, #f7fbff);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
-/* From Uiverse.io by alexmaracinaru */
-.card {
-  width: 70%;
-  height: 70%;
-  background: #C24A4C;
-  margin-top:80px;
-  margin-left:80px;
+
+.candidate-card {
+  display: flex;
+  gap: 20px;
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 1500px;
+  width: 100%;
+  background: #ffffff;
   border-radius: 15px;
-  box-shadow: 1px 5px 10px 0px #C24C4C;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  align-items: flex-start;
 }
 
-.card .card-border-top {
-  width: 60%;
-  height: 3%;
-  background: white;
-  margin-left:90zzpx;
-  border-radius: 0px 0px 15px 15px;
-}
-
-.card span {
-  font-weight: 600;
-  color: white;
-  text-align: center;
-  display: block;
-  padding-top: 10px;
-  font-size: 16px;
-}
-
-.card .job {
-  font-weight: 400;
-  color: white;
-  display: block;
-  text-align: center;
-  padding-top: 3px;
-  font-size: 12px;
-}
-
-/* Candidate List Header */
-.title {
-  text-align: center;
-  font-size: 2.2rem;
-  color: black;
-  padding: 25px;
-  border-bottom: 2px solid #C9261D;
-  margin-bottom: 30px;
-  background-color: #ffffff; /* Change to white for a cleaner look */
-  font-weight: bold;
-}
-
-/* Candidate card styles */
-.candidate-list {
+.left-column,
+.center-column,
+.right-column,
+.experience-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex: 1;
   gap: 20px;
 }
 
-.candidate-card {
-  width: 80%;
-  max-width: 900px;
-  background: #ffffff; /* Solid white background for card */
-  padding: 25px;
+.left-column {
+  text-align: center;
+  padding: 80px 50px;
+  background: linear-gradient(178deg, #F4EAE6FF 0%, #AF0505FF 100%);
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.candidate-card:hover {
-  transform: scale(1.02); /* Slightly less scaling */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+.image-container img {
+  clip-path: circle(60px);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid black;
+  background: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Candidate header styles */
-.candidate-header {
-  background-color: #ffffff; /* Change to white for a cleaner look */
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  border-left: 5px solid #C9261D; /* Keep the accent color */
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  gap: 10px; /* Space between items */
-}
-
-.candidate-name {
-  font-size: 1.8rem;
-  color: black;
-  font-weight: bold;
-}
-
-.candidate-info {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-}
-
-.candidate-info strong {
-  color: #C9261D;
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-/* Section styles for Education and Experience */
-.candidate-body {
-  margin-top: 15px;
-}
-
+h3,
 h4 {
-  color: black;
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.education-section, .experience-section {
-  margin-bottom: 25px;
-  padding: 15px; /* Increased padding for better spacing */
-  background-color: #f9f9f9; /* Light gray background for sections */
-  border-radius: 8px;
-  border-left: 4px solid #C9261D; /* Accent color */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  margin: 0;
+  color: #333;
+  font-weight: 600;
 }
 
 ul {
@@ -138,54 +61,97 @@ ul {
   margin: 0;
 }
 
-ul li {
-  font-size: 1rem;
-  color: #444;
+.education-section,
+.experience-section,
+.personal-section {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.user-name {
+  font-size: 1.5em;
+  color: black;
+  font-weight: 600;
+}
+
+h4 {
+  border-bottom: 2px solid #ff6666;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.education-section ul,
+.experience-section ul {
+  margin: 0;
+  padding: 0;
+}
+
+.education-section ul li,
+.experience-section ul li {
   margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
 }
 
-ul li strong {
-  font-weight: bold;
-  color: #C9261D;
+.center-column,
+.right-column,
+.experience-column {
+  padding: 20px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .candidate-card {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .candidate-name {
-    font-size: 1.6rem;
-  }
+ul li {
+  font-size: 15px;
+  color: #666;
 }
 
-/* Button Style */
-.view-details-button {
-  text-align: center;
-  margin-top: 20px;
+.phone {
+  font-size: 1.1em;
+  color: black;
 }
 
-.btn-view-details {
-  padding: 12px 25px;
-  background: linear-gradient(145deg, #b32e2e, #a02727);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.experience-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-view-details:hover {
-  background-color: #9e2626;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+.experience-section h4 {
+  border-bottom: 2px solid #ff6666;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  font-size: 1.3em;
+}
+
+.experience-section ul li {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+  padding: 5px 0;
+}
+
+.experience-section ul li span {
+  font-weight: 600;
+}
+
+.experience-section ul li small {
+  font-size: 0.9em;
+  color: #999;
+}
+
+/* Apply spacing consistency to all sections */
+.education-section ul li,
+.experience-section ul li,
+.personal-section ul li {
+  padding: 10px 0;
+  line-height: 1.6;
 }

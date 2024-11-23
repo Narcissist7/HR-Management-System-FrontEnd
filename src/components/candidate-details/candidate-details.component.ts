@@ -3,12 +3,16 @@ import {Candidate} from '../../Model/Candidate/candidate';
 import {Router} from '@angular/router';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
+import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-candidate-details',
   standalone: true,
   imports: [
-    NavbarComponent
+    NavbarComponent,
+    NgForOf,
+    NgIf,
+    NgOptimizedImage
   ],
   templateUrl: './candidate-details.component.html',
   styleUrl: './candidate-details.component.css'
