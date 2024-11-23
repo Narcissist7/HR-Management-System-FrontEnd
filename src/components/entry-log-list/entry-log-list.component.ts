@@ -2,10 +2,10 @@ import {EntryLogFilterRequestDTO} from '../../Model/EntryLog/EntryLogFilterReque
 import {EntryLogService} from '../../Services/EntryLog/entry-log.service';
 import {EntryLog} from '../../Model/EntryLog/entry-log';
 import {Component, OnInit} from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {LoaderComponent} from '../Reusable/loader/loader.component';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
@@ -57,7 +57,7 @@ export class EntryLogListComponent implements OnInit {
 
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
 
-  constructor(private logService: EntryLogService , private router : Router , private tokenService:tokenserviceService) {}
+  constructor(private logService: EntryLogService , private tokenService:tokenserviceService) {}
 
   ngOnInit(): void {
 

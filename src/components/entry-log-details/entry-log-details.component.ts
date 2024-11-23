@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {EntryLog} from '../../Model/EntryLog/entry-log';
 import {Candidate} from '../../Model/Candidate/candidate';
@@ -21,10 +21,11 @@ import {NavbarComponent} from '../Reusable/navbar/navbar.component';
   templateUrl: './entry-log-details.component.html',
   styleUrl: './entry-log-details.component.css'
 })
-export class EntryLogDetailsComponent {
+export class EntryLogDetailsComponent implements OnInit{
   logDetails: EntryLog = new EntryLog();
   visitorDetails: Visitor = new Visitor();
   candidateDetails: Candidate = new Candidate();
+  userDetails: any;
   educations: Education[] = new Array<Education>();
   experiences: Experience[] = new Array<Experience>();
 
@@ -67,7 +68,7 @@ export class EntryLogDetailsComponent {
 
   ngOnInit(): void {
 
-    if (this.tokenService.validateToken() == true) {
+    if (this.tokenService.validateToken()) {
 
     }
     else
