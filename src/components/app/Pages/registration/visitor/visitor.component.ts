@@ -80,7 +80,8 @@ export class VisitorComponent {
           egyptianId: ocrDataArray[2] || '',
           dob: ocrDataArray[3] || '',
           address: ocrDataArray[4] || '',
-          gender: ocrDataArray[5] || '',
+          // gender: ocrDataArray[5] || '',
+          gender: this.mapGender(ocrDataArray[5] || ''),
           birthPlace: ocrDataArray[6] || ''
         });
 
@@ -163,5 +164,16 @@ export class VisitorComponent {
           });
         }
       );
+  }
+
+  private mapGender(ocrGender: string) {
+    const normalizedGender = ocrGender.trim().toLowerCase(); // Normalize for comparison
+    if (normalizedGender === 'male' || normalizedGender === 'm') {
+      return 'ذكر';
+    } else if (normalizedGender === 'female' || normalizedGender === 'f') {
+      return 'أنثى';
+    }
+    return '';
+
   }
 }

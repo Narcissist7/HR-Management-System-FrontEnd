@@ -22,7 +22,7 @@ body {
 .left-column,
 .center-column,
 .right-column,
-.experience-column {
+.experience-column, .personal-section {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -74,6 +74,7 @@ ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(250px, 1fr));
   gap: 20px;
+  padding-top:20px;
 }
 
 .user-name {
@@ -83,20 +84,24 @@ ul {
 }
 
 h4 {
-  border-bottom: 2px solid #ff6666;
   padding-bottom: 5px;
   margin-bottom: 15px;
-  font-size: 1.2em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff6f61; /* Brand color */
+  border-left: 4px solid #ff6f61;
+  padding-left: 10px;
+
 }
 
 .education-section ul,
-.experience-section ul {
+.experience-section ul, .personal-section {
   margin: 0;
   padding: 0;
 }
 
 .education-section ul li,
-.experience-section ul li {
+.experience-section ul li, .personal-section {
   margin-bottom: 8px;
   font-size: 14px;
   color: #555;
@@ -104,7 +109,8 @@ h4 {
 
 .center-column,
 .right-column,
-.experience-column {
+.experience-column,
+.personal-section{
   padding: 20px;
 }
 
@@ -118,35 +124,35 @@ ul li {
   color: black;
 }
 
-.experience-section {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+/*.experience-section {*/
+/*  !*background: #fff;*!*/
+/*  padding: 20px;*/
+/*  border-radius: 10px;*/
+/*  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
-.experience-section h4 {
-  border-bottom: 2px solid #ff6666;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
-  font-size: 1.3em;
-}
+/*.experience-section h4 {*/
+/*  border-bottom: 2px solid #ff6666;*/
+/*  padding-bottom: 5px;*/
+/*  margin-bottom: 20px;*/
+/*  font-size: 1.3em;*/
+/*}*/
 
-.experience-section ul li {
-  margin-bottom: 12px;
-  font-size: 14px;
-  color: #666;
-  padding: 5px 0;
-}
+/*.experience-section ul li {*/
+/*  margin-bottom: 12px;*/
+/*  font-size: 14px;*/
+/*  color: #666;*/
+/*  padding: 5px 0;*/
+/*}*/
 
-.experience-section ul li span {
-  font-weight: 600;
-}
+/*.experience-section ul li span {*/
+/*  font-weight: 600;*/
+/*}*/
 
-.experience-section ul li small {
-  font-size: 0.9em;
-  color: #999;
-}
+/*.experience-section ul li small {*/
+/*  font-size: 0.9em;*/
+/*  color: #999;*/
+/*}*/
 
 /* Apply spacing consistency to all sections */
 .education-section ul li,
