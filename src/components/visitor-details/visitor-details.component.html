@@ -5,7 +5,7 @@
   <div class="visitor-card">
     <div class="left-column">
       <div class="image-container">
-        <img *ngIf="visitorDetails.profilePicture" [src]="visitorDetails.profilePicture" alt="Visitor Image" />
+        <img *ngIf="visitorDetails.pic" [src]="'data:image/png;base64,' + visitorDetails.pic" alt="Visitor Image">
       </div>
       <h3 class="user-name">{{ visitorDetails.name }}</h3>
       <p class="phone">Phone: {{ visitorDetails.phone }}</p>
