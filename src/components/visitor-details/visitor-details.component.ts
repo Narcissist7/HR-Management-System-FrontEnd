@@ -3,12 +3,14 @@ import {Visitor} from '../../Model/Visitor/visitor';
 import {Router} from '@angular/router';
 import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-visitor-details',
   standalone: true,
   imports: [
-    NavbarComponent
+    NavbarComponent,
+    NgIf
   ],
   templateUrl: './visitor-details.component.html',
   styleUrl: './visitor-details.component.css'
