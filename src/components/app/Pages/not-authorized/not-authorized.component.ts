@@ -14,6 +14,6 @@ export class NotAuthorizedComponent {
   ngOnInit() {
     setTimeout(() => {
       this.router.navigate(['login']);
-    }, 5000);
+    }, 2500);
   }
 }

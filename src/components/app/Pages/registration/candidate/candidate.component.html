@@ -54,8 +54,13 @@
 
       <div class="col-md-6 mb-3">
         <label for="gender" class="form-label">Gender</label>
-        <input type="text" id="gender" class="form-control" formControlName="gender" required />
+        <select id="gender" class="form-control" formControlName="gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="male">ذكر</option>
+          <option value="female">أنثى</option>
+        </select>
       </div>
+
     </div>
 
     <div class="row">

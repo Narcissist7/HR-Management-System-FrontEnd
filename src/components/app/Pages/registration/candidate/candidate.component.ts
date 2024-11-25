@@ -139,6 +139,7 @@ export class CandidateComponent implements OnInit {
       (response) => {
         const ocrDataArray = response.ocr_data;
         const cvDataArray = response.cv_data;
+        const genderValue = this.mapGender(ocrDataArray[5] || '');
 
         // Populate form fields with OCR and CV data
         this.registrationForm.patchValue({
@@ -147,7 +148,7 @@ export class CandidateComponent implements OnInit {
           secondname: ocrDataArray[1] || '',
           dob: ocrDataArray[3] || '',
           address: ocrDataArray[4] || '',
-          gender: ocrDataArray[5] || '',
+          gender: genderValue ,
           birthPlace: ocrDataArray[6] || '',
           email: cvDataArray[1] || '',
           phone: cvDataArray[0]|| '',
@@ -178,6 +179,19 @@ export class CandidateComponent implements OnInit {
       }
     );
   }
+
+  // Function to map Arabic gender to form value
+  mapGender(arabicGender: string): string {
+    switch (arabicGender) {
+      case 'ذكر':
+        return 'male';
+      case 'أنثى':
+        return 'female';
+      default:
+        return '';  // Return empty if gender is not recognized
+    }
+  }
+
 
   onSubmit() {
     if (this.registrationForm.invalid) {

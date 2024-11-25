@@ -8,6 +8,7 @@ import { ChartComponent } from '../chart/chart.component';
 import {NgOptimizedImage} from '@angular/common';
 import {LoaderComponent} from '../../../Reusable/loader/loader.component';
 import {ChartRadarDemo} from '../chart/chart-radar-demo/chart-radar-demo.component';
+import {NgCircleProgressModule} from 'ng-circle-progress';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -19,15 +20,17 @@ import {ChartRadarDemo} from '../chart/chart-radar-demo/chart-radar-demo.compone
     ChartComponent,
     NgOptimizedImage,
     LoaderComponent,
-    ChartRadarDemo
+    ChartRadarDemo,
+    NgCircleProgressModule
   ],
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
 
   constructor(private router: Router , private analyticsService: AnalyticsServiceService , private tokenService:tokenserviceService) {}
-
-  allTime_candidates: number[] = [];
+  ss: number[] = [];
+  allTime_candidates = 120;  // Example data
+  maxCandidates = 500;
   allTime_visitors: number[] = [];
   today_candidates: number[] = [];
   today_visitors: number[] = [];
@@ -42,7 +45,7 @@ export class AdminDashboardComponent implements OnInit {
     if (this.tokenService.validateToken()) {
       this.analyticsService.getAnalyticsData().subscribe(
         (data) => {
-          [this.allTime_candidates, this.allTime_visitors, this.today_candidates, this.today_visitors, this.month_candidates, this.month_visitors] = data;
+          [this.ss, this.allTime_visitors, this.today_candidates, this.today_visitors, this.month_candidates, this.month_visitors] = data;
           this.loading = false;
         },
         (error) => {

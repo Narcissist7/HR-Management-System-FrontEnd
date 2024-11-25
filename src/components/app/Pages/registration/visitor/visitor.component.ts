@@ -73,6 +73,9 @@ export class VisitorComponent {
         // Extract OCR data
         const ocrDataArray = response.ocr_data;
 
+        // Map gender from Arabic to form value
+        const genderValue = this.mapGender(ocrDataArray[5] || '');
+
         // Set form fields using OCR data
         this.registrationForm.patchValue({
           firstname: ocrDataArray[0] || '',
@@ -80,8 +83,7 @@ export class VisitorComponent {
           egyptianId: ocrDataArray[2] || '',
           dob: ocrDataArray[3] || '',
           address: ocrDataArray[4] || '',
-          // gender: ocrDataArray[5] || '',
-          gender: this.mapGender(ocrDataArray[2] || ''),
+          gender: genderValue,  // Use the mapped gender value
           birthPlace: ocrDataArray[6] || ''
         });
 
@@ -96,6 +98,19 @@ export class VisitorComponent {
       }
     );
   }
+
+// Function to map Arabic gender to form value
+  mapGender(arabicGender: string): string {
+    switch (arabicGender) {
+      case 'ذكر':
+        return 'male';
+      case 'أنثى':
+        return 'female';
+      default:
+        return '';  // Return empty if gender is not recognized
+    }
+  }
+
 
 
 
@@ -175,20 +190,6 @@ export class VisitorComponent {
         }
       );
   }
-  private mapGender(egyptianId: string): string {
-    if (!egyptianId || egyptianId.length < 13) {
-      return ''; // Return empty if ID is invalid or incomplete
-    }
 
-    const genderCode = parseInt(egyptianId.charAt(12)); // Extract the 13th digit (index 12)
-
-    if (genderCode % 2 === 0) {
-      return 'أنثى'; // Female
-    } else if (genderCode % 2 === 1) {
-      return 'ذكر'; // Male
-    }
-
-    return ''; // Default to empty if invalid
-  }
 
 }
