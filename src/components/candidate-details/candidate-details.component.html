@@ -2,9 +2,16 @@
 
 <div class="candidate-card">
   <div class="left-column">
-    <div class="image-container">
-      <img src="./assets/CandidateM.png" alt="Candidate Image">
+
+
+    <!-- Display the visitor's image -->
+    <div *ngIf="imageUrl; else noImage">
+      <img [src]="imageUrl" alt="Visitor Image" style="width: 200px; height: 200px; border-radius: 50%;">
     </div>
+    <ng-template #noImage>
+      <p>No image available</p>
+    </ng-template>
+
     <h3 class="user-name">{{ candidateDetails.name }}</h3>
     <p class="phone">Phone: {{ candidateDetails.phone }}</p>
   </div>

@@ -36,6 +36,19 @@ export class CandidateService {
     return this.http.get<any>(`/api/entry_managment_sys/candidate/paged?page=${page}&size=${size}` , {headers});
   }
 
+  getCandidateUserpic(ssn: string): Observable<Blob>
+  {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<Blob>(
+      `/api/entry_managment_sys/candidate/getUserPic/${ssn}`,
+      { headers, responseType: 'blob' as 'json' } // Important: Specify responseType
+    );
+  }
+
   searchCandidatesByName(name: string, page: number, size: number) {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
