@@ -28,9 +28,7 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
 export class AdminDashboardComponent implements OnInit {
 
   constructor(private router: Router , private analyticsService: AnalyticsServiceService , private tokenService:tokenserviceService) {}
-  ss: number[] = [];
-  allTime_candidates = 120;  // Example data
-  maxCandidates = 500;
+  allTime_candidates: number[] = [];
   allTime_visitors: number[] = [];
   today_candidates: number[] = [];
   today_visitors: number[] = [];
@@ -45,7 +43,7 @@ export class AdminDashboardComponent implements OnInit {
     if (this.tokenService.validateToken()) {
       this.analyticsService.getAnalyticsData().subscribe(
         (data) => {
-          [this.ss, this.allTime_visitors, this.today_candidates, this.today_visitors, this.month_candidates, this.month_visitors] = data;
+          [this.allTime_candidates, this.allTime_visitors, this.today_candidates, this.today_visitors, this.month_candidates, this.month_visitors] = data;
           this.loading = false;
         },
         (error) => {
