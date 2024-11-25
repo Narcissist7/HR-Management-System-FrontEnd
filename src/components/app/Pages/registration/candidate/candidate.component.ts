@@ -8,7 +8,6 @@ import { ToastModule } from 'primeng/toast'; // Import the ToastModule
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { TimelineModule } from 'primeng/timeline';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
@@ -16,7 +15,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   standalone: true,
   imports: [
     FormsModule, ReactiveFormsModule, NgFor, HttpClientModule, NgIf,
-    ToastModule, DropdownModule, ButtonModule, InputTextModule, ProgressSpinnerModule , TimelineModule
+    ToastModule, DropdownModule, ButtonModule, InputTextModule, ProgressSpinnerModule
   ],
   providers: [MessageService],
   templateUrl: './candidate.component.html',
@@ -26,10 +25,10 @@ export class CandidateComponent implements OnInit {
   selectedFile: File | null = null;
   ocrData: any = {};
   isLoading: boolean = false;
+  imagedata : string | null = null ;
   jobTitles: string[] = []; // Array to store job titles
 
   registrationForm: FormGroup;
-  step: number = 1;
 
   constructor(
     private http: HttpClient,
@@ -64,8 +63,6 @@ export class CandidateComponent implements OnInit {
       this.registrationForm.patchValue({ email });
     }
   }
-
-
 
   ngOnInit(): void {
     this.fetchJobTitles(); // Fetch job titles when the component initializes
@@ -160,7 +157,7 @@ export class CandidateComponent implements OnInit {
           date : cvDataArray[5]
           // Add more fields if needed based on your cvData structure
         });
-
+        this.imagedata = 'data:image/jpeg;base64,' + response.image;
         this.isLoading = false;
         this.messageService.add({
           severity: 'success',
@@ -211,7 +208,7 @@ export class CandidateComponent implements OnInit {
           degree: formValues.degree,
           grade: formValues.grade,
           major: formValues.major,
-          date: formValues.date,
+          date: formValues.uniDate,
         }
       ],
       experiences: formValues.workExperiences.map((experience: any) => ({
@@ -234,6 +231,19 @@ export class CandidateComponent implements OnInit {
       formData.append('cv', this.selectedPdfFile);
     }
 
+    if (this.imagedata) { // Ensure imagedata is not null
+      // Convert base64 image data to Blob
+      const base64Data = this.imagedata.split(',')[1]; // Remove the "data:image/jpeg;base64," prefix
+      const binaryData = atob(base64Data); // Decode base64 string to binary
+      const byteArray = new Uint8Array(binaryData.length);
+      for (let i = 0; i < binaryData.length; i++) {
+        byteArray[i] = binaryData.charCodeAt(i);
+      }
+      const imageBlob = new Blob([byteArray], { type: 'image/jpeg' }); // Create a Blob from binary data
+
+      formData.append('pic', imageBlob, 'image.jpg'); // Append the Blob to FormData
+    }
+
     // Send request
     this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', formData)
       .subscribe(
@@ -248,15 +258,5 @@ export class CandidateComponent implements OnInit {
       );
   }
 
-  nextStep() {
-    if (this.step < 4) {
-      this.step++;
-    }
-  }
 
-  previousStep() {
-    if (this.step > 1) {
-      this.step--;
-    }
-  }
 }

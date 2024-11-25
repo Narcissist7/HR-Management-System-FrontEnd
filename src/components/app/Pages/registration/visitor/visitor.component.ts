@@ -127,8 +127,18 @@ export class VisitorComponent {
 
 //
 
-    formData.append('pic', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
-    formData.append('pic', this.imagedata as string);
+    if (this.imagedata) { // Ensure imagedata is not null
+                          // Convert base64 image data to Blob
+      const base64Data = this.imagedata.split(',')[1]; // Remove the "data:image/jpeg;base64," prefix
+      const binaryData = atob(base64Data); // Decode base64 string to binary
+      const byteArray = new Uint8Array(binaryData.length);
+      for (let i = 0; i < binaryData.length; i++) {
+        byteArray[i] = binaryData.charCodeAt(i);
+      }
+      const imageBlob = new Blob([byteArray], { type: 'image/jpeg' }); // Create a Blob from binary data
+
+      formData.append('pic', imageBlob, 'image.jpg'); // Append the Blob to FormData
+    }
 
 
 

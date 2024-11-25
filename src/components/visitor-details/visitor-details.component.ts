@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Router } from '@angular/router';
+import { tokenserviceService } from '../../Services/token/tokenservice.service';
+import { NavbarComponent } from '../Reusable/navbar/navbar.component';
+import { NgIf } from '@angular/common';
+
 import {Visitor} from '../../Model/Visitor/visitor';
-import {Router} from '@angular/router';
-import {tokenserviceService} from '../../Services/token/tokenservice.service';
-import {NavbarComponent} from '../Reusable/navbar/navbar.component';
-import {NgIf} from '@angular/common';
+import {VisitorService} from '../../Services/Visitor/visitor.service';
 
 @Component({
   selector: 'app-visitor-details',
@@ -15,27 +18,43 @@ import {NgIf} from '@angular/common';
   templateUrl: './visitor-details.component.html',
   styleUrl: './visitor-details.component.css'
 })
-export class VisitorDetailsComponent {
+export class VisitorDetailsComponent implements OnInit {
   visitorDetails: Visitor = new Visitor();
+  imageUrl: string | null = null; // To store the image URL
 
-  constructor(private router: Router , private tokenService:tokenserviceService) {
+  constructor(
+    private router: Router,
+    private visitorService: VisitorService,
+    private tokenService: tokenserviceService
+  ) {
     this.visitorDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
 
     if (!this.visitorDetails) {
       console.warn('No visitor details available.');
     }
-
-
   }
 
   ngOnInit(): void {
-
-    if (this.tokenService.validateToken() == true) {
-
+    if (this.tokenService.validateToken()) {
+      this.loadVisitorImage(); // Load the visitor's image if the token is valid
+    } else {
+      alert("Session expired!!!");
+      this.router.navigate(['/login']); // Redirect to login if the session is expired
     }
-    else
-    {
-      alert("session expired!!!")
+  }
+
+  loadVisitorImage(): void {
+    const ssn = this.visitorDetails?.ssn;
+    if (ssn) {
+      this.visitorService.getVisitorUserpic(ssn).subscribe({
+        next: (blob) => {
+          // Create a URL for the image Blob
+          this.imageUrl = URL.createObjectURL(blob);
+        },
+        error: (err) => {
+          console.error('Error loading visitor image:', err);
+        }
+      });
     }
   }
 }

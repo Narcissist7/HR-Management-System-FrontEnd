@@ -42,6 +42,19 @@ export class VisitorService {
     return this.http.get<Visitor>(`/api/entry_managment_sys/visitor/${ssn}`, { headers });
   }
 
+  getVisitorUserpic(ssn: string): Observable<Blob>
+  {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<Blob>(
+      `/api/entry_managment_sys/visitor/getUserPic/${ssn}`,
+      { headers, responseType: 'blob' as 'json' } // Important: Specify responseType
+    );
+  }
+
 
   getPaginatedVisitors(page: number, size: number): Observable<any> {
     const headers = {

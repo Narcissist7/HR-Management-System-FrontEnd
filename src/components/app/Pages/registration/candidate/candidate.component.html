@@ -1,197 +1,160 @@
 <div class="container">
   <h2 class="text-center mb-4">Candidate Application Form</h2>
 
-  <!-- Step One -->
   <!-- Image Upload and OCR Section -->
-  <div *ngIf="step === 1">
-    <h4>Step One: Upload Documents</h4>
-    <div class="mb-3">
-      <label class="form-label">Select Egyptian ID Image</label>
-      <input (change)="onImageSelected($event)" class="form-control" type="file"/>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Select Resume (PDF)</label>
-      <input (change)="onPdfSelected($event)" class="form-control" type="file"/>
-    </div>
-    <button (click)="onUpload()" [disabled]="isLoading" class="btn btn-primary mb-4" type="button">
-      {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
-    </button>
-    <div class="text-center">
-      <button (click)="nextStep()" class="btn btn-secondary" id="nextBtn" type="button"> Next <i class="arrow right"></i></button>
-    </div>
+  <div class="mb-3">
+    <label class="form-label">Select Egyptian ID Image</label>
+    <input type="file" (change)="onImageSelected($event)" class="form-control" />
   </div>
-
+  <div class="mb-3">
+    <label class="form-label">Select Resume (PDF)</label>
+    <input type="file" (change)="onPdfSelected($event)" class="form-control" />
+  </div>
+  <button type="button" class="btn btn-primary mb-4" (click)="onUpload()" [disabled]="isLoading">
+    {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
+  </button>
 
   <!-- Registration Form -->
-  <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
-    <!-- Step Two -->
     <!-- OCR Data Display Section -->
-    <div *ngIf="step === 2">
-      <h4>Step Two: Personal Information</h4>
-      <div class="mb-3">
-        <label class="form-label" for="email">Email</label>
-        <input class="form-control" formControlName="email" id="email" required type="email"/>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email" required  />
+    </div>
+
+    <div class="mb-3">
+      <label for="job_title" class="form-label">Job Title</label>
+      <select id="job_title" class="form-control" formControlName="job_title" required>
+        <option value="">Select a job title</option>
+        <option *ngFor="let title of jobTitles">{{title}}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="egyptianId" class="form-label">Egyptian ID Number</label>
+      <input type="text" id="egyptianId" class="form-control" formControlName="egyptianId" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="firstname" class="form-label">First Name</label>
+      <input type="text" id="firstname" class="form-control" formControlName="firstname" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="secondname" class="form-label">Second Name</label>
+      <input type="text" id="secondname" class="form-control" formControlName="secondname" required />
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="tel" id="phone" class="form-control" formControlName="phone" required />
       </div>
 
-      <div class="mb-3">
-        <label class="form-label" for="job_title">Job Title</label>
-        <select class="form-control" formControlName="job_title" id="job_title" required>
-          <option value="">Select a job title</option>
-          <option *ngFor="let title of jobTitles">{{ title }}</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="egyptianId">Egyptian ID Number</label>
-        <input class="form-control" formControlName="egyptianId" id="egyptianId" required type="text"/>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="firstname">First Name</label>
-        <input class="form-control" formControlName="firstname" id="firstname" required type="text"/>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="secondname">Second Name</label>
-        <input class="form-control" formControlName="secondname" id="secondname" required type="text"/>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label" for="phone">Phone Number</label>
-          <input class="form-control" formControlName="phone" id="phone" required type="tel"/>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label" for="gender">Gender</label>
-          <select id="gender" class="form-control" formControlName="gender" required>
-            <option value="" disabled selected>Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label" for="dob">Date of Birth</label>
-          <input class="form-control" formControlName="dob" id="dob" required type="text"/>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label class="form-label" for="birthPlace">Place of Birth</label>
-          <input class="form-control" formControlName="birthPlace" id="birthPlace" required type="text"/>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="address">Address</label>
-        <input class="form-control" formControlName="address" id="address" required type="text"/>
-      </div>
-
-      <!-- Military and Marital Status -->
-      <div class="mb-3">
-        <label class="form-label" for="militaryStatus">Military Status</label>
-        <select class="form-select" formControlName="militaryStatus" id="militaryStatus" required>
-          <option value="">Select Status</option>
-          <option value="Temporary Exemption">Temporary Exemption</option>
-          <option value="Completed">Completed</option>
-          <option value="Permanent Exemption">Permanent Exemption</option>
-          <option value="In service">In service</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="maritalStatus">Marital Status</label>
-        <select class="form-select" formControlName="maritalStatus" id="maritalStatus" required>
-          <option value="">Select Status</option>
-          <option value="single">Single</option>
-          <option value="married">Married</option>
-          <option value="divorced">Divorced</option>
-          <option value="widowed">Widowed</option>
-        </select>
-      </div>
-
-      <div class="text-center">
-        <button (click)="previousStep()" class="btn btn-secondary" type="button"><i class="arrow left"></i>Back</button>
-        <button (click)="nextStep()" class="btn btn-secondary" type="button">Next <i class="arrow right"></i></button>
+      <div class="col-md-6 mb-3">
+        <label for="gender" class="form-label">Gender</label>
+        <input type="text" id="gender" class="form-control" formControlName="gender" required />
       </div>
     </div>
 
-    <!-- Step Three -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input type="text" id="dob" class="form-control" formControlName="dob" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="birthPlace" class="form-label">Place of Birth</label>
+        <input type="text" id="birthPlace" class="form-control" formControlName="birthPlace" required />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" id="address" class="form-control" formControlName="address" required />
+    </div>
+
+    <!-- Military and Marital Status -->
+    <div class="mb-3">
+      <label for="militaryStatus" class="form-label">Military Status</label>
+      <select id="militaryStatus" class="form-select" formControlName="militaryStatus" required>
+        <option value="">Select Status</option>
+        <option value="Temporary Exemption">Temporary Exemption</option>
+        <option value="Completed">Completed</option>
+        <option value="Permanent Exemption">Permanent Exemption</option>
+        <option value="In service">In service</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="maritalStatus" class="form-label">Marital Status</label>
+      <select id="maritalStatus" class="form-select" formControlName="maritalStatus" required>
+        <option value="">Select Status</option>
+        <option value="single">Single</option>
+        <option value="married">Married</option>
+        <option value="divorced">Divorced</option>
+        <option value="widowed">Widowed</option>
+      </select>
+    </div>
+
     <!-- Work Experience Section -->
-    <div *ngIf="step === 3">
-      <h4>Step Three: Work Experience</h4>
-<!--      <h4 class="mb-3">Work Experience</h4>-->
-      <div formArrayName="workExperiences">
-        <div *ngFor="let experience of workExperiences.controls; let i = index" [formGroupName]="i"
-             class="work-entry mb-4">
-          <div class="mb-3">
-            <label class="form-label">Company Name</label>
-            <input class="form-control" formControlName="company" placeholder="Company Name" type="text"/>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Position</label>
-            <input class="form-control" formControlName="postion" placeholder="postion" type="text"/>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label class="form-label">Start Date</label>
-              <input class="form-control" formControlName="startDate" type="date"/>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">End Date</label>
-              <input class="form-control" formControlName="endDate" type="date"/>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Reason for Leaving</label>
-            <input class="form-control" formControlName="reason" placeholder="Reason for Leaving" type="text"/>
-          </div>
-          <button (click)="removeWorkExperience(i)" class="btn btn-danger mb-3" type="button">Remove Experience</button>
+    <h4 class="mb-3">Work Experience</h4>
+    <div formArrayName="workExperiences">
+      <div *ngFor="let experience of workExperiences.controls; let i = index" [formGroupName]="i" class="work-entry mb-4">
+        <div class="mb-3">
+          <label class="form-label">Company Name</label>
+          <input formControlName="company" type="text" class="form-control" placeholder="Company Name" />
         </div>
-      </div>
-      <button (click)="addWorkExperience()" class="btn btn-primary mb-4" type="button">+ Add Work Experience</button>
-      <div class="text-center">
-        <button (click)="previousStep()" class="btn btn-secondary" type="button"> <i class="arrow left"></i>Back</button>
-        <button (click)="nextStep()" class="btn btn-secondary" type="button">Next<i class="arrow right"></i></button>
+        <div class="mb-3">
+          <label class="form-label">Position</label>
+          <input formControlName="postion" type="text" class="form-control" placeholder="postion" />
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Start Date</label>
+            <input formControlName="startDate" type="date" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">End Date</label>
+            <input formControlName="endDate" type="date" class="form-control" />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Reason for Leaving</label>
+          <input formControlName="reason" type="text" class="form-control" placeholder="Reason for Leaving" />
+        </div>
+        <button type="button" class="btn btn-danger mb-3" (click)="removeWorkExperience(i)">Remove Experience</button>
       </div>
     </div>
+    <button type="button" class="btn btn-primary mb-4" (click)="addWorkExperience()">+ Add Work Experience</button>
 
-    <!-- Step Four -->
     <!-- University Details Section -->
-    <div *ngIf="step === 4">
-      <h4 class="mb-3">University Details</h4>
-      <div class="mb-3">
-        <label class="form-label">University</label>
-        <input class="form-control" formControlName="university" placeholder="University" type="text"/>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Degree</label>
-        <input class="form-control" formControlName="degree" placeholder="Degree" type="text"/>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Grade</label>
-        <input class="form-control" formControlName="grade" placeholder="Grade" type="text"/>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Major</label>
-        <input class="form-control" formControlName="major" placeholder="Major" type="text"/>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Date of Graduation</label>
-        <input class="form-control" formControlName="date" type="text"/>
-      </div>
-      <div class="text-center">
-        <button (click)="previousStep()" class="btn btn-secondary" type="button"><i class="arrow left"></i>Back </button>
-      </div>
-      <!-- Submit Button -->
-      <div class="text-center mt-4">
-        <button class="btn btn-success" type="submit">Submit</button>
-      </div>
+    <h4 class="mb-3">University Details</h4>
+    <div class="mb-3">
+      <label class="form-label">University</label>
+      <input formControlName="university" type="text" class="form-control" placeholder="University" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Degree</label>
+      <input formControlName="degree" type="text" class="form-control" placeholder="Degree" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Grade</label>
+      <input formControlName="grade" type="text" class="form-control" placeholder="Grade" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Major</label>
+      <input formControlName="major" type="text" class="form-control" placeholder="Major" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Date of Graduation</label>
+      <input formControlName="date" type="text" class="form-control" />
     </div>
 
-
+    <!-- Submit Button -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
   </form>
 </div>
 <p-toast></p-toast>

@@ -66,6 +66,7 @@ export class VisitorListComponent implements OnInit {
   fetchVisitors() {
     this.visitorService.getPaginatedVisitors(this.page, this.size).subscribe(data => {
       this.visitors = data.content;
+      console.log(data.content);
       this.totalElements = data.totalElements;
       this.loading = false;
     });
