@@ -28,8 +28,12 @@ export class EntryLogDetailsComponent implements OnInit{
   userDetails: any;
   educations: Education[] = new Array<Education>();
   experiences: Experience[] = new Array<Experience>();
+  imageUrl: string | null = null; // To store the image URL
+  canidadteImageUrl: string | null = null ;
 
-  constructor(private router: Router, candidateService: CandidateService, visitorService: VisitorService , private tokenService:tokenserviceService) {
+
+
+  constructor(private router: Router, private candidateService: CandidateService, private  visitorService: VisitorService , private tokenService:tokenserviceService) {
     this.logDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
 
 
@@ -70,10 +74,55 @@ export class EntryLogDetailsComponent implements OnInit{
 
     if (this.tokenService.validateToken()) {
 
+      if (this.logDetails.role == "visitor")
+      {
+
+        this.loadVisitorImage();
+      }
+      else if (this.logDetails.role == "candidate")
+      {
+
+        this.loadCandiateImage();
+      }
     }
     else
     {
       alert("session expired!!!")
     }
   }
+
+  loadVisitorImage(): void {
+
+    if (this.logDetails.ssn) {
+      this.visitorService.getVisitorUserpic(this.logDetails.ssn).subscribe({
+        next: (blob) => {
+          // Create a URL for the image Blob
+          this.imageUrl = URL.createObjectURL(blob);
+          console.log(this.imageUrl); // Verify this is not undefined or empty
+
+        },
+        error: (err) => {
+          console.error('Error loading visitor image:', err);
+        }
+      });
+    }
+  }
+
+  loadCandiateImage(): void {
+
+    if (this.logDetails.ssn) {
+      this.candidateService.getCandidateUserpic(this.logDetails.ssn).subscribe({
+        next: (blob) => {
+          // Create a URL for the image Blob
+          this.canidadteImageUrl = URL.createObjectURL(blob);
+        },
+        error: (err) => {
+          console.error('Error loading visitor image:', err);
+        }
+      });
+    }
+
+  }
+
+
 }
