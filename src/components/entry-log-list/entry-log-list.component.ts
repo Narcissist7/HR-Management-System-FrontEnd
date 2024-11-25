@@ -53,6 +53,7 @@ export class EntryLogListComponent implements OnInit {
   showTimeFilter: boolean = false;
   // showVisiteeFilter: boolean = false;
   showRoleFilter: boolean = false;
+  isFiltering: boolean = false;
 
 
   filterRequest: EntryLogFilterRequestDTO = new EntryLogFilterRequestDTO();
@@ -90,12 +91,12 @@ export class EntryLogListComponent implements OnInit {
 
   applyFilter(): void {
     this.loading = true;
+    this.isFiltering = true;
     this.logService.filterLogs(this.filterRequest, this.page, this.size).subscribe({
       next: (data: any) => {
         this.logs = data.content ;
         this.totalElements = data.totalElements;
         this.loading = false;
-        console.log(this.logs);
       },
       error: (error) => {
         console.error('Failed to apply filter:', error);
@@ -130,11 +131,16 @@ export class EntryLogListComponent implements OnInit {
   onPageChange(event: any): void {
     this.page = event.pageIndex;
     this.size = event.pageSize;
-    this.loadLogs();
+    if (this.isFiltering){
+     this.applyFilter();
+    }else {
+      this.loadLogs();
+    }
   }
 
   resetFilters() {
     this.filterRequest = new EntryLogFilterRequestDTO();
     this.applyFilter();
+    this.isFiltering = false;
   }
 }

@@ -29,17 +29,7 @@ export class EntryLogService {
     return this.http.get<EntryLog[]>('api/entry_managment_sys/log' , {headers});
   }
 
-  getPaginatedLogs(page: number, size: number): Observable<EntryLog[]> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('size', size.toString());
-    const headers = {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      'Content-Type': 'application/json'
-    };
 
-    return this.http.get<EntryLog[]>(`api/entry_managment_sys/log/paginated`, { params , headers });
-  }
 // `${environment.API_URL +  Constant.API_Method.EntryLog + '/paged'}?page=${page}&size=${size}`
   filterLogsByDate(startDate: string, endDate: string, page: number, size: number): Observable<any> {
     return this.http.post(`${environment.API_URL +  Constant.API_Method.EntryLog + '/filterDates'}`, {
@@ -61,11 +51,23 @@ export class EntryLogService {
   }
 
 
+  getPaginatedLogs(page: number, size: number): Observable<EntryLog[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<EntryLog[]>(`api/entry_managment_sys/log/paginated`, { params , headers });
+  }
 
   filterLogs(filterRequest: EntryLogFilterRequestDTO, page: number, size: number): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
     const body = {
-      page: page,
-      size: size,
       role: filterRequest.role,
       visitee: filterRequest.visitee,
       startDate: filterRequest.startDate,
@@ -80,7 +82,7 @@ export class EntryLogService {
     };
 
 
-    return this.http.post<any>('api/entry_managment_sys/log/filter', body, { headers });
+    return this.http.post<any>('api/entry_managment_sys/log/filter', body, {params, headers });
   }
 
   getChartData(): Observable<any> {
