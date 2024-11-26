@@ -68,7 +68,7 @@ export class VisitorComponent {
 
     this.isLoading = true;
 
-    this.http.post<any>('http://127.0.0.1:5000/visitor', formData).subscribe(
+    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData).subscribe(
       (response) => {
         // Extract OCR data
         const ocrDataArray = response.ocr_data;
