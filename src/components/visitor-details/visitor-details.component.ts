@@ -7,6 +7,8 @@ import { NgIf } from '@angular/common';
 
 import {Visitor} from '../../Model/Visitor/visitor';
 import {VisitorService} from '../../Services/Visitor/visitor.service';
+import {CandidatePreviewModalComponent} from '../Reusable/candidate-preview-modal/candidate-preview-modal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-visitor-details',
@@ -25,7 +27,8 @@ export class VisitorDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private visitorService: VisitorService,
-    private tokenService: tokenserviceService
+    private tokenService: tokenserviceService,
+    private dialog: MatDialog
   ) {
     this.visitorDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
 
@@ -56,5 +59,33 @@ export class VisitorDetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  loadVisitorID() {
+    const ssn = this.visitorDetails?.ssn;
+    if (ssn) {
+      this.visitorService.getVisitorID(ssn).subscribe({
+        next: (blob) => this.openPreview(blob, 'Candidate ID Preview', `${this.visitorDetails.name}_ID.png`, true),
+        error: (err) => console.error('Error fetching candidate ID:', err),
+      });
+    }
+  }
+
+
+  openPreview(blob: Blob, title: string, fileName: string, isImage: boolean): void {
+    const objectUrl = URL.createObjectURL(blob);
+    const previewData = {
+      content: objectUrl,
+      title: title,
+      fileName: fileName,
+      isImage: isImage,
+    };
+
+    this.dialog.open(CandidatePreviewModalComponent, {
+      data: previewData,
+      width: '90%',  // Less aggressive than full screen
+      height: '90%',
+      maxWidth: '1200px'  // Optional: limit maximum width
+    });
   }
 }
