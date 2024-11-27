@@ -185,7 +185,7 @@ export class CandidateComponent implements OnInit {
     switch (arabicGender) {
       case 'ذكر':
         return 'male';
-      case 'أنثى':
+      case 'انثى':
         return 'female';
       default:
         return '';  // Return empty if gender is not recognized

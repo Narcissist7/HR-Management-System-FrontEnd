@@ -51,27 +51,31 @@
 
 /* Submit button styling */
 .submit-button {
-  background-color: #ff0000;
-  border: none;
+  /*background: linear-gradient(178deg, #F4EAE6FF 0%, #AF0505FF 100%);*/
+  /*border: none;*/
   color: white;
-  padding: 10px 20px;
+  /*padding: 10px 20px;*/
   border-radius: 8px;
   font-weight: bold;
   text-transform: uppercase;
   transition: background-color 0.3s ease-in-out;
   font-size: 16px;
   cursor: pointer;
+  background-color: #c24a4c;
+  border-color: #c24a4c;
+  padding: 10px 30px;
+
 }
 
 .submit-button:hover {
-  background-color: #cc0000;
-  box-shadow: 0 4px 8px rgba(204, 0, 0, 0.2);
+  background-color: darkred;
+  border-color: darkred;
 }
 
-.submit-button:focus {
-  background-color: #b30000;
-  box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);
-}
+/*.submit-button:focus {*/
+/*  background-color: #b30000;*/
+/*  box-shadow: 0 4px 8px rgba(179, 0, 0, 0.4);*/
+/*}*/
 /* Error message styling */
 .error-message {
   color: #f44336; /* Red color for errors */

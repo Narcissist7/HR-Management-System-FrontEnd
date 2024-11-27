@@ -1,3 +1,122 @@
+/*.container {*/
+/*  text-align: center;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.header {*/
+/*  margin-top: 20px;*/
+/*}*/
+
+/*.welcome-gif {*/
+/*  max-width: 150px;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*h1 {*/
+/*  font-size: 24px;*/
+/*  font-weight: bold;*/
+/*}*/
+/*!*.visitorCard{*!*/
+/*!*  width: 80%;*!*/
+/*!*  !*background-color: ;*!*!*/
+/*!*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*!*/
+/*!*  margin-bottom: 25px;*!*/
+/*!*  border-radius: 30px;*!*/
+/*!*}*!*/
+/*!*.text-container{*!*/
+/*!*  text-align: center;*!*/
+/*!*  padding: 10px 20px;*!*/
+/*!*}*!*/
+/*.content {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  margin-top: 30px;*/
+/*  gap: 80px;*/
+/*  position: relative;*/
+/*}*/
+
+/*.card {*/
+/*  cursor: pointer;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.image-button {*/
+/*  width: 200px;*/
+/*  height: 200px;*/
+/*  margin-left: 10px;*/
+/*  border-radius: 25px;*/
+/*  transition: transform 0.3s ease;*/
+
+/*}*/
+
+/*.contentVisitor:hover {*/
+/*  transform: scale(1.05);*/
+/*}*/
+/*.contentCandidate:hover{*/
+/*  transform: scale(1.05);*/
+/*}*/
+
+/*h2 {*/
+/*  font-size: 18px;*/
+/*  margin-top:-20px;*/
+/*}*/
+
+/*!* Add a red border between the images *!*/
+/*!*.content::before {*!*/
+/*!*  content: "";*!*/
+/*!*  width: 6px; !* Make the border thicker *!*!*/
+/*!*  height: 210px;*!*/
+/*!*  background-color: #c52e25;*!*/
+/*!*  position: absolute;*!*/
+/*!*  left: 50%;*!*/
+/*!*  transform: translateX(-50%);*!*/
+/*!*}*!*/
+
+/*.alreadySubmitted_btn {*/
+/*  background-color: #c52e25; !* Pure red for buttons *!*/
+/*  display: block;*/
+/*  margin: 50px auto;*/
+/*  color: #ffffffff;*/
+/*}*/
+
+/*.alreadySubmitted_btn:hover {*/
+/*  background-color: #8b3329; !* Darker red on hover *!*/
+/*}*/
+
+
+
+/*.footer {*/
+/*  position: fixed;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  background-color: #c52e25;*/
+/*  color: white;*/
+/*  text-align: center;*/
+/*  padding: 15px 0; !* Reduced padding for a slimmer appearance *!*/
+/*  font-size: 16px; !* Adjusted font size for readability *!*/
+/*  z-index: 10;*/
+/*}*/
+
+/*.footer p {*/
+/*  font-size: 14px; !* Slightly smaller font size for the text *!*/
+/*  margin: 5px 0;*/
+/*}*/
+
+/*!* Make footer responsive for smaller screens *!*/
+/*@media (max-width: 600px) {*/
+/*  .footer {*/
+/*    font-size: 14px; !* Further adjust font size for small screens *!*/
+/*    padding: 10px 0; !* Smaller padding on mobile *!*/
+/*  }*/
+/*  .footer p {*/
+/*    font-size: 12px;*/
+/*  }*/
+/*}*/
+
 .container {
   text-align: center;
   display: flex;
@@ -10,7 +129,7 @@
 }
 
 .welcome-gif {
-  max-width: 270px;
+  max-width: 150px;
   margin-bottom: 10px;
 }
 
@@ -24,7 +143,7 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  gap: 50px;
+  gap: 80px;
   position: relative;
 }
 
@@ -34,45 +153,33 @@ h1 {
 }
 
 .image-button {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   margin-left: 10px;
   border-radius: 25px;
   transition: transform 0.3s ease;
 }
 
-.image-button:hover {
+.contentVisitor:hover,
+.contentCandidate:hover {
   transform: scale(1.05);
 }
 
 h2 {
-  margin-top: 10px;
   font-size: 18px;
-}
-
-/* Add a red border between the images */
-.content::before {
-  content: "";
-  width: 6px; /* Make the border thicker */
-  height: 210px;
-  background-color: #c52e25;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: -20px;
 }
 
 .alreadySubmitted_btn {
   background-color: #c52e25; /* Pure red for buttons */
   display: block;
-  margin: 0 auto;
+  margin: 50px auto;
   color: #ffffffff;
 }
 
 .alreadySubmitted_btn:hover {
   background-color: #8b3329; /* Darker red on hover */
 }
-
-
 
 .footer {
   position: fixed;
@@ -92,13 +199,62 @@ h2 {
   margin: 5px 0;
 }
 
-/* Make footer responsive for smaller screens */
-@media (max-width: 600px) {
-  .footer {
-    font-size: 14px; /* Further adjust font size for small screens */
-    padding: 10px 0; /* Smaller padding on mobile */
+/* Make the page responsive for smaller screens */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Reduced gap for mobile */
   }
+
+  .image-button {
+    width: 150px; /* Smaller button size for mobile */
+    height: 150px;
+  }
+
+  h1 {
+    font-size: 20px; /* Adjust heading size */
+  }
+
+  h2 {
+    font-size: 16px; /* Adjust subheading size */
+  }
+
+  .alreadySubmitted_btn {
+    width: 80%; /* Full-width button for mobile */
+    font-size: 14px;
+  }
+
+  .footer {
+    font-size: 14px; /* Adjust footer font size */
+    padding: 10px 0;
+  }
+
   .footer p {
     font-size: 12px;
+  }
+}
+
+/* Additional adjustments for extra small screens */
+@media (max-width: 480px) {
+  .header {
+    margin-top: 10px; /* Less margin for smaller screens */
+  }
+
+  h1 {
+    font-size: 18px; /* Smaller heading size */
+  }
+
+  h2 {
+    font-size: 14px; /* Smaller subheading size */
+  }
+
+  .image-button {
+    width: 120px; /* Further reduce button size */
+    height: 120px;
+  }
+
+  .alreadySubmitted_btn {
+    font-size: 12px; /* Smaller button text */
+    padding: 8px 0; /* Reduce button padding */
   }
 }
