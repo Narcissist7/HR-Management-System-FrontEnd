@@ -222,7 +222,7 @@ export class CandidateComponent implements OnInit {
           degree: formValues.degree,
           grade: formValues.grade,
           major: formValues.major,
-          date: formValues.uniDate,
+          date: formValues.date,
         }
       ],
       experiences: formValues.workExperiences.map((experience: any) => ({

@@ -1,51 +1,85 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {MessageService} from 'primeng/api';
+import {NgIf} from '@angular/common';
+import {PaginatorModule} from 'primeng/paginator';
+import {ToastModule} from 'primeng/toast';
 
 @Component({
-  selector: 'app-log-entry',
+  selector: 'app-alreadyexists-ocr',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    NgFor,
     NgIf,
+    PaginatorModule,
+    ReactiveFormsModule,
     ToastModule
   ],
-  templateUrl: './log-entry.component.html',
-  styleUrls: ['./log-entry.component.css'], // Use styleUrls instead of styleUrl
-  providers: [MessageService]
+  templateUrl: './alreadyexists-ocr.component.html',
+  styleUrl: './alreadyexists-ocr.component.css',
+  providers:[MessageService]
 })
-export class LogEntryComponent {
+export class AlreadyexistsOCRComponent {
   registrationForm: FormGroup;
-  private ssn: any;
+  selectedFile: File | null = null;
+  ocrData: any = {};
+  imagedata : string | null = null ;
+  isLoading: boolean = false;
+
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     private router: Router,
-    private messageService: MessageService ,
-    private route: ActivatedRoute, // Fixed constructor parameter (missing comma)
+    private messageService: MessageService // Fixed constructor parameter (missing comma)
   ) {
     this.registrationForm = this.fb.group({
       nid: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       visitee: ['', Validators.required],
     });
-
-    this.route.queryParams.subscribe(params => {
-      this.ssn = params['ssn'] || '';  // Default to empty string if ssn not present
-
-      // If SSN is available, pre-fill the NID field
-      if (this.ssn) {
-        this.registrationForm.patchValue({ nid: this.ssn });
-      }
-    });
+  }
+  onImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
-  
+
+  onUpload() {
+    if (!this.selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.isLoading = true;
+
+    this.http.post<any>('http://127.0.0.1:5000/nid', formData).subscribe(
+      (response) => {
+        // Extract OCR data
+        const ocrDataArray = response.ocr_data;
+
+
+
+        // Set form fields using OCR data
+        this.registrationForm.patchValue({
+
+          nid: ocrDataArray || ''
+        });
+
+
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error(error);
+        this.isLoading = false;
+      }
+    );
+  }
 
   onSubmit() {
     if (this.registrationForm.valid) {
@@ -106,4 +140,5 @@ export class LogEntryComponent {
       }
     }
   }
+
 }

@@ -26,6 +26,7 @@ export class VisitorComponent {
   ocrData: any = {};
   imagedata : string | null = null ;
   isLoading: boolean = false;
+  SSN : string | null = null
 
   registrationForm: FormGroup;
 
@@ -87,6 +88,7 @@ export class VisitorComponent {
           birthPlace: ocrDataArray[6] || ''
         });
 
+        this.SSN = ocrDataArray[2];
         // Set base64 image data for display
         this.imagedata = 'data:image/jpeg;base64,' + response.image;
 
@@ -161,10 +163,19 @@ export class VisitorComponent {
       .subscribe(
         (response) => {
           if (response.status === 208) {
-            this.messageService.add({ severity: 'warn', summary: 'User already exists', detail: 'User already exists in the database! Redirecting...', life: 5000 });
+            const ssn =this.SSN; // Assuming SSN is returned in the response
+
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'User already exists',
+              detail: `User with SSN ${ssn} already exists in the database! Redirecting...`,
+              life: 5000
+            });
+
             setTimeout(() => {
-              this.router.navigate(['/logEntry']);
+              this.router.navigate(['/logEntry'], { queryParams: { ssn: ssn } });
             }, 3000);
+
           } else if (response.status === 200) {
             this.snackBar.open('Visitor registered successfully!', 'Close', {
               duration: 5000,
