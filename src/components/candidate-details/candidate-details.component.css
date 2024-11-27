@@ -161,3 +161,22 @@ ul li {
   padding: 10px 0;
   line-height: 1.6;
 }
+
+/*Downlaod CV*/
+.cv-download-section {
+  margin-top: 20px;
+}
+
+.download-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.download-button:hover {
+  background-color: #e63939;
+}

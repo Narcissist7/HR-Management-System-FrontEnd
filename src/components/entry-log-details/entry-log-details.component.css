@@ -5,13 +5,16 @@ body {
   padding: 0;
 }
 
+.mat-typography{
+  overflow: hidden;
+}
+
 .log-list,  .log-card {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin: 20px auto;
   max-width: 1500px;
-  padding: 20px;
 }
 
 .candidate-card,

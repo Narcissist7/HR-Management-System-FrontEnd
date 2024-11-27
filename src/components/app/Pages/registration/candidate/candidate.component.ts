@@ -135,7 +135,7 @@ export class CandidateComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.http.post<any>('http://127.0.0.1:5000/candidate', formData).subscribe(
+    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/candidate', formData).subscribe(
       (response) => {
         const ocrDataArray = response.ocr_data;
         const cvDataArray = response.cv_data;

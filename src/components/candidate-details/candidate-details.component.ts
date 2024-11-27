@@ -62,4 +62,48 @@ export class CandidateDetailsComponent {
     }
   }
 
+  downloadCv() {
+    const ssn = this.candidateDetails?.ssn;
+    if (ssn) {
+      this.candidateService.getCandidateCv(ssn).subscribe({
+        next: (blob) => {
+          // Create a URL for the Blob
+          const url = window.URL.createObjectURL(blob);
+          // Create a link element and trigger download
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Candidate_CV_${ssn}.pdf`; // Set the desired file name and extension
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url); // Clean up the URL object
+        },
+        error: (err) => {
+          console.error('Error downloading CV:', err);
+          alert('Failed to download the CV. Please try again.');
+        }
+      });
+    } else {
+      alert('Invalid candidate details. Cannot download CV.');
+    }
+  }
+
+  loadCandidateID() {
+    const ssn = this.candidateDetails?.ssn;
+    if (ssn) {
+      this.candidateService.getCandidateID(ssn).subscribe({
+        next: (blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${this.candidateDetails.name}_ID.png`; // Modify the file name and extension as needed
+          a.click();
+          URL.revokeObjectURL(url);
+        },
+        error: (err) => {
+          console.error('Error fetching candidate ID:', err);
+        }
+      });
+    }
+  }
 }
