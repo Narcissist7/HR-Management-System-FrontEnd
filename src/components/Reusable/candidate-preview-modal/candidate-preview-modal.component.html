@@ -1,0 +1,15 @@
+  <div class="modal-container">
+    <h2>{{ title }}</h2>
+    <div class="preview-content">
+      <ng-container *ngIf="isImage; else documentPreview">
+        <img [src]="content" alt="Preview" class="preview-image" />
+      </ng-container>
+      <ng-template #documentPreview>
+        <iframe [src]="content" class="preview-frame"></iframe>
+      </ng-template>
+    </div>
+    <div class="modal-actions">
+      <button mat-button (click)="onClose()">Close</button>
+      <button mat-raised-button color="primary" (click)="onDownload()">Download</button>
+    </div>
+  </div>

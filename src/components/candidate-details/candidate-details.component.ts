@@ -5,6 +5,8 @@ import {tokenserviceService} from '../../Services/token/tokenservice.service';
 import {NavbarComponent} from '../Reusable/navbar/navbar.component';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {CandidateService} from '../../Services/Candidate/candidate.service';
+import {MatDialog} from '@angular/material/dialog';
+import {CandidatePreviewModalComponent} from '../Reusable/candidate-preview-modal/candidate-preview-modal.component';
 
 @Component({
   selector: 'app-candidate-details',
@@ -25,7 +27,7 @@ export class CandidateDetailsComponent {
   imageUrl: string | null = null; // To store the image URL
 
 
-  constructor(private router: Router , private tokenService:tokenserviceService , private candidateService : CandidateService) {
+  constructor(private router: Router , private tokenService:tokenserviceService , private candidateService : CandidateService, private dialog: MatDialog) {
     this.candidateDetails = this.router.getCurrentNavigation()?.extras.state?.['data'];
     this.educations = this.candidateDetails.educations;
     this.experiences = this.candidateDetails.experiences;
@@ -66,22 +68,8 @@ export class CandidateDetailsComponent {
     const ssn = this.candidateDetails?.ssn;
     if (ssn) {
       this.candidateService.getCandidateCv(ssn).subscribe({
-        next: (blob) => {
-          // Create a URL for the Blob
-          const url = window.URL.createObjectURL(blob);
-          // Create a link element and trigger download
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `Candidate_CV_${ssn}.pdf`; // Set the desired file name and extension
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url); // Clean up the URL object
-        },
-        error: (err) => {
-          console.error('Error downloading CV:', err);
-          alert('Failed to download the CV. Please try again.');
-        }
+        next: (blob) => this.openPreview(blob, 'Candidate CV Preview', `Candidate_CV_${ssn}.pdf`, false),
+        error: (err) => console.error('Error downloading CV:', err),
       });
     } else {
       alert('Invalid candidate details. Cannot download CV.');
@@ -92,18 +80,27 @@ export class CandidateDetailsComponent {
     const ssn = this.candidateDetails?.ssn;
     if (ssn) {
       this.candidateService.getCandidateID(ssn).subscribe({
-        next: (blob) => {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${this.candidateDetails.name}_ID.png`; // Modify the file name and extension as needed
-          a.click();
-          URL.revokeObjectURL(url);
-        },
-        error: (err) => {
-          console.error('Error fetching candidate ID:', err);
-        }
+        next: (blob) => this.openPreview(blob, 'Candidate ID Preview', `${this.candidateDetails.name}_ID.png`, true),
+        error: (err) => console.error('Error fetching candidate ID:', err),
       });
     }
+  }
+
+
+  openPreview(blob: Blob, title: string, fileName: string, isImage: boolean): void {
+    const objectUrl = URL.createObjectURL(blob);
+    const previewData = {
+      content: objectUrl,
+      title: title,
+      fileName: fileName,
+      isImage: isImage,
+    };
+
+    this.dialog.open(CandidatePreviewModalComponent, {
+      data: previewData,
+      width: '90%',  // Less aggressive than full screen
+      height: '90%',
+      maxWidth: '1200px'  // Optional: limit maximum width
+    });
   }
 }

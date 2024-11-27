@@ -14,6 +14,11 @@
 
     <h3 class="user-name">{{ candidateDetails.name }}</h3>
     <p class="phone">Phone: {{ candidateDetails.phone }}</p>
+
+    <div class="download-section">
+      <button (click)="downloadCv()" class="download-button">Preview CV</button>
+      <button (click)="loadCandidateID()" class="download-button">Preview ID</button>
+    </div>
   </div>
 
   <div class="center-column">
@@ -61,12 +66,6 @@
           </ul>
         </div>
       </div>
-    </div>
-    <div class="cv-download-section">
-      <button (click)="downloadCv()" class="download-button">Download CV</button>
-    </div>
-    <div class="cv-download-section">
-    <button (click)="loadCandidateID()" class="download-button">Download ID</button>
     </div>
   </div>
 </div>
