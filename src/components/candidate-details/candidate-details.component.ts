@@ -68,11 +68,11 @@ export class CandidateDetailsComponent {
     const ssn = this.candidateDetails?.ssn;
     if (ssn) {
       this.candidateService.getCandidateCv(ssn).subscribe({
-        next: (blob) => this.openPreview(blob, 'Candidate CV Preview', `Candidate_CV_${ssn}.pdf`, false),
+        next: (blob) => this.openPreview(blob, `${this.candidateDetails.name.split(' ')[0]}'s ID Preview`, `Candidate_CV_${ssn}.pdf`, false),
         error: (err) => console.error('Error downloading CV:', err),
       });
     } else {
-      alert('Invalid candidate details. Cannot download CV.');
+      alert(`Invalid ${this.candidateDetails.name.split(' ')[0]}'s details. Cannot download CV.`);
     }
   }
 
@@ -80,8 +80,8 @@ export class CandidateDetailsComponent {
     const ssn = this.candidateDetails?.ssn;
     if (ssn) {
       this.candidateService.getCandidateID(ssn).subscribe({
-        next: (blob) => this.openPreview(blob, 'Candidate ID Preview', `${this.candidateDetails.name}_ID.png`, true),
-        error: (err) => console.error('Error fetching candidate ID:', err),
+        next: (blob) => this.openPreview(blob, `${this.candidateDetails.name.split(' ')[0]}'s ID Preview`, `${this.candidateDetails.name}_ID.png`, true),
+        error: (err) => console.error(`Error fetching ${this.candidateDetails.name.split(' ')[0]}'s ID:`, err),
       });
     }
   }
@@ -100,7 +100,7 @@ export class CandidateDetailsComponent {
       data: previewData,
       width: '90%',  // Less aggressive than full screen
       height: '90%',
-      maxWidth: '1200px'  // Optional: limit maximum width
+      maxWidth: '1200px',  // Optional: limit maximum width
     });
   }
 }

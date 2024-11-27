@@ -65,8 +65,8 @@ export class VisitorDetailsComponent implements OnInit {
     const ssn = this.visitorDetails?.ssn;
     if (ssn) {
       this.visitorService.getVisitorID(ssn).subscribe({
-        next: (blob) => this.openPreview(blob, 'Candidate ID Preview', `${this.visitorDetails.name}_ID.png`, true),
-        error: (err) => console.error('Error fetching candidate ID:', err),
+        next: (blob) => this.openPreview(blob, `${this.visitorDetails.name.split(' ')[0]}'s ID Preview`, `${this.visitorDetails.name}_ID.png`, true),
+        error: (err) => console.error(`Error fetching ${this.visitorDetails.name.split(' ')[0]} ID:`, err),
       });
     }
   }
