@@ -1,19 +1,12 @@
 /* Wider form container for the registration form */
 .form-container {
   max-width: 700px;
-  margin: 20px auto;
-  /*padding: 20px;*/
-  /*border: 1px solid #ff0000;*/
-  /*border-radius: 10px;*/
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-  /*background-color: #ffffff;*/
-
+  margin: 10px auto;
   background: linear-gradient(0deg, rgb(245, 245, 245) 0%, #F4EAE6FF 100%);
   border-radius: 40px;
   padding: 25px 35px;
   border: 5px solid rgb(255, 255, 255);
   box-shadow: #F4EAE6FF 30px 30px 30px -20px;
-  /*margin: 20px;*/
 }
 
 /* Form field styling */

@@ -17,7 +17,8 @@
   margin-bottom: 20px;
   flex: 1; /* Make each chart take equal space */
   min-width: 600px; /* Set a minimum width for responsive behavior */
-  max-width: 70%; /* Prevent charts from becoming too wide */
+  /*max-width: 70%; !* Prevent charts from becoming too wide *!*/
+  max-width: 93%; /* Prevent charts from becoming too wide */
   text-align: center;
   margin-left:55px ;
 }
