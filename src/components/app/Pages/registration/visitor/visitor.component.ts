@@ -60,7 +60,12 @@ export class VisitorComponent {
 
   onUpload() {
     if (!this.selectedFile) {
-      alert('Please select a file to upload.');
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'No File Selected',
+        detail: 'Please select a file to upload.',
+        life: 5000
+      });
       return;
     }
 
@@ -69,39 +74,71 @@ export class VisitorComponent {
 
     this.isLoading = true;
 
-    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData).subscribe(
-      (response) => {
-        // Extract OCR data
-        const ocrDataArray = response.ocr_data;
+    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData)
+      .subscribe(
+        (response) => {
+          const ocrDataArray = response.ocr_data;
 
-        // Check if the first name is 'No text Found' and set it to an empty string if true
-        const firstName = ocrDataArray[0] === 'No text found' ? '' : ocrDataArray[0] || '';
+          if (!ocrDataArray || ocrDataArray.length === 0 || ocrDataArray[0] === 'No text found') {
+            this.showUploadError();
+            return;
+          }
 
-        // Map gender from Arabic to form value
-        const genderValue = this.mapGender(ocrDataArray[5] || '');
+          const firstName = ocrDataArray[0] === 'No text found' ? '' : ocrDataArray[0];
+          const genderValue = this.mapGender(ocrDataArray[5] || '');
 
-        // Set form fields using OCR data
-        this.registrationForm.patchValue({
-          firstname: firstName,  // Use the updated first name
-          secondname: ocrDataArray[1] === 'No text Found' ? '' : ocrDataArray[1] || '',
-          egyptianId: ocrDataArray[2] || '',
-          dob: ocrDataArray[3] || '',
-          address: ocrDataArray[4] || '',
-          gender: genderValue,
-          birthPlace: ocrDataArray[6] || ''
-        });
+          this.registrationForm.patchValue({
+            firstname: firstName,
+            secondname: ocrDataArray[1] === 'No text found' ? '' : ocrDataArray[1] || '',
+            egyptianId: ocrDataArray[2] || '',
+            dob: ocrDataArray[3] || '',
+            address: ocrDataArray[4] || '',
+            gender: genderValue,
+            birthPlace: ocrDataArray[6] || ''
+          });
 
-        this.SSN = ocrDataArray[2];
-        // Set base64 image data for display
-        this.imagedata = 'data:image/jpeg;base64,' + response.image;
+          this.SSN = ocrDataArray[2];
+          this.imagedata = 'data:image/jpeg;base64,' + response.image;
 
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading = false;
-      }
-    );
+          this.isLoading = false;
+          this.showSuccess();
+          this.showWarn()
+        },
+        (error) => {
+          console.error(error);
+          this.isLoading = false;
+          this.showUploadError();
+        }
+      );
+  }
+
+// Display an error message for invalid or unclear uploads
+  showUploadError() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Upload Failed',
+      detail: 'Please upload a clear and valid ID card image.',
+      life: 5000
+    });
+  }
+
+  showSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'OCR data fetched',
+      detail: 'Your data is extracted successfully',
+      life: 5000
+    });
+  }
+
+  showWarn()
+  {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Recheck OCR data',
+      detail: 'Please make sure the fetched data is correct before submitting',
+      life: 15000
+    });
   }
 
 
