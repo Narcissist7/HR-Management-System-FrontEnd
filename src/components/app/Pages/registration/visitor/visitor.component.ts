@@ -74,17 +74,20 @@ export class VisitorComponent {
         // Extract OCR data
         const ocrDataArray = response.ocr_data;
 
+        // Check if the first name is 'No text Found' and set it to an empty string if true
+        const firstName = ocrDataArray[0] === 'No text found' ? '' : ocrDataArray[0] || '';
+
         // Map gender from Arabic to form value
         const genderValue = this.mapGender(ocrDataArray[5] || '');
 
         // Set form fields using OCR data
         this.registrationForm.patchValue({
-          firstname: ocrDataArray[0] || '',
-          secondname: ocrDataArray[1] || '',
+          firstname: firstName,  // Use the updated first name
+          secondname: ocrDataArray[1] === 'No text Found' ? '' : ocrDataArray[1] || '',
           egyptianId: ocrDataArray[2] || '',
           dob: ocrDataArray[3] || '',
           address: ocrDataArray[4] || '',
-          gender: genderValue,  // Use the mapped gender value
+          gender: genderValue,
           birthPlace: ocrDataArray[6] || ''
         });
 
@@ -100,6 +103,7 @@ export class VisitorComponent {
       }
     );
   }
+
 
 // Function to map Arabic gender to form value
   mapGender(arabicGender: string): string {

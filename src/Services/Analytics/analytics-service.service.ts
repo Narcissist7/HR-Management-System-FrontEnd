@@ -11,8 +11,8 @@ export class AnalyticsServiceService {
   private apiUrl = 'api/entry_managment_sys/log/count';
   private visitorUrl = 'api/entry_managment_sys/log/people_last_seven_days/visitor'
   private candidateUrl = 'api/entry_managment_sys/log/people_last_seven_days/candidate'
-  private radarMaleUrl = 'api/entry_managment_sys/candidate/radar/ذكر'
-  private radarFemaleUrl = 'api/entry_managment_sys/candidate/radar/انثى'
+  private radarMaleUrl = 'api/entry_managment_sys/candidate/radar/male'
+  private radarFemaleUrl = 'api/entry_managment_sys/candidate/radar/female'
 
 
   constructor(private http: HttpClient , private router:Router) {}

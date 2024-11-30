@@ -45,7 +45,7 @@ export class LogEntryComponent {
     });
   }
 
-  
+
 
   onSubmit() {
     if (this.registrationForm.valid) {

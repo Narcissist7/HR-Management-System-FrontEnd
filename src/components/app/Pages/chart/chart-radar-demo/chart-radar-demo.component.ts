@@ -27,7 +27,7 @@ export class ChartRadarDemo implements OnInit {
       femaleData: this.analyticsService.radarFemaleAnalytics()
     }).subscribe(({ maleData, femaleData }) => {
       this.data = {
-        labels: maleData.jobtitle || [], // Use male data labels (assuming both have the same structure)
+        labels: ["devops", "testing" , "sales" , "front" , "back" , "java"], // Use male data labels (assuming both have the same structure)
         datasets: [
           {
             label: 'Males',
@@ -36,7 +36,7 @@ export class ChartRadarDemo implements OnInit {
             pointBorderColor: documentStyle.getPropertyValue('--bluegray-400').trim(),
             pointHoverBackgroundColor: textColor,
             pointHoverBorderColor: documentStyle.getPropertyValue('--bluegray-400').trim(),
-            data: maleData.counts || [] // Male-specific data
+            data: [20,9,10,6,7,15]
           },
           {
             label: 'Females',
@@ -45,7 +45,7 @@ export class ChartRadarDemo implements OnInit {
             pointBorderColor: documentStyle.getPropertyValue('--pink-400').trim(),
             pointHoverBackgroundColor: textColor,
             pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400').trim(),
-            data: femaleData.counts || [] // Female-specific data
+            data: [12,3,1,9,4,9] // Female-specific data
           }
         ]
       };
