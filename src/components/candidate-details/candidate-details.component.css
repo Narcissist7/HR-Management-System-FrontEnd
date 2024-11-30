@@ -164,18 +164,21 @@ ul li {
 
 /*Downlaod Section*/
 .download-section {
-  display: inline-block; /* Allows buttons to sit next to each other */
-  text-align: center; /* Centers the buttons if needed */
+  /*display: inline-block; !* Allows buttons to sit next to each other *!*/
+  /*text-align: center; !* Centers the buttons if needed *!*/
+  display: flex; /* Ensures buttons sit next to each other */
+  justify-content: center; /* Centers the buttons horizontally */
+  gap: 10px;
 }
 
 .download-button:last-child {
   margin-right: 0; /* Removes margin from the last button */
-  background-color: #2ecc71;
+  background-color: #8B3329FF;
   color: white;
 }
 
 .download-button {
-  background-color: #4a90e2;
+  background-color: #ea745c ;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -186,10 +189,12 @@ ul li {
 }
 
 .download-button:hover {
-  background-color: lightcoral;
+  background-color:#c14c46;
 }
 
-
+.download-button:last-child:hover {
+  background-color:#c14c46; /* Hover background for the last button */
+}
 /*!*Popup window*!*/
 
 /*.popup-container {*/
