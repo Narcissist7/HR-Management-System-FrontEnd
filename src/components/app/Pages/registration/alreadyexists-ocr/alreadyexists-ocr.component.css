@@ -1,3 +1,9 @@
+.wrapper{
+  padding: 10px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
 /* Wider form container for the registration form */
 .form-container {
   max-width: 700px;

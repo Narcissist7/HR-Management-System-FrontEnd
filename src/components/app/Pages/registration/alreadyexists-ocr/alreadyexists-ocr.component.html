@@ -1,66 +1,67 @@
-<div class="center-content">
-  <img src="assets/img.png" alt="Visitor Image" class="image-button" />
-  <h2 class="text-danger">Welcome Back</h2>
-</div>
-
-<style>
-  .center-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 35vh; /* This will center the content vertically on the page */
-  }
-
-  .image-button {
-    max-width: 100%;
-    height: auto;
-  }
-</style>
-
-
-
-
-<div class="form-container">
-
-  <h6 class="mb-3">Upload your Egyptian National ID:</h6>
-  <p class="text-danger">Using OCR can speed up your data entry (optional)</p>
-  <div class="mb-3">
-    <label class="form-label">Select Image</label>
-    <input type="file" (change)="onImageSelected($event)" class="form-control" />
-  </div>
-  <button type="button" class="btn btn-primary mb-4" (click)="onUpload()" [disabled]="isLoading">
-    {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
-  </button>
-
-
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-
-    <!-- Egyptian National ID Field -->
-    <div class="form-field">
-      <label for="nid">Egyptian National ID</label>
-      <input id="nid" formControlName="nid" type="text" required>
-      <!-- Error message for NID field -->
-      <div *ngIf="registrationForm.get('nid')?.invalid && registrationForm.get('nid')?.touched" class="error-message">
-        Egyptian National ID is required.
-      </div>
+<div class="wrapper">
+  <div class="center-content">
+      <img src="assets/img.png" alt="Visitor Image" class="image-button" />
+      <h2 class="text-danger">Welcome Back</h2>
     </div>
 
-    <!-- Visitee Full Name Field -->
-    <div class="form-field">
-      <label for="visitee">Visitee Full Name</label>
-      <input id="visitee" formControlName="visitee" type="text" required>
-      <!-- Error message for Visitee field -->
-      <div *ngIf="registrationForm.get('visitee')?.invalid && registrationForm.get('visitee')?.touched" class="error-message">
-        Visitee Full Name is required.
+    <style>
+      .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 35vh; /* This will center the content vertically on the page */
+      }
+
+      .image-button {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+
+
+
+
+    <div class="form-container">
+
+      <h6 class="mb-3">Upload your Egyptian National ID:</h6>
+      <p class="text-danger">Using OCR can speed up your data entry (optional)</p>
+      <div class="mb-3">
+        <label class="form-label">Select Image</label>
+        <input type="file" (change)="onImageSelected($event)" class="form-control" />
       </div>
+      <button type="button" class="btn btn-primary mb-4" (click)="onUpload()" [disabled]="isLoading">
+        {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
+      </button>
+
+
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+        <!-- Egyptian National ID Field -->
+        <div class="form-field">
+          <label for="nid">Egyptian National ID</label>
+          <input id="nid" formControlName="nid" type="text" required>
+          <!-- Error message for NID field -->
+          <div *ngIf="registrationForm.get('nid')?.invalid && registrationForm.get('nid')?.touched" class="error-message">
+            Egyptian National ID is required.
+          </div>
+        </div>
+
+        <!-- Visitee Full Name Field -->
+        <div class="form-field">
+          <label for="visitee">Visitee Full Name</label>
+          <input id="visitee" formControlName="visitee" type="text" required>
+          <!-- Error message for Visitee field -->
+          <div *ngIf="registrationForm.get('visitee')?.invalid && registrationForm.get('visitee')?.touched" class="error-message">
+            Visitee Full Name is required.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
     </div>
-
-    <!-- Submit Button -->
-    <button type="submit" class="submit-button">Submit</button>
-  </form>
 </div>
-
 
 <p-toast></p-toast>
