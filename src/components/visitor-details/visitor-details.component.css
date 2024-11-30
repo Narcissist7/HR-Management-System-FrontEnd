@@ -187,13 +187,14 @@ h4 {
 }
 
 /*Download Section*/
+
 .download-section {
   display: inline-block; /* Allows buttons to sit next to each other */
   text-align: center; /* Centers the buttons if needed */
 }
 
 .download-button {
-  background-color: #8B3329FF;
+  background-color: #e5605b;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -204,5 +205,5 @@ h4 {
 }
 
 .download-button:hover {
-  background-color: lightcoral;
+  background-color: #c14c46;
 }

@@ -32,6 +32,7 @@ body {
 .left-column {
   text-align: center;
   padding: 80px 50px;
+  margin-top:10px;
   background: linear-gradient(178deg, #F4EAE6FF 0%, #AF0505FF 100%);
   border-radius: 15px;
   box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -124,6 +125,87 @@ ul li {
   color: black;
 }
 
+
+/* Apply spacing consistency to all sections */
+.education-section ul li,
+.experience-section ul li,
+.personal-section ul li {
+  padding: 10px 0;
+  line-height: 1.6;
+}
+
+/*Downlaod Section*/
+.download-section {
+  /*display: inline-block; !* Allows buttons to sit next to each other *!*/
+  /*text-align: center; !* Centers the buttons if needed *!*/
+  display: flex; /* Ensures buttons sit next to each other */
+  justify-content: center; /* Centers the buttons horizontally */
+  gap: 5px;
+}
+
+.download-button:last-child {
+  margin-right: 0; /* Removes margin from the last button */
+  background-color:  #e5605b;
+  color: white;
+}
+
+.download-button {
+  background-color: #ef9c99;
+  color: white;
+  border: none;
+  width:121px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* Adds space to the right of the first button */
+  font-size: 16px;
+}
+
+.download-button:hover {
+  background-color:#c14c46;
+}
+
+.download-button:last-child:hover {
+  background-color:#c14c46; /* Hover background for the last button */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*!*Popup window*!*/
+
+/*.popup-container {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  background-color: rgba(0, 0, 0, 0.5);*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  z-index: 10; !* Ensure popup is above other elements *!*/
+/*}*/
+
+/*.popup-container.visible {*/
+/*  display: block;*/
+/*}*/
+
+/*.popup-content {*/
+/*  background-color: white;*/
+/*  padding: 20px;*/
+/*  border-radius: 5px;*/
+/*}*/
+
 /*.experience-section {*/
 /*  !*background: #fff;*!*/
 /*  padding: 20px;*/
@@ -152,70 +234,4 @@ ul li {
 /*.experience-section ul li small {*/
 /*  font-size: 0.9em;*/
 /*  color: #999;*/
-/*}*/
-
-/* Apply spacing consistency to all sections */
-.education-section ul li,
-.experience-section ul li,
-.personal-section ul li {
-  padding: 10px 0;
-  line-height: 1.6;
-}
-
-/*Downlaod Section*/
-.download-section {
-  /*display: inline-block; !* Allows buttons to sit next to each other *!*/
-  /*text-align: center; !* Centers the buttons if needed *!*/
-  display: flex; /* Ensures buttons sit next to each other */
-  justify-content: center; /* Centers the buttons horizontally */
-  gap: 10px;
-}
-
-.download-button:last-child {
-  margin-right: 0; /* Removes margin from the last button */
-  background-color: #8B3329FF;
-  color: white;
-}
-
-.download-button {
-  background-color: #ea745c ;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px; /* Adds space to the right of the first button */
-  font-size: 16px;
-}
-
-.download-button:hover {
-  background-color:#c14c46;
-}
-
-.download-button:last-child:hover {
-  background-color:#c14c46; /* Hover background for the last button */
-}
-/*!*Popup window*!*/
-
-/*.popup-container {*/
-/*  position: fixed;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  background-color: rgba(0, 0, 0, 0.5);*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  z-index: 10; !* Ensure popup is above other elements *!*/
-/*}*/
-
-/*.popup-container.visible {*/
-/*  display: block;*/
-/*}*/
-
-/*.popup-content {*/
-/*  background-color: white;*/
-/*  padding: 20px;*/
-/*  border-radius: 5px;*/
 /*}*/
