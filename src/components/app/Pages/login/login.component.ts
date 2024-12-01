@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
           // Save JWT token if it exists in the response
           if (response && response.token) {
             localStorage.setItem('token', response.token);
+            localStorage.setItem('isSuperAdmin' , response.isSuperAdmin);
           }
 
           // Optionally save other user data

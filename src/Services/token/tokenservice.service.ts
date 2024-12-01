@@ -48,7 +48,7 @@ export class tokenserviceService {
   getUserRole(): boolean {
     const superAdmin = localStorage.getItem('isSuperAdmin');
     console.log(superAdmin)
-    if(superAdmin == 'true')
+    if(superAdmin === 'true')
     {
       return true ;
     }
