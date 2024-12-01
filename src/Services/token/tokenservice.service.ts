@@ -7,7 +7,8 @@ import {Router} from '@angular/router';
   providedIn: 'root',
 })
 export class tokenserviceService {
-  constructor(private  router : Router) {}
+  constructor(private router: Router) {
+  }
 
   // Decode the token
   decodeToken(token: string): any {
@@ -29,8 +30,7 @@ export class tokenserviceService {
     return decodedToken.exp < currentTime;
   }
 
-  logout()
-  {
+  logout() {
     localStorage.removeItem('token');
     this.router.navigate(["notAuthorized"])
   }
@@ -44,4 +44,17 @@ export class tokenserviceService {
       return false;
     }
   }
+
+  getUserRole(): boolean {
+    const superAdmin = localStorage.getItem('isSuperAdmin');
+    console.log(superAdmin)
+    if(superAdmin == 'true')
+    {
+      return true ;
+    }
+    else {
+      return false;
+    }
+  }
+
 }

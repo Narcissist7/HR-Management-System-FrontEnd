@@ -44,13 +44,22 @@ export class CreateAdminComponent {
 
   ngOnInit(): void {
     setTimeout(() => {
+      this.loading = false;
     }, 2000);
-    this.loading = false;
-    if (this.tokenService.validateToken() == true) {
-    }
-    else
-    {
-      alert("session expired!!!")
+
+    if (this.tokenService.validateToken()) {
+      const isSuperAdmin = this.tokenService.getUserRole();  // Get boolean value
+
+      if (isSuperAdmin) {  // If isSuperAdmin is false
+        console.log("Access granted: super admin");
+        // Page remains accessible
+      } else {
+        alert("Access denied: Super admins only can access this page.");
+        this.router.navigate(['/adminDashboard']);  // Redirect super admins
+      }
+    } else {
+      alert("Session expired!");
+      this.router.navigate(['/login']);  // Redirect to login
     }
   }
 

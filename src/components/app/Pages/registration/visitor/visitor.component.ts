@@ -79,33 +79,42 @@ export class VisitorComponent {
         (response) => {
           const ocrDataArray = response.ocr_data;
 
-          if (!ocrDataArray || ocrDataArray.length === 0 || ocrDataArray[0] === 'No text found') {
+          // Log the received OCR data for debugging
+          console.log('OCR Data:', ocrDataArray);
+
+          // Validate if there is at least one valid data field
+          const hasValidData = ocrDataArray.some((data: string) => data && data !== 'No text found');
+
+
+          if (!ocrDataArray || ocrDataArray.length === 0 || !hasValidData) {
             this.showUploadError();
+            this.isLoading = false;
             return;
           }
 
-          const firstName = ocrDataArray[0] === 'No text found' ? '' : ocrDataArray[0];
-          const genderValue = this.mapGender(ocrDataArray[5] || '');
+          // Helper function to clean OCR data
+          const cleanData = (value: string) => (value && value !== 'No text found') ? value : '';
 
+          // Populate the registration form with cleaned OCR data
           this.registrationForm.patchValue({
-            firstname: firstName,
-            secondname: ocrDataArray[1] === 'No text found' ? '' : ocrDataArray[1] || '',
-            egyptianId: ocrDataArray[2] || '',
-            dob: ocrDataArray[3] || '',
-            address: ocrDataArray[4] || '',
-            gender: genderValue,
-            birthPlace: ocrDataArray[6] || ''
+            firstname: cleanData(ocrDataArray[0]),
+            secondname: cleanData(ocrDataArray[1]),
+            egyptianId: cleanData(ocrDataArray[2]),
+            dob: cleanData(ocrDataArray[3]),
+            address: cleanData(ocrDataArray[4]),
+            gender: this.mapGender(ocrDataArray[5] || ''),
+            birthPlace: cleanData(ocrDataArray[6])
           });
 
-          this.SSN = ocrDataArray[2];
+          this.SSN = cleanData(ocrDataArray[2]);
           this.imagedata = 'data:image/jpeg;base64,' + response.image;
 
           this.isLoading = false;
           this.showSuccess();
-          this.showWarn()
+          this.showWarn();
         },
         (error) => {
-          console.error(error);
+          console.error('Upload Error:', error);
           this.isLoading = false;
           this.showUploadError();
         }
@@ -122,24 +131,26 @@ export class VisitorComponent {
     });
   }
 
+// Display a success message upon successful data extraction
   showSuccess() {
     this.messageService.add({
       severity: 'success',
-      summary: 'OCR data fetched',
-      detail: 'Your data is extracted successfully',
+      summary: 'OCR Data Fetched',
+      detail: 'Your data is extracted successfully.',
       life: 5000
     });
   }
 
-  showWarn()
-  {
+// Display a warning message to recheck OCR data
+  showWarn() {
     this.messageService.add({
       severity: 'warn',
-      summary: 'Recheck OCR data',
-      detail: 'Please make sure the fetched data is correct before submitting',
+      summary: 'Recheck OCR Data',
+      detail: 'Please make sure the fetched data is correct before submitting.',
       life: 15000
     });
   }
+
 
 
 // Function to map Arabic gender to form value

@@ -135,11 +135,13 @@ export class CandidateComponent implements OnInit {
 
     this.isLoading = true;
 
+
     this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/candidate', formData).subscribe(
       (response) => {
         const ocrDataArray = response.ocr_data;
         const cvDataArray = response.cv_data;
         const genderValue = this.mapGender(ocrDataArray[5] || '');
+        console.log(cvDataArray)
 
         // Populate form fields with OCR and CV data
         this.registrationForm.patchValue({
