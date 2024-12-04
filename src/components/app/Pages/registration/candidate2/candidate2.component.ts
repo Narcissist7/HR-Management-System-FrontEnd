@@ -94,61 +94,7 @@ export class Candidate2Component {
     }
   }
 
-  onUploadId() {
-    if (!this.selectedImageFile) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'File Missing',
-        detail: 'Please select both an image and a PDF file to upload.',
-        life: 5000
-      });
-      return;
-    }
 
-    const formData = new FormData();
-    formData.append('file', this.selectedImageFile);
-
-
-    this.isLoading = true;
-
-
-    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData).subscribe(
-      (response) => {
-        const ocrDataArray = response.ocr_data;
-        const genderValue = this.mapGender(ocrDataArray[5] || '');
-
-        // Populate form fields with OCR and CV data
-        this.registrationForm.patchValue({
-          egyptianId: ocrDataArray[2] || '',
-          firstname: ocrDataArray[0] || '',
-          secondname: ocrDataArray[1] || '',
-          dob: ocrDataArray[3] || '',
-          address: ocrDataArray[4] || '',
-          gender: genderValue ,
-          birthPlace: ocrDataArray[6] || '',
-          // Add more fields if needed based on your cvData structure
-        });
-        this.imagedata = 'data:image/jpeg;base64,' + response.image;
-        this.isLoading = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'File Uploaded',
-          detail: 'OCR and resume data fetched successfully!',
-          life: 5000
-        });
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'There was an error uploading the files.',
-          life: 5000
-        });
-      }
-    );
-  }
 
   // Function to map Arabic gender to form value
   mapGender(arabicGender: string): string {
@@ -162,12 +108,67 @@ export class Candidate2Component {
     }
   }
 
+  onUploadId() {
+    if (!this.selectedImageFile) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'File Missing',
+        detail: 'Please select an image file to upload.',
+        life: 5000
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedImageFile);
+
+    this.isLoading = true;  // Set loading to true before request
+
+    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData).subscribe({
+      next: (response) => {
+        const ocrDataArray = response.ocr_data;
+        const genderValue = this.mapGender(ocrDataArray[5] || '');
+
+        // Populate form fields with OCR and CV data
+        this.registrationForm.patchValue({
+          egyptianId: ocrDataArray[2] || '',
+          firstname: ocrDataArray[0] || '',
+          secondname: ocrDataArray[1] || '',
+          dob: ocrDataArray[3] || '',
+          address: ocrDataArray[4] || '',
+          gender: genderValue,
+          birthPlace: ocrDataArray[6] || '',
+        });
+        this.imagedata = 'data:image/jpeg;base64,' + response.image;
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'File Uploaded',
+          detail: 'OCR and resume data fetched successfully!',
+          life: 5000
+        });
+      },
+      error: (error) => {
+        console.error(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'There was an error uploading the files.',
+          life: 5000
+        });
+      },
+      complete: () => {
+        this.isLoading = false;  // Set loading to false in complete callback
+      }
+    });
+  }
+
   onUpload() {
     if (!this.selectedPdf) {
       this.messageService.add({
         severity: 'error',
         summary: 'File Missing',
-        detail: 'Please select both an image and a PDF file to upload.',
+        detail: 'Please select a PDF file to upload.',
         life: 5000
       });
       return;
@@ -175,6 +176,8 @@ export class Candidate2Component {
 
     const formData = new FormData();
     formData.append('pdf', this.selectedPdf);
+
+    this.isLoading = true;  // Set loading to true before request
 
     this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/cvdata', formData)
       .subscribe({
@@ -184,15 +187,12 @@ export class Candidate2Component {
           this.registrationForm.patchValue({
             email: response.education_data.email,
             phone: response.education_data.phone_number
-
-
-            // Add more fields if needed based on your cvData structure
           });
 
           this.messageService.add({
             severity: 'success',
-            summary: 'CV parserd',
-            detail: 'Your data from cv are parsed successfully!',
+            summary: 'CV Parsed',
+            detail: 'Your data from CV are parsed successfully!',
             life: 3000,
           });
         },
@@ -200,13 +200,13 @@ export class Candidate2Component {
           console.error('Error:', error);
           this.messageService.add({
             severity: 'error',
-            summary: 'CV parsing Failed',
+            summary: 'CV Parsing Failed',
             detail: 'An error occurred while parsing.',
             life: 5000,
           });
         },
         complete: () => {
-          this.isLoading = false;
+          this.isLoading = false;  // Set loading to false in complete callback
         }
       });
   }
