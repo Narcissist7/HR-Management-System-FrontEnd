@@ -22,11 +22,34 @@
       <input type="text" id="user_name" class="form-control" formControlName="user_name" required />
     </div>
 
+    <div class="mb-3 form-check">
+      <input type="checkbox" id="isSuperAdmin" class="form-check-input" formControlName="isSuperAdmin" />
+      <label for="isSuperAdmin" class="form-check-label">Super Admin</label>
+    </div>
+
     <!-- Submit Button -->
     <div class="text-center mt-4">
       <button type="submit" class="btn btn-outline-dark">Create</button>
     </div>
   </form>
+
+
+
+    <hr> <!-- Separator line -->
+
+      <!-- Delete Admin Form -->
+    <h2 class="text-center mb-4">Delete Admin</h2>
+    <form [formGroup]="deleteForm" (ngSubmit)="onDelete()">
+      <div class="mb-3">
+        <label for="deleteEmail" class="form-label">Admin Email</label>
+        <input type="email" id="deleteEmail" class="form-control" formControlName="email" required />
+      </div>
+
+      <!-- Delete Button -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </form>
   }
 </div>
 

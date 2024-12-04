@@ -1,0 +1,216 @@
+<!-- PDF Upload Section -->
+<div class="wrapper">
+  <h2 class="text-center mb-4">Candidate Application Form</h2>
+  <div class="container">
+
+    <h4 class="text-center mb-4">Personal Information</h4>
+    <!-- Image Upload and OCR Section -->
+    <div class="mb-3">
+      <label class="form-label">Select Egyptian ID Image</label>
+      <input type="file" (change)="onImageSelected($event)" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary mb-4" (click)="onUploadId()" [disabled]="isLoading">
+      {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
+    </button>
+
+    <!-- Registration Form -->
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <!-- OCR Data Display Section -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" required  />
+      </div>
+
+      <div class="mb-3">
+        <label for="job_title" class="form-label">Job Title</label>
+        <select id="job_title" class="form-control" formControlName="job_title" required>
+          <option value="">Select a job title</option>
+          <option *ngFor="let title of jobTitles">{{title}}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="egyptianId" class="form-label">Egyptian ID Number</label>
+        <input type="text" id="egyptianId" class="form-control" formControlName="egyptianId" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="firstname" class="form-label">First Name</label>
+        <input type="text" id="firstname" class="form-control" formControlName="firstname" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="secondname" class="form-label">Second Name</label>
+        <input type="text" id="secondname" class="form-control" formControlName="secondname" required />
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" id="phone" class="form-control" formControlName="phone" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="gender" class="form-label">Gender</label>
+          <select id="gender" class="form-control" formControlName="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">ذكر</option>
+            <option value="female">انثى</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="dob" class="form-label">Date of Birth</label>
+          <input type="text" id="dob" class="form-control" formControlName="dob" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="birthPlace" class="form-label">Place of Birth</label>
+          <input type="text" id="birthPlace" class="form-control" formControlName="birthPlace" required />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" id="address" class="form-control" formControlName="address" required />
+      </div>
+
+      <!-- Military and Marital Status -->
+      <div class="mb-3">
+        <label for="militaryStatus" class="form-label">Military Status</label>
+        <select id="militaryStatus" class="form-select" formControlName="militaryStatus" required>
+          <option value="">Select Status</option>
+          <option value="Temporary Exemption">Temporary Exemption</option>
+          <option value="Completed">Completed</option>
+          <option value="Permanent Exemption">Permanent Exemption</option>
+          <option value="In service">In service</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="maritalStatus" class="form-label">Marital Status</label>
+        <select id="maritalStatus" class="form-select" formControlName="maritalStatus" required>
+          <option value="">Select Status</option>
+          <option value="single">Single</option>
+          <option value="married">Married</option>
+          <option value="divorced">Divorced</option>
+          <option value="widowed">Widowed</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-success" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        {{ isLoading ? 'Submitting...' : 'Submit Application' }}
+      </button>
+
+    </form>
+  </div>
+</div>
+<p-toast></p-toast>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="wrapper">
+  <div class="container">
+    <h4 class="text-center mb-4">Education & Work Experience</h4>
+<div class="mb-3">
+  <label class="form-label">Select Resume (PDF)</label>
+  <input type="file" (change)="onPdfSelected($event)" class="form-control" />
+</div>
+    <button type="button" class="btn btn-primary mb-4" (click)="onUpload()" [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      {{ isLoading ? 'Uploading...' : 'Upload and Process' }}
+    </button>
+
+
+    <!-- Display and Edit Education Data -->
+    <div *ngIf="educationData.length > 0" class="mb-4">
+      <h3 class="text-danger">Education</h3>
+      <div *ngFor="let edu of educationData; let i = index" class="card p-4 mb-3 shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="university{{i}}" class="form-label">University</label>
+            <input [(ngModel)]="edu.university" id="university{{i}}" class="form-control form-control-sm" placeholder="Enter university name" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="degree{{i}}" class="form-label">Degree</label>
+            <input [(ngModel)]="edu.degree" id="degree{{i}}" class="form-control form-control-sm" placeholder="Enter degree" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="major{{i}}" class="form-label">Major</label>
+            <input [(ngModel)]="edu.major" id="major{{i}}" class="form-control form-control-sm" placeholder="Enter major" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Grade</label>
+            <input formControlName="grade" type="text" class="form-control" placeholder="Grade" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="date{{i}}" class="form-label">Graduation Date</label>
+            <input [(ngModel)]="edu.date" id="date{{i}}" class="form-control form-control-sm" placeholder="Enter graduation date" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display and Edit Work Experience Data -->
+    <div *ngIf="workExperienceData.length > 0" class="mb-4">
+      <h3 class="text-danger">Work Experience</h3>
+      <div *ngFor="let work of workExperienceData; let i = index" class="card p-4 mb-3 shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="companyName{{i}}" class="form-label">Company Name</label>
+            <input [(ngModel)]="work.company_name" id="companyName{{i}}" class="form-control form-control-sm" placeholder="Enter company name" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="position{{i}}" class="form-label">Position</label>
+            <input [(ngModel)]="work.position" id="position{{i}}" class="form-control form-control-sm" placeholder="Enter position" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="workDate{{i}}" class="form-label">Work Duration</label>
+            <input [(ngModel)]="work.date" id="workDate{{i}}" class="form-control form-control-sm" placeholder="Enter work duration" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="reason{{i}}" class="form-label">Reason for Leaving</label>
+            <input [(ngModel)]="work.reason" id="reason{{i}}" class="form-control form-control-sm" placeholder="Enter reason for leaving" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      </div>
+    </div>
+
+
+
+
+

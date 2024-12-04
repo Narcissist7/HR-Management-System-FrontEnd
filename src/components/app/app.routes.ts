@@ -28,6 +28,8 @@ import {AuthGuard} from '../../Services/auth.guard';
 import {adminDashboardGuard} from '../../Services/admin-dashboard.guard';
 import {ChartRadarDemo} from './Pages/chart/chart-radar-demo/chart-radar-demo.component';
 import {AlreadyexistsOCRComponent} from './Pages/registration/alreadyexists-ocr/alreadyexists-ocr.component';
+import {Candidate2Component} from './Pages/registration/candidate2/candidate2.component';
+
 
 // import {ChartComponent} from './Pages/chart/chart.component';
 
@@ -143,5 +145,10 @@ export const routes: Routes = [
   {
     path:"alreadysexistOCR",
     component:AlreadyexistsOCRComponent
+  },
+  {
+    path: "testing",
+    component: Candidate2Component
   }
+
 ];

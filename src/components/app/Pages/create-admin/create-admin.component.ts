@@ -25,7 +25,9 @@ import {LoaderComponent} from '../../../Reusable/loader/loader.component';
 })
 export class CreateAdminComponent {
   registrationForm: FormGroup;
+  deleteForm: FormGroup ;
   loading: boolean = true;
+
 
   constructor(
     private http: HttpClient,
@@ -39,6 +41,11 @@ export class CreateAdminComponent {
       email: ['', Validators.required],
       password: ['', Validators.required],
       user_name: ['', Validators.required],
+      isSuperAdmin: [false]  // Add the isSuperAdmin form control, default to false
+    });
+
+    this.deleteForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -65,7 +72,6 @@ export class CreateAdminComponent {
 
 
 
-
   onSubmit() {
     this.loading = true;
     const headers = {
@@ -86,7 +92,10 @@ export class CreateAdminComponent {
       email: formData.email,
       password: formData.password,
       user_name: formData.user_name,
+      isSuperAdmin: formData.isSuperAdmin  // Add isSuperAdmin value here
     };
+
+    this.showWarn();
 
     this.http.post('/api/entry_managment_sys/admin/save', requestData, {
       headers: headers, // Add the headers to the request
@@ -112,6 +121,72 @@ export class CreateAdminComponent {
         }
       }
     );
+    this.loading = false;
+  }
+
+  showWarn() {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Your Request is being processed',
+      detail: 'please wait for the confirmation!',
+      life: 7000
+    });
+  }
+
+
+
+
+// Method to handle admin deletion
+  onDelete() {
+    if (this.deleteForm.invalid) {
+      this.deleteForm.markAllAsTouched();
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Invalid Email',
+        detail: 'Please enter a valid email address.',
+        life: 5000
+      });
+      return;
+    }
+
+    this.loading = true;
+    const email = this.deleteForm.get('email')?.value;
+
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.delete(`/api/entry_managment_sys/admin/${email}`, { headers })
+      .subscribe(
+        () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Deletion Successful',
+            detail: 'Admin deleted successfully!',
+            life: 5000
+          });
+          this.deleteForm.reset();
+        },
+        (error) => {
+          this.loading = false;
+          if (error.status === 404) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Admin Not Found',
+              detail: 'No admin found with this email.',
+              life: 5000
+            });
+          } else {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Deletion Successful',
+              detail: 'Admin deleted successfully!',
+              life: 5000
+            });
+          }
+        }
+      );
     this.loading = false;
   }
 

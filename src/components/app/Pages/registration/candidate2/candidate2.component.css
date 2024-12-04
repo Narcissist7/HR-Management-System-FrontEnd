@@ -1,0 +1,208 @@
+/* Global Styles */
+:root {
+  --primary-color: #ff0000;
+  --secondary-color: #b30000;
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  /*background-color: floralwhite;*/
+  padding: 10px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  line-height: 1.6;
+}
+
+.container {
+  /*max-width: 700px;*/
+  /*background: linear-gradient(0deg, rgb(245, 245, 245) 0%, #F4EAE6FF 100%);*/
+  /*border-radius: 40px;*/
+  /*padding: 25px 35px;*/
+  /*border: 5px solid rgb(255, 255, 255);*/
+  /*box-shadow: #F4EAE6FF 30px 30px 30px -20px;*/
+  /*margin: 50px auto auto auto;*/
+  background: linear-gradient(0deg, rgb(245, 245, 245) 0%, #F4EAE6FF 100%);
+  border-radius: 40px;
+  padding: 25px 35px;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: #F4EAE6FF 30px 30px 30px -20px;
+  margin: 20px;
+}
+
+
+/* Typography */
+h2, h4 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Elements */
+.form-label {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+.form-control, .form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+
+
+.btn-primary {
+  background-color: #c24a4c;
+  border-color: #c24a4c;
+}
+
+.btn-primary:hover {
+  background-color: darkred;
+  border-color: darkred;
+}
+
+.btn-success {
+  margin-left:238px;
+  background-color: #c24a4c;
+  border-color: #c24a4c;
+  padding: 10px 58px;
+  font-weight: bold;
+}
+
+.btn-success:hover {
+  background-color: darkred;
+  border-color: darkred;
+}
+
+.btn-secondary {
+  background-color: #f1f1f1;
+  color: var(--text-color);
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Step Navigation */
+.text-center {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/*position of the"next button" when there is no back button*/
+#nextBtn {
+  margin-left: auto; /* Pushes the button to the far right */
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.left{
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+/* Work Experience */
+.work-entry {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.work-entry .btn-danger {
+  background-color: #dc3545;
+  color: var(--white);
+}
+
+.work-entry .btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Layout */
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.col-md-6 {
+  flex: 1;
+}
+
+/* Error & Validation */
+.error-message {
+  color: red;
+  font-size: 0.875em;
+}
+
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid {
+  border-color: red;
+}
+
+/* Spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
