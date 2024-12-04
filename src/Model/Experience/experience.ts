@@ -2,14 +2,12 @@ class Experience {
   postion: string;
   reason: string;
   company_name: string;
-  start_date: Date;
-  end_date: Date;
+  date: string;
 
-  constructor(position: string = '', reason: string = '', company_name: string = '', start_date: Date = new Date(), end_date: Date = new Date()) {
+  constructor(position: string = '', reason: string = '', company_name: string = '', date: string = ''){
     this.postion = position;
     this.reason = reason;
     this.company_name = company_name;
-    this.start_date = start_date;
-    this.end_date = end_date;
+    this.date = date;
   }
 }
