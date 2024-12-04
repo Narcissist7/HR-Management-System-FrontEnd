@@ -122,8 +122,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="maritalStatus" class="form-label">Marital Status</label>
-      <select id="maritalStatus" class="form-select" formControlName="maritalStatus" required>
+      <label for="martial_status" class="form-label">Marital Status</label>
+      <select id="martial_status" class="form-select" formControlName="martial_status" required>
         <option value="">Select Status</option>
         <option value="single">Single</option>
         <option value="married">Married</option>
@@ -183,9 +183,9 @@
             <input [(ngModel)]="edu.major" id="major{{i}}" class="form-control form-control-sm" placeholder="Enter major" />
           </div>
 
-          <div class="mb-3">
-            <label class="form-label">Grade</label>
-            <input formControlName="grade" type="text" class="form-control" placeholder="Grade" />
+          <div class="col-md-6">
+            <label for="reason{{i}}" class="form-label">Grade</label>
+            <input [(ngModel)]="edu.grade" id="grade{{i}}" class="form-control form-control-sm" placeholder="Enter Grade" />
           </div>
 
           <div class="col-md-6">

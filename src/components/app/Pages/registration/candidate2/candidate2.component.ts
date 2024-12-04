@@ -46,7 +46,7 @@ export class Candidate2Component {
       birthPlace: ['', Validators.required],
       address: ['', Validators.required],
       militaryStatus: ['', Validators.required],
-      maritalStatus: ['', Validators.required],
+      martial_status: ['', Validators.required],
     });
 
     const email = this.route.snapshot.queryParamMap.get('email');
@@ -277,13 +277,13 @@ export class Candidate2Component {
       military_status: formValues.militaryStatus,
       ssn: formValues.egyptianId,
       address: formValues.address,
-      marital_status: formValues.maritalStatus,
+      martial_status: formValues.martial_status,
       educations: this.educationData.map((edu: any) => ({
         university: edu.university,
         degree: edu.degree,
         major: edu.major,
         date: edu.date,
-        grade: edu.grade
+        grade: edu.grade,
       })),
       experiences: this.workExperienceData.map((work: any) => ({
         company_name: work.company_name,
