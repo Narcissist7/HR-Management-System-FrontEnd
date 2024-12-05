@@ -29,11 +29,6 @@ body {
 }
 
 .left-column {
-  /*text-align: center;*/
-  /*padding: 30px;*/
-  /*background: linear-gradient(135deg, #ff6b6b, #ff4176);*/
-  /*border-radius: 20px;*/
-  /*box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);*/
   text-align: center;
   padding: 80px 50px;
   background: linear-gradient(178deg, #F4EAE6FF 0%, #AF0505FF 100%);
