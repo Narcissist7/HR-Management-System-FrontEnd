@@ -5,34 +5,27 @@
 
     <h4 class="text-center mb-4">Documents Upload</h4>
 
-    <!-- ID Image Upload Section -->
+    <!-- Unified File Upload Section -->
     <div class="mb-3">
-      <label class="form-label">Select Egyptian ID Image</label>
-      <input type="file" (change)="onImageSelected($event)" class="form-control" />
+      <div class="row">
+        <div class="col-md-6">
+          <label class="form-label">Select Egyptian ID Image</label>
+          <input type="file" (change)="onImageSelected($event)" class="form-control" />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Select Resume (PDF)</label>
+          <input type="file" (change)="onPdfSelected($event)" class="form-control" />
+        </div>
+      </div>
       <button
         type="button"
         class="btn btn-primary mt-2"
-        (click)="onUploadId()"
+        (click)="onFileUpload()"
         [disabled]="isLoading">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        {{ isLoading ? 'Uploading...' : 'Upload and Process ID' }}
+        {{ isLoading ? 'Processing...' : 'Upload and Process Files' }}
       </button>
     </div>
-
-    <!-- Resume Upload Section -->
-    <div class="mb-3">
-      <label class="form-label">Select Resume (PDF)</label>
-      <input type="file" (change)="onPdfSelected($event)" class="form-control" />
-      <button
-        type="button"
-        class="btn btn-primary mt-2"
-        (click)="onUpload()"
-        [disabled]="isLoading">
-        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        {{ isLoading ? 'Uploading...' : 'Upload and Process Resume' }}
-      </button>
-    </div>
-  </div>
 
 
 </div>
@@ -161,76 +154,154 @@
 <div class="mb-3">
 
 
-    <!-- Display and Edit Education Data -->
-    <div *ngIf="educationData.length > 0" class="mb-4">
-      <h3 class="text-danger">Education</h3>
-      <div *ngFor="let edu of educationData; let i = index" class="card p-4 mb-3 shadow-sm">
+  <div *ngIf="educationData.length > 0" class="education-section container-fluid px-4 py-3">
+    <h3 class="section-title">Education</h3>
+    <div *ngFor="let edu of educationData; let i = index" class="education-card card rounded-lg mb-3 shadow-sm position-relative">
+      <button
+        type="button"
+        class="btn btn-danger btn-xs position-absolute top-0 end-0 m-1"
+        (click)="deleteEducation(i)"
+        title="Delete Work Experience Entry"
+        style="padding: 2px 6px; font-size: 12px;"
+      >
+        <i class="fa fa-trash"></i>
+      </button>
+
+
+      <div class="card-body">
         <div class="row mb-3">
           <div class="col-md-6">
-            <label for="university{{i}}" class="form-label">University</label>
-            <input [(ngModel)]="edu.university" id="university{{i}}" class="form-control form-control-sm" placeholder="Enter university name" />
+            <label for="university{{i}}" class="form-label text-danger fw-bold">University</label>
+            <input [(ngModel)]="edu.university" id="university{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter university name" />
           </div>
 
           <div class="col-md-6">
-            <label for="degree{{i}}" class="form-label">Degree</label>
-            <input [(ngModel)]="edu.degree" id="degree{{i}}" class="form-control form-control-sm" placeholder="Enter degree" />
+            <label for="degree{{i}}" class="form-label text-danger fw-bold">Degree</label>
+            <input [(ngModel)]="edu.degree" id="degree{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter degree" />
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-md-6">
-            <label for="major{{i}}" class="form-label">Major</label>
-            <input [(ngModel)]="edu.major" id="major{{i}}" class="form-control form-control-sm" placeholder="Enter major" />
+          <div class="col-md-4">
+            <label for="major{{i}}" class="form-label text-danger fw-bold">Major</label>
+            <input [(ngModel)]="edu.major" id="major{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter major" />
           </div>
 
-          <div class="col-md-6">
-            <label for="reason{{i}}" class="form-label">Grade</label>
-            <input [(ngModel)]="edu.grade" id="grade{{i}}" class="form-control form-control-sm" placeholder="Enter Grade" />
+          <div class="col-md-4">
+            <label for="grade{{i}}" class="form-label text-danger fw-bold">Grade</label>
+            <input [(ngModel)]="edu.grade" id="grade{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter Grade" />
           </div>
 
-          <div class="col-md-6">
-            <label for="date{{i}}" class="form-label">Graduation Date</label>
-            <input [(ngModel)]="edu.date" id="date{{i}}" class="form-control form-control-sm" placeholder="Enter graduation date" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Display and Edit Work Experience Data -->
-    <div *ngIf="workExperienceData.length > 0" class="mb-4">
-      <h3 class="text-danger">Work Experience</h3>
-      <div *ngFor="let work of workExperienceData; let i = index" class="card p-4 mb-3 shadow-sm">
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <label for="companyName{{i}}" class="form-label">Company Name</label>
-            <input [(ngModel)]="work.company_name" id="companyName{{i}}" class="form-control form-control-sm" placeholder="Enter company name" />
-          </div>
-
-          <div class="col-md-6">
-            <label for="position{{i}}" class="form-label">Position</label>
-            <input [(ngModel)]="work.position" id="position{{i}}" class="form-control form-control-sm" placeholder="Enter position" />
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <label for="workDate{{i}}" class="form-label">Work Duration</label>
-            <input [(ngModel)]="work.date" id="workDate{{i}}" class="form-control form-control-sm" placeholder="Enter work duration" />
-          </div>
-
-          <div class="col-md-6">
-            <label for="reason{{i}}" class="form-label">Reason for Leaving</label>
-            <input [(ngModel)]="work.reason" id="reason{{i}}" class="form-control form-control-sm" placeholder="Enter reason for leaving" />
+          <div class="col-md-4">
+            <label for="date{{i}}" class="form-label text-danger fw-bold">Graduation Date</label>
+            <input [(ngModel)]="edu.date" id="date{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter graduation date" />
           </div>
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- In the Work Experience Section -->
+  <div *ngIf="workExperienceData.length > 0" class="work-experience-section container-fluid px-4 py-3">
+    <h3 class="section-title">Work Experience</h3>
+    <div *ngFor="let work of workExperienceData; let i = index" class="work-card card rounded-lg mb-3 shadow-sm position-relative">
+      <button
+        type="button"
+        class="btn btn-danger btn-xs position-absolute top-0 end-0 m-1"
+        (click)="deleteWorkExperience(i)"
+        title="Delete Work Experience Entry"
+        style="padding: 2px 6px; font-size: 12px;"
+      >
+        <i class="fa fa-trash"></i>
+      </button>
+
+
+
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="companyName{{i}}" class="form-label text-danger fw-bold">Company Name</label>
+            <input [(ngModel)]="work.company_name" id="companyName{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter company name" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="position{{i}}" class="form-label text-danger fw-bold">Position</label>
+            <input [(ngModel)]="work.position" id="position{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter position" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="workDate{{i}}" class="form-label text-danger fw-bold">Work Duration</label>
+            <input [(ngModel)]="work.date" id="workDate{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter work duration" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="reason{{i}}" class="form-label text-danger fw-bold">Reason for Leaving</label>
+            <input [(ngModel)]="work.reason" id="reason{{i}}"
+                   class="form-control form-control-sm border-danger red-placeholder"
+                   placeholder="Enter reason for leaving " />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .section-title {
+      color: #dc3545;
+      border-bottom: 5px solid #dc3545;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .education-card,
+    .work-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: var(--background-color);
+      padding: 10px ;
+      margin-top : 20px ;
+      margin-left: 20px ;
+      marign-right : 20px ;
+    }
+
+    .education-card:hover,
+    .work-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+    }
+
+    .form-control.border-danger {
+      border: 1px solid #dc3545;
+    }
+
+    .form-control.border-danger:focus {
+      border-color: #dc3545;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+  </style>
 
       </div>
     </div>
   </div>
   </div>
+</div>
 
 
 

@@ -147,7 +147,7 @@ export const routes: Routes = [
     component:AlreadyexistsOCRComponent
   },
   {
-    path: "testing",
+    path: "candidate2",
     component: Candidate2Component
   }
 

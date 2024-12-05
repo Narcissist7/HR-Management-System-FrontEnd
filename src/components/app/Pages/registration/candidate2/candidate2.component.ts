@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {ToastModule} from 'primeng/toast';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
+import {forkJoin, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-candidate2',
@@ -55,20 +56,42 @@ export class Candidate2Component {
     }
   }
 
-
   ngOnInit(): void {
     this.fetchJobTitles(); // Fetch job titles when the component initializes
   }
 
-
   selectedImageFile: File | null = null;
-
-
 
   onImageSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.selectedImageFile = file;
+    }
+  }
+
+  // New method to delete an education entry
+  deleteEducation(index: number) {
+    if (this.educationData && this.educationData.length > 0) {
+      this.educationData.splice(index, 1);
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Education Removed',
+        detail: 'Education entry has been deleted.',
+        life: 3000
+      });
+    }
+  }
+
+  // New method to delete a work experience entry
+  deleteWorkExperience(index: number) {
+    if (this.workExperienceData && this.workExperienceData.length > 0) {
+      this.workExperienceData.splice(index, 1);
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Work Experience Removed',
+        detail: 'Work experience entry has been deleted.',
+        life: 3000
+      });
     }
   }
 
@@ -85,16 +108,12 @@ export class Candidate2Component {
       );
   }
 
-
-
   onPdfSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       this.selectedPdf = fileInput.files[0];
     }
   }
-
-
 
   // Function to map Arabic gender to form value
   mapGender(arabicGender: string): string {
@@ -108,52 +127,92 @@ export class Candidate2Component {
     }
   }
 
-  onUploadId() {
-    if (!this.selectedImageFile) {
+  onFileUpload() {
+    // Check if both files are selected
+    if (!this.selectedImageFile && !this.selectedPdf) {
       this.messageService.add({
         severity: 'error',
-        summary: 'File Missing',
-        detail: 'Please select an image file to upload.',
+        summary: 'Files Missing',
+        detail: 'Please select at least one file to upload.',
         life: 5000
       });
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', this.selectedImageFile);
+
+    // Append files to formData if they exist
+    if (this.selectedImageFile) {
+      formData.append('file', this.selectedImageFile);
+    }
+
+    if (this.selectedPdf) {
+      formData.append('pdf', this.selectedPdf);
+    }
 
     this.isLoading = true;  // Set loading to true before request
 
-    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData).subscribe({
-      next: (response) => {
-        const ocrDataArray = response.ocr_data;
-        const genderValue = this.mapGender(ocrDataArray[5] || '');
+    // Create an array of requests based on available files
+    const requests: Observable<any>[] = [];
 
-        // Populate form fields with OCR and CV data
-        this.registrationForm.patchValue({
-          egyptianId: ocrDataArray[2] || '',
-          firstname: ocrDataArray[0] || '',
-          secondname: ocrDataArray[1] || '',
-          dob: ocrDataArray[3] || '',
-          address: ocrDataArray[4] || '',
-          gender: genderValue,
-          birthPlace: ocrDataArray[6] || '',
+    if (this.selectedImageFile) {
+      requests.push(
+        this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/visitor', formData)
+      );
+    }
+
+    if (this.selectedPdf) {
+      requests.push(
+        this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/cvdata', formData)
+      );
+    }
+
+    // Use forkJoin to handle multiple requests
+    forkJoin(requests).subscribe({
+      next: (responses) => {
+        responses.forEach(response => {
+          // Handle ID Image OCR response
+          if (response.ocr_data) {
+            const ocrDataArray = response.ocr_data;
+            const genderValue = this.mapGender(ocrDataArray[5] || '');
+
+            // Populate form fields with OCR and CV data
+            this.registrationForm.patchValue({
+              egyptianId: ocrDataArray[2] || '',
+              firstname: ocrDataArray[0] || '',
+              secondname: ocrDataArray[1] || '',
+              dob: ocrDataArray[3] || '',
+              address: ocrDataArray[4] || '',
+              gender: genderValue,
+              birthPlace: ocrDataArray[6] || '',
+            });
+            this.imagedata = 'data:image/jpeg;base64,' + response.image;
+          }
+
+          // Handle PDF CV response
+          if (response.education_data) {
+            this.educationData = response.education_data.education;
+            this.workExperienceData = response.work_data.work_experience;
+            this.registrationForm.patchValue({
+              email: response.education_data.email,
+              phone: response.education_data.phone_number
+            });
+          }
         });
-        this.imagedata = 'data:image/jpeg;base64,' + response.image;
 
         this.messageService.add({
           severity: 'success',
-          summary: 'File Uploaded',
-          detail: 'OCR and resume data fetched successfully!',
+          summary: 'Files Processed',
+          detail: 'Your files have been processed successfully!',
           life: 5000
         });
       },
       error: (error) => {
-        console.error(error);
+        console.error('Error:', error);
         this.messageService.add({
           severity: 'error',
-          summary: 'Error',
-          detail: 'There was an error uploading the files.',
+          summary: 'File Processing Failed',
+          detail: 'An error occurred while processing the files.',
           life: 5000
         });
       },
@@ -162,62 +221,6 @@ export class Candidate2Component {
       }
     });
   }
-
-  onUpload() {
-    if (!this.selectedPdf) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'File Missing',
-        detail: 'Please select a PDF file to upload.',
-        life: 5000
-      });
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('pdf', this.selectedPdf);
-
-    this.isLoading = true;  // Set loading to true before request
-
-    this.http.post<any>('https://872a-41-65-83-130.ngrok-free.app/cvdata', formData)
-      .subscribe({
-        next: (response) => {
-          this.educationData = response.education_data.education;
-          this.workExperienceData = response.work_data.work_experience;
-          this.registrationForm.patchValue({
-            email: response.education_data.email,
-            phone: response.education_data.phone_number
-          });
-
-          this.messageService.add({
-            severity: 'success',
-            summary: 'CV Parsed',
-            detail: 'Your data from CV are parsed successfully!',
-            life: 3000,
-          });
-        },
-        error: (error) => {
-          console.error('Error:', error);
-          this.messageService.add({
-            severity: 'error',
-            summary: 'CV Parsing Failed',
-            detail: 'An error occurred while parsing.',
-            life: 5000,
-          });
-        },
-        complete: () => {
-          this.isLoading = false;  // Set loading to false in complete callback
-        }
-      });
-  }
-
-
-
-
-
-
-
-
 
   onSubmit() {
     if (this.registrationForm.invalid) {
@@ -263,7 +266,7 @@ export class Candidate2Component {
       );
   }
 
-// Method to prepare candidate data from the form
+  // Method to prepare candidate data from the form
   prepareCandidateData() {
     const formValues = this.registrationForm.value;
     return {
@@ -278,23 +281,26 @@ export class Candidate2Component {
       ssn: formValues.egyptianId,
       address: formValues.address,
       martial_status: formValues.martial_status,
-      educations: this.educationData.map((edu: any) => ({
-        university: edu.university,
-        degree: edu.degree,
-        major: edu.major,
-        date: edu.date,
-        grade: edu.grade,
-      })),
-      experiences: this.workExperienceData.map((work: any) => ({
-        company_name: work.company_name,
-        postion: work.position,
-        date: work.date,
-        reason: work.reason
-      })),
+      educations: this.educationData
+        .filter((edu: any) => edu && edu.university && edu.degree && edu.major)
+        .map((edu: any) => ({
+          university: edu.university,
+          degree: edu.degree,
+          major: edu.major,
+          date: edu.date,
+          grade: edu.grade,
+        })),
+      experiences: this.workExperienceData
+        .filter((work: any) => work && work.company_name && work.position)
+        .map((work: any) => ({
+          company_name: work.company_name,
+          postion: work.position,
+          date: work.date,
+          reason: work.reason
+        })),
     };
   }
-
-// Method to append image and CV files to FormData
+  // Method to append image and CV files to FormData
   appendFiles(formData: FormData) {
     if (this.selectedImageFile) {
       formData.append('image', this.selectedImageFile);
@@ -314,110 +320,4 @@ export class Candidate2Component {
       formData.append('pic', imageBlob, 'image.jpg');
     }
   }
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //
-  // onSubmit() {
-  //   if (this.registrationForm.invalid) {
-  //     this.registrationForm.markAllAsTouched();
-  //     this.messageService.add({ severity: 'error', summary: 'Form Incomplete', detail: 'Please fill in all required fields.', life: 5000 });
-  //     return;
-  //   }
-  //
-  //   const formData = new FormData();
-  //
-  //   // Append form fields
-  //   const formValues = this.registrationForm.value;
-  //   const candidateData = {
-  //     name: `${formValues.firstname} ${formValues.secondname}`,
-  //     email: formValues.email,
-  //     phone: formValues.phone,
-  //     job_title: formValues.job_title,
-  //     dob: formValues.dob,
-  //     gender: formValues.gender,
-  //     pob: formValues.birthPlace,
-  //     military_status: formValues.militaryStatus,
-  //     ssn: formValues.egyptianId,
-  //     address: formValues.address,
-  //     martial_status: formValues.maritalStatus,
-  //     educations: [
-  //       {
-  //         university: formValues.university,
-  //         degree: formValues.degree,
-  //         grade: formValues.grade,
-  //         major: formValues.major,
-  //         date: formValues.date,
-  //       }
-  //     ],
-  //     experiences: formValues.workExperiences.map((experience: any) => ({
-  //       postion: experience.postion,
-  //       reason: experience.reason,
-  //       company_name: experience.company,
-  //       start_date: experience.startDate,
-  //       end_date: experience.endDate
-  //     }))
-  //   };
-  //
-  //   // Convert the JSON candidate data to a Blob and append it to formData
-  //   formData.append('candidateData', new Blob([JSON.stringify(candidateData)], { type: 'application/json' }));
-  //
-  //   // Append image and cv files
-  //   if (this.selectedImageFile) {
-  //     formData.append('image', this.selectedImageFile);
-  //   }
-  //   if (this.selectedPdfFile) {
-  //     formData.append('cv', this.selectedPdfFile);
-  //   }
-  //
-  //   if (this.imagedata) { // Ensure imagedata is not null
-  //     // Convert base64 image data to Blob
-  //     const base64Data = this.imagedata.split(',')[1]; // Remove the "data:image/jpeg;base64," prefix
-  //     const binaryData = atob(base64Data); // Decode base64 string to binary
-  //     const byteArray = new Uint8Array(binaryData.length);
-  //     for (let i = 0; i < binaryData.length; i++) {
-  //       byteArray[i] = binaryData.charCodeAt(i);
-  //     }
-  //     const imageBlob = new Blob([byteArray], { type: 'image/jpeg' }); // Create a Blob from binary data
-  //
-  //     formData.append('pic', imageBlob, 'image.jpg'); // Append the Blob to FormData
-  //   }
-  //
-  //   // Send request
-  //   this.http.post('http://localhost:8080/api/entry_managment_sys/candidate', formData)
-  //     .subscribe(
-  //       (response) => {
-  //         this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You are registered successfully!', life: 3000 });
-  //         this.router.navigate(['sucess']);
-  //       },
-  //       (error) => {
-  //         console.error('Error submitting form:', error);
-  //         this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: 'An error occurred while registering.', life: 5000 });
-  //       }
-  //     );
-  // }
-
-
-
