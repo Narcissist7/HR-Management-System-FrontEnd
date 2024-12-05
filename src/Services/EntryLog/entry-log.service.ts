@@ -91,7 +91,6 @@ export class EntryLogService {
       'Content-Type': 'application/json'
     };
 
-    // Assuming the API endpoint for chart data
     return this.http.get<any>('api/entry_managment_sys/log/people_last_seven_days/visitor', { headers });
   }
 }

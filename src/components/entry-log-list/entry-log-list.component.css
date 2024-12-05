@@ -8,16 +8,6 @@
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Light shadow */
 }
-
-/*.title {*/
-/*  text-align: center;*/
-/*  font-size: 2rem;*/
-/*  color: #C9261D;*/
-/*  padding-bottom: 20px;*/
-/*  margin-bottom: 30px;*/
-/*  border-bottom: 2px solid #e0e0e0;*/
-/*}*/
-
 .table-wrapper {
   overflow-x: auto; /* Allows horizontal scrolling if needed */
 }
